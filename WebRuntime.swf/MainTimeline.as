@@ -358,6 +358,15 @@ package WebRuntime_fla
          SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = this.loading.pcode.text;
          SharedObject.getLocal("net.zygame.hxwz.air").flush();
          trace("startGame");
+         var userData:Object = { //
+            nickName: this.loading.pname.text, //
+            coin: 0, //
+            crystal: 0, //
+            userData: { //
+                buys: [], //
+                ofigth: "" //
+            } //
+          }; //
          var _loc1_:URLLoader = new URLLoader();
          _loc1_.dataFormat = URLLoaderDataFormat.BINARY;
          if(File.applicationStorageDirectory.resolvePath(this.loadName + ".swf").exists)
@@ -393,6 +402,7 @@ package WebRuntime_fla
          {
             loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userName"] = loading.pname.text;
             loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userCode"] = loading.pcode.text;
+            loader.contentLoaderInfo.applicationDomain.getDefinition("zygame.server.Service")["userData"] = userData; //
          });
          this.loading.visible = false;
       }

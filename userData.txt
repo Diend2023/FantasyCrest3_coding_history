@@ -1,0 +1,13 @@
+userData.nickName
+userData.coin
+userData.crystal
+userData.ofigth
+
+
+
+Game.initData(userData.userData);
+Game.onlineData = new OnlineFightData(userData.userData.ofigth);
+updateUserData(userData);
+
+
+!data2 || !data2.userData || !data2.userData.buys || data2.userData.buys.indexOf(value.target) 
