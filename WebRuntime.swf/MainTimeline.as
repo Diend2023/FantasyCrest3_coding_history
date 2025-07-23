@@ -302,9 +302,14 @@ package WebRuntime_fla
                nickName: this.loading.pname.text, //
                coin: 0, //
                crystal: 0, //
+               fight: "", //
+               ofigth: "", //
+               fbs: "", //
                userData: { //
-                  buys: [], //
-                  ofigth: "" //
+                  buys: ["anotherJX"], //
+                  fight: "", //
+                  ofigth: "", //
+                  fbs: "" //
                } //
             }; //
             trace("登录"); //
