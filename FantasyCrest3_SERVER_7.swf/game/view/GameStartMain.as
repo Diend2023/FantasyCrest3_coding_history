@@ -342,6 +342,7 @@ package game.view
          }
          ServerUtils.updateRoleData(GameOnlineRoomListView._userName,GameOnlineRoomListView._userCode,{},function(userData:Object):void
          {
+            userData = Service.userData; //
             if(!userData)
             {
                SceneCore.pushView(new GameTipsView("无法登陆"));
@@ -442,10 +443,10 @@ package game.view
       private function onSelect(e:Event) : void
       {
          trace("onSelect",_modeList.selectedItem);
-         // if(Service.userData == null)
-         // {
-         //    return;
-         // }
+         if(Service.userData == null)
+         {
+            return;
+         }
          switch(_modeList.selectedItem)
          {
             case "英雄之迹":
@@ -509,10 +510,10 @@ package game.view
       
       private function onBtnEvent(label:String) : void
       {
-         // if(Service.userData == null)
-         // {
-         //    return;
-         // }
+         if(Service.userData == null)
+         {
+            return;
+         }
          switch(label)
          {
             case "商店":
