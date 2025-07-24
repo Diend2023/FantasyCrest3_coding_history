@@ -342,7 +342,6 @@ package game.view
          }
          ServerUtils.updateRoleData(GameOnlineRoomListView._userName,GameOnlineRoomListView._userCode,{},function(userData:Object):void
          {
-            userData = Service.userData; //
             if(!userData)
             {
                SceneCore.pushView(new GameTipsView("无法登陆"));

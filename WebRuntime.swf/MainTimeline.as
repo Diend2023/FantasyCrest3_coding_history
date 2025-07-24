@@ -298,20 +298,6 @@ package WebRuntime_fla
                this.loading.pname.text = this.loading.pname.text + "#" + String(Math.round(Math.random() * 10000)); //
                this.loading.pcode.text = this.loading.pcode.text + "#" + String(Math.round(Math.random() * 10000)); //
             } //
-            this.loading.userData = { //
-               nickName: this.loading.pname.text, //
-               coin: 0, //
-               crystal: 0, //
-               fight: "", //
-               ofigth: "", //
-               fbs: "", //
-               userData: { //
-                  buys: ["anotherJX"], //
-                  fight: "", //
-                  ofigth: "", //
-                  fbs: "" //
-               } //
-            }; //
             trace("登录"); //
             startGame(); //
         //  var clinet:BaseSocketClient = null;
@@ -370,6 +356,7 @@ package WebRuntime_fla
       {
          SharedObject.getLocal("net.zygame.hxwz.air").data.userName = this.loading.pname.text;
          SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = this.loading.pcode.text;
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = this.loading.userData; //缓存userData
          SharedObject.getLocal("net.zygame.hxwz.air").flush();
          trace("startGame");
          var _loc1_:URLLoader = new URLLoader();
@@ -484,7 +471,27 @@ package WebRuntime_fla
             {
                loading.pname.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userName;
                loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userCode;
-               loading.userData = {}; //
+               if(SharedObject.getLocal("net.zygame.hxwz.air").data.userData) //
+               { //
+                  loading.userData = SharedObject.getLocal("net.zygame.hxwz.air").data.userData; //
+               } //
+               else //
+               { //
+                  loading.userData = { //
+                     nickName: loading.pname.text, //
+                     coin: 0, //
+                     crystal: 0, //
+                     fight: "", //
+                     ofigth: "", //
+                     fbs: "", //
+                     userData: { //
+                        buys: [], //
+                        fight: "", //
+                        ofigth: "", //
+                        fbs: "" //
+                     } //
+                  }; //
+               } //
             }
             catch(e:Error)
             {

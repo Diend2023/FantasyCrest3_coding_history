@@ -1,6 +1,7 @@
 package zygame.utils
 {
    import flash.net.Socket;
+   import flash.net.SharedObject; //
    import zygame.server.BaseSocketClient;
    import zygame.server.Service;
    
@@ -18,7 +19,7 @@ package zygame.utils
       
       public static function updateRoleData(userName:String, userCode:String, userData:Object, onUpdate:Function) : void
       {
-         onUpdate(userData); //
+         onUpdate(Service.userData); //
          // var clinet:BaseSocketClient;
          // if(sending)
          // {
@@ -46,7 +47,35 @@ package zygame.utils
       
       public static function buyRole(userName:String, userCode:String, roleName:String, target:String, coin:int, type:int, onUpdate:Function, mail:String = null) : void
       {
-         onUpdate(Service.userData); //
+         if(type) //
+         { //
+            // if(Service.userData.crystal + coin >= 0) //
+            if(true) //
+            { //
+               Service.userData.crystal += coin; //
+               Service.userData.userData.buys.push(target) //
+               onUpdate(Service.userData); //
+            } //
+            else //
+            { //
+               onUpdate(null); //
+            } //
+         }
+         else
+         {
+            // if(Service.userData.coin + coin >= 0) //
+            if(true) //
+            { //
+               Service.userData.coin += coin; //
+               Service.userData.userData.buys.push(target) //
+               onUpdate(Service.userData); //
+            } //
+            else //
+            { //
+               onUpdate(null); //
+            } //
+         } //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //缓存userData
          // var clinet:BaseSocketClient;
          // if(sending)
          // {
@@ -108,6 +137,8 @@ package zygame.utils
       
       public static function addCoin(userName:String, userCode:String, coin:int, onUpdate:Function, codeType:String = "addCoin") : void
       {
+         Service.userData.coin += coin; //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //缓存userData
          onUpdate(Service.userData); //
          // var clinet:BaseSocketClient;
          // if(sending)
