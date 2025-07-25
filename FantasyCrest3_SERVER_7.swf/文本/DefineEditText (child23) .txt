@@ -1,0 +1,18 @@
+[
+xmin -40
+ymin -40
+xmax 2374
+ymax 400
+multiline 1
+readonly 1
+noselect 1
+font 4
+height 360
+color #ffffcc00
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+// ]密码
+]地址:端口

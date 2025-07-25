@@ -390,9 +390,9 @@ package game.display
             {
                rootName = (xmllist[i] as XML).localName();
                // if(unlockData.indexOf("Role" + rootName) != -1 && rootName != "init" && String((xmllist[i] as XML).@visible) != "false" && (!config.showCoinRole || config.showCoinRole && (int((xmllist[i] as XML).@crystal) > 0 || int((xmllist[i] as XML).@coin) > 0)))
-               if(rootName != "init" && String((xmllist[i] as XML).@visible) != "false" && (!config.showCoinRole || config.showCoinRole && (int((xmllist[i] as XML).@crystal) > 0 || int((xmllist[i] as XML).@coin) > 0))) //
+               if(rootName != "init") //
                {
-                  if(!(false && (int((xmllist[i] as XML).@crystal) > 0 || int((xmllist[i] as XML).@coin) > 0) && String((xmllist[i] as XML).@in4399) != "true"))
+                  // if(!(false && (int((xmllist[i] as XML).@crystal) > 0 || int((xmllist[i] as XML).@coin) > 0) && String((xmllist[i] as XML).@in4399) != "true"))
                   {
                      arr.push({
                         "passive":xmllist[i].@passive,

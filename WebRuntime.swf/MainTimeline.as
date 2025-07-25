@@ -83,13 +83,15 @@ package WebRuntime_fla
       
       public function clear(param1:MouseEvent) : void
       {
-         if(File.applicationStorageDirectory.exists)
-         {
-            File.applicationStorageDirectory.deleteDirectory(true);
-         }
-         this.loading.clear.visible = false;
-         this.loading.start.visible = false;
-         this.cheakUpdate();
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = {}; //
+         this.loading.userData = {}; //
+         // if(File.applicationStorageDirectory.exists)
+         // {
+         //    File.applicationStorageDirectory.deleteDirectory(true);
+         // }
+         // this.loading.clear.visible = false;
+         // this.loading.start.visible = false;
+         // this.cheakUpdate();
       }
       
       public function cheakUpdate() : void
@@ -285,7 +287,7 @@ package WebRuntime_fla
       
       public function login(param1:MouseEvent) : void
       {
-            if(this.loading.pname.text == "" || this.loading.pcode.text == "") //
+            if(this.loading.pname.text == "") //
             { //
                 this.loginError(); //
                 return; //
@@ -296,8 +298,29 @@ package WebRuntime_fla
             else //
             { //
                this.loading.pname.text = this.loading.pname.text + "#" + String(Math.round(Math.random() * 10000)); //
-               this.loading.pcode.text = this.loading.pcode.text + "#" + String(Math.round(Math.random() * 10000)); //
             } //
+            if(!this.loading.userData.nickName) //
+            { //
+               this.loading.userData = { //
+                  nickName: this.loading.pname.text, //
+                  coin: 0, //
+                  crystal: 0, //
+                  fight: "", //
+                  ofigth: "", //
+                  fbs: "", //
+                  userData: { //
+                     buys: [], //
+                     fight: "", //
+                     ofigth: "", //
+                     fbs: "" //
+                  } //
+               }; //
+            } //
+            else if(this.loading.userData.nickName != this.loading.pname.text) //
+            { //
+               this.loading.userData.nickName = this.loading.pname.text; //
+            } //
+            this.loading.address.text = this.loading.pcode.text; //
             trace("登录"); //
             startGame(); //
         //  var clinet:BaseSocketClient = null;
@@ -355,8 +378,10 @@ package WebRuntime_fla
       public function startGame() : void
       {
          SharedObject.getLocal("net.zygame.hxwz.air").data.userName = this.loading.pname.text;
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = this.loading.pcode.text;
+         // SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = this.loading.pcode.text;
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = this.loading.pname.text; //
          SharedObject.getLocal("net.zygame.hxwz.air").data.userData = this.loading.userData; //缓存userData
+         SharedObject.getLocal("net.zygame.hxwz.air").data.address = this.loading.address.text; //缓存地址
          SharedObject.getLocal("net.zygame.hxwz.air").flush();
          trace("startGame");
          var _loc1_:URLLoader = new URLLoader();
@@ -384,6 +409,21 @@ package WebRuntime_fla
          var con:LoaderContext;
          var loader:Loader = null;
          var e:Event = param1;
+         if (this.loading.address.text.indexOf(":") > -1) // 检查地址是否包含端口
+         { //
+            var ip:String = this.loading.address.text.split(":")[0]; //获取ip
+            var port:String = this.loading.address.text.split(":")[1]; //获取端口
+         } //
+         else if (this.loading.address.text.indexOf("：") > -1)
+         { //
+            var ip:String = this.loading.address.text.split("：")[0]; //获取ip
+            var port:String = this.loading.address.text.split("：")[1]; //获取端口
+         } //
+         else //
+         { //
+            var ip:String = ""; //
+            var port:String = ""; //
+         } //
          trace("加载完成");
          loader = new Loader();
          this.addChild(loader);
@@ -393,7 +433,10 @@ package WebRuntime_fla
          loader.contentLoaderInfo.addEventListener(Event.COMPLETE,function(param1:Event):void
          {
             loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userName"] = loading.pname.text;
-            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userCode"] = loading.pcode.text;
+            // loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userCode"] = loading.pcode.text;
+            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userCode"] = SharedObject.getLocal("net.zygame.hxwz.air").data.userCode; //
+            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_ip"] = ip; //
+            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_port"] = port; //
             loader.contentLoaderInfo.applicationDomain.getDefinition("zygame.server.Service")["userData"] = loading.userData; //
          });
          this.loading.visible = false;
@@ -454,7 +497,7 @@ package WebRuntime_fla
          this.loading.start.addEventListener(MouseEvent.CLICK,this.login);
          this.loading.zhuce.addEventListener(MouseEvent.CLICK,this.zhuceFunc);
          this.loading.mimaxiug.addEventListener(MouseEvent.CLICK,this.mimaFunc);
-        //  this.loading.clear.addEventListener(MouseEvent.CLICK,this.clear);
+         this.loading.clear.addEventListener(MouseEvent.CLICK,this.clear);
          this.path2 = "http://www.4399api.com/system/attachment/100/05/24/100052440/";
          this.path = "http://www.4399api.com/system/attachment/100/05/24/100052440/";
          this.files = [];
@@ -469,29 +512,13 @@ package WebRuntime_fla
          {
             try
             {
+               loading.userData = {}; //
+               loading.address = {text:""}; //
                loading.pname.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userName;
-               loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userCode;
-               if(SharedObject.getLocal("net.zygame.hxwz.air").data.userData) //
-               { //
-                  loading.userData = SharedObject.getLocal("net.zygame.hxwz.air").data.userData; //
-               } //
-               else //
-               { //
-                  loading.userData = { //
-                     nickName: loading.pname.text, //
-                     coin: 0, //
-                     crystal: 0, //
-                     fight: "", //
-                     ofigth: "", //
-                     fbs: "", //
-                     userData: { //
-                        buys: [], //
-                        fight: "", //
-                        ofigth: "", //
-                        fbs: "" //
-                     } //
-                  }; //
-               } //
+               // loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userCode;
+               loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.address; //
+               loading.userData = SharedObject.getLocal("net.zygame.hxwz.air").data.userData; //
+               loading.address.text = SharedObject.getLocal("net.zygame.hxwz.air").data.address; //
             }
             catch(e:Error)
             {
