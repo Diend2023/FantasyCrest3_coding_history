@@ -456,7 +456,8 @@ package game.view
                SceneCore.pushView(new GameLANModeView());
                break;
             case "网络对战":
-               SceneCore.replaceScene(new GameOnlineRoomListView());
+               // SceneCore.replaceScene(new GameOnlineRoomListView());
+               SceneCore.pushView(new GameOnlineRoomListView(GameOnlineRoomListView._ip)); //
                break;
             case "制作组":
                openSelect("左眼","老邪","巅峰","小鸟","虚伪","木姐","RS","菠萝","小研En","妹红","柠七");

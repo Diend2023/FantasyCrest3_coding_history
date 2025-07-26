@@ -34,22 +34,44 @@ package game.view
       public static var _ip:String //
 
       public static var _port:String = "4888"; //
-      
+
+      public static var ip:String //
+
+      public static var port:int = 4888; //
+
+
       private var _msg:TextField;
       
-      public function GameOnlineRoomListView(ip:String = "120.79.155.18")
+      // public function GameOnlineRoomListView(ip:String = "120.79.155.18")
+      public function GameOnlineRoomListView(inIp:String = "") //
       {
          super();
-         if(!ip) //
+         if(inIp == "127.0.0.1") //
          { //
-            _ip = ip; //
+            ip = inIp; //
+            port = 4888; //
+         } //
+         else if(inIp == _ip) //
+         { //
+            ip = _ip; //
+            port = int(_port); //
+         } //
+         else if(!inIp && !port) //
+         { //
+            ip = "127.0.0.1"; //
+            port = 4888; //
+         } //
+         else //
+         { //
+            ip = _ip; //
+            port = int(_port); //
          } //
          // _ip = ip;
       }
       
       override public function onInit() : void
       {
-         var ip:String;
+         // var ip:String;
          var msg:TextField;
          var textures:TextureAtlas = DataCore.getTextureAtlas("start_main");
          var bg:Image = new Image(textures.getTexture("bg"));
@@ -64,8 +86,7 @@ package game.view
          }
          else
          {
-            ip = _ip;
-            port = int(_port); //
+            // ip = _ip;
             // Service.startService(ip,4888,function():void
             Service.startService(ip,port,function():void //
             {
@@ -80,6 +101,7 @@ package game.view
                Service.client.userName = _userName;
                Service.client.userCode = _userCode;
                showList();
+               Service.send({"type":"room_list"}); //
             };
             Service.client.closeFunc = function():void
             {
@@ -96,6 +118,14 @@ package game.view
          this.addChild(msg);
          msg.x = msg.y = 5;
          _msg = msg;
+         var onlineAddress:TextField = new TextField(stage.stageWidth,32,"联机大厅地址：" + ip + ":" + String(port),new TextFormat(GameFont.FONT_NAME,12,16776960,"left")); //
+         this.addChild(onlineAddress); //
+         onlineAddress.x = 5; //
+         onlineAddress.y = msg.y + 15; //
+         if(ip == "127.0.0.1") //
+         { //
+            port = null; //
+         } //
       }
       
       private function onUserData(data:Object) : void
