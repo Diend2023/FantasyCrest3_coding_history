@@ -326,10 +326,11 @@ package game.view
             GameCore.soundCore.volume = GameCore.soundCore.volume == 0 ? 1 : 0;
             music.upState = DataCore.getTextureAtlas("start_main").getTexture(GameCore.soundCore.volume == 0 ? "sound_close" : "sound_open");
          });
-         if(!Phone.isPhone() && false)
+         // if(!Phone.isPhone() && false)
+         if (true) // 显示按钮
          {
             skin = DataCore.getTextureAtlas("start_main").getTexture("btn_style_1");
-            button = new Button(skin,"解决掉帧");
+            button = new Button(skin,"版本说明");
             this.addChild(button);
             button.scale = 0.7;
             button.textFormat.size = 18;
