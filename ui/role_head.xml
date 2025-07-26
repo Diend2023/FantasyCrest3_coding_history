@@ -98,6 +98,7 @@
     <SubTexture name="yuzhiboyou" x="322" y="65" width="60" height="60"/>
     <SubTexture name="zhaomei" x="260" y="65" width="60" height="60"/>
     <SubTexture name="zhixubaimian" x="198" y="65" width="60" height="60"/>
+    <SubTexture name="zhizhixiong" x="2" y="74" width="60" height="60"/>
     <SubTexture name="zhouzuo" x="136" y="65" width="60" height="60"/>
     <SubTexture name="zzx" x="2" y="74" width="60" height="60"/>
 </TextureAtlas>

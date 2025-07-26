@@ -1,0 +1,12 @@
+<TextureAtlas imagePath="acl16.png" px="-168" py="-281" class="" sound="">
+  <SubTexture name="元件 160000" x="1" y="1" width="273" height="302" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+  <SubTexture name="元件 160001" x="275" y="1" width="271" height="300" frameX="0" frameY="0" frameWidth="297" frameHeight="302" hitPoint="-91,11 -117,-168 -15,-255 88,-227 124,6" hitEffect="4" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="元件 160002" x="547" y="1" width="291" height="298" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+  <SubTexture name="元件 160003" x="1" y="304" width="295" height="289" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+  <SubTexture name="元件 160004" x="297" y="304" width="289" height="270" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+  <SubTexture name="元件 160005" x="587" y="304" width="295" height="280" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+  <SubTexture name="元件 160006" x="1" y="594" width="297" height="277" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+  <SubTexture name="元件 160007" x="299" y="594" width="296" height="275" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+  <SubTexture name="元件 160008" x="596" y="594" width="296" height="273" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+  <SubTexture name="元件 160009" x="1" y="872" width="294" height="195" frameX="0" frameY="0" frameWidth="297" frameHeight="302"/>
+</TextureAtlas>
