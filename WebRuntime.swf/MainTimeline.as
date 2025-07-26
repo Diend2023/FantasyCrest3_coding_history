@@ -33,6 +33,12 @@ package WebRuntime_fla
    public dynamic class MainTimeline extends MovieClip
    {
       
+      private const DESIGN_WIDTH:int = 1000; //
+      
+      private const DESIGN_HEIGHT:int = 600; //
+      
+      private var container:Sprite; //
+      
       public var loading:MovieClip;
       
       public var mimaxiugai:MovieClip;
@@ -70,6 +76,20 @@ package WebRuntime_fla
          super();
          addFrameScript(0,this.frame1);
       }
+
+      private function handleStageResize(e:Event = null) : void //
+      { //
+         if(!stage) //
+         { //
+            return; //
+         } //
+         var scaleX:Number = stage.stageWidth / DESIGN_WIDTH; //
+         var scaleY:Number = stage.stageHeight / DESIGN_HEIGHT; //
+         var scale:Number = Math.min(scaleX,scaleY); //
+         container.scaleX = container.scaleY = scale; //
+         container.x = (stage.stageWidth - DESIGN_WIDTH * scale) / 2; //
+         container.y = (stage.stageHeight - DESIGN_HEIGHT * scale) / 2; //
+      } //
       
       public function zhuceFunc(param1:MouseEvent) : void
       {
@@ -491,8 +511,16 @@ package WebRuntime_fla
       
       internal function frame1() : *
       {
+         container = new Sprite(); //
+         while(this.numChildren > 0) //
+         { //
+            container.addChild(this.getChildAt(0)); //
+         } //
+         this.addChild(container); //
          stage.scaleMode = StageScaleMode.NO_SCALE;
          stage.align = StageAlign.TOP_LEFT;
+         stage.addEventListener(Event.RESIZE,handleStageResize); //
+         handleStageResize(); //
          this.loadName = "FantasyCrest3_SERVER_7";
          this.loading.start.addEventListener(MouseEvent.CLICK,this.login);
          this.loading.zhuce.addEventListener(MouseEvent.CLICK,this.zhuceFunc);

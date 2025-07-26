@@ -334,8 +334,10 @@ package game.view
             this.addChild(button);
             button.scale = 0.7;
             button.textFormat.size = 18;
-            button.x = stage.stageWidth - button.width - 2;
-            button.y = 2;
+            // button.x = stage.stageWidth - button.width - 2;
+            button.x = stage.stageWidth - button.width - 4; //
+            // button.y = 2;
+            button.y = 8; //
             button.addEventListener("triggered",function(e:Event):void
             {
                SceneCore.pushView(new GameFPSTipsView());

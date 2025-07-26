@@ -10,6 +10,7 @@ package game.view
    import zygame.core.SceneCore; //
    import zygame.display.KeyDisplayObject;
    import zygame.server.Service; //
+   import flash.net.SharedObject; //
 
    
    public class GameTestView extends KeyDisplayObject
@@ -92,6 +93,7 @@ package game.view
                Starling.juggler.delayCall(removeFromParent,3);
                this.clearKey();
                Service.userData.userData.buys = buys; // 购买所有角色
+               SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
                SceneCore.pushView(new GameTipsView("已购买所有角色")); //
                return false;
             }
@@ -114,6 +116,7 @@ package game.view
          Starling.juggler.delayCall(removeFromParent,3);
          this.clearKey();
          Service.userData.userData.buys = buys; // 购买所有角色
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
          SceneCore.pushView(new GameTipsView("已购买所有角色")); //
          return false;
       }
