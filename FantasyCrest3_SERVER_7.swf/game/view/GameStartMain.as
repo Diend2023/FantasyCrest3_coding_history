@@ -303,7 +303,8 @@ package game.view
          {
             showUserState();
          }
-         GameCore.soundCore.playBGSound("main");
+         // GameCore.soundCore.playBGSound("main");
+         GameCore.soundCore.playBGSound(["main", "main1"][Math.floor(Math.random() * 2)]); //
          isHW = Starling.context.driverInfo.toLowerCase().indexOf("software") == -1;
          tispbg = new Quad(stage.stageWidth,32,0);
          tispbg.alpha = 0.7;

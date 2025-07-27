@@ -104,7 +104,15 @@ package WebRuntime_fla
       public function clear(param1:MouseEvent) : void
       {
          SharedObject.getLocal("net.zygame.hxwz.air").data.userData = {}; //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.address = ""; //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userName = ""; //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = ""; //
+         SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
          this.loading.userData = {}; //
+         this.loading.address.text = ""; //
+         this.loading.pname.text = ""; //
+         this.loading.pcode.text = ""; //
+
          // if(File.applicationStorageDirectory.exists)
          // {
          //    File.applicationStorageDirectory.deleteDirectory(true);
