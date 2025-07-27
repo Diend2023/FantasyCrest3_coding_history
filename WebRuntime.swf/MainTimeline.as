@@ -110,8 +110,8 @@ package WebRuntime_fla
          SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
          this.loading.userData = {}; //
          this.loading.address.text = ""; //
-         this.loading.pname.text = ""; //
-         this.loading.pcode.text = ""; //
+         // this.loading.pname.text = ""; //
+         // this.loading.pcode.text = ""; //
 
          // if(File.applicationStorageDirectory.exists)
          // {
@@ -339,16 +339,24 @@ package WebRuntime_fla
                   userData: { //
                      buys: [], //
                      fight: "", //
+                     allFight: 0, //
                      ofigth: "", //
+                     vip: 0, //
+                     version: "", //
                      fbs: "" //
-                  } //
+                  }, //
+                  _4399userData: this.loading._4399userData[0] //
                }; //
             } //
             else if(this.loading.userData.nickName != this.loading.pname.text) //
             { //
                this.loading.userData.nickName = this.loading.pname.text; //
             } //
+            trace("userData2",JSON.stringify(this.loading.userData)); //
             this.loading.address.text = this.loading.pcode.text; //
+            this.loading.userData._4399userData = this.loading._4399userData; //
+            this.loading.userData._4399userData[0].nickName = this.loading.pname.text; //
+            this.loading.userData._4399userData[0].userName = this.loading.pname.text; //
             trace("登录"); //
             startGame(); //
         //  var clinet:BaseSocketClient = null;
@@ -544,12 +552,41 @@ package WebRuntime_fla
          this.errorCount = 0;
          this.nextLoad(); //
         //  this.cheakUpdate();
+         loading._4399userData = [ //
+            { //
+               nickName: "", //
+               userName: "", //
+               uid: 0, //
+               allFight: 0, //
+               fight: "", //
+               ofigth: "", //
+               vip: 0, //
+               version: "", //
+               fbs: ""}]; //
+         loading.userData = { //
+            nickName: "???", //
+            coin: 0, //
+            crystal: 0, //
+            fight: "", //
+            ofigth: "", //
+            fbs: "", //
+            userData: { //
+               buys: [], //
+               fight: "", //
+               allFight: 0, //
+               ofigth: "", //
+               vip: 0, //
+               version: "", //
+               fbs: "" //
+            }, //
+            _4399userData: loading._4399userData //
+         }; //
+         loading.address = {text:""}; //
+         trace("userData1",JSON.stringify(loading.userData)); //
          setTimeout(function():void
          {
             try
             {
-               loading.userData = {}; //
-               loading.address = {text:""}; //
                loading.pname.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userName;
                // loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userCode;
                loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.address; //

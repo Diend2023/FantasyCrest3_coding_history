@@ -19,7 +19,23 @@ package zygame.utils
       
       public static function updateRoleData(userName:String, userCode:String, userData:Object, onUpdate:Function) : void
       {
+         if(userData.fight) //
+         { //
+            Service.userData.fight = userData.fight; //
+         } //
+         Service.userData.userData.fight = Service.userData.fight; //
+         if(userData.fbs) //
+         { //
+            Service.userData.fbs = userData.fbs; //
+         } //
+         Service.userData.userData.fbs = Service.userData.fbs; //
+         if(userData.ofigth) //
+         { //
+            Service.userData.ofigth = userData.ofigth; //
+         } //
+         Service.userData.userData.ofigth = Service.userData.ofigth; //
          onUpdate(Service.userData); //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
          // var clinet:BaseSocketClient;
          // if(sending)
          // {
@@ -108,6 +124,7 @@ package zygame.utils
       public static function transferMoney(userName:String, userCode:String, coin:int, coinType:int, mail:String, onUpdate:Function) : void
       {
          onUpdate(Service.userData); //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
          // var clinet:BaseSocketClient;
          // if(sending)
          // {
@@ -168,6 +185,7 @@ package zygame.utils
       private static function createSocket(userName:String, userCode:String, onUpdate:Function) : BaseSocketClient
       {
          onUpdate(Service.userData); //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
          return null; //
          // var socket:Socket = new Socket(ip,4888);
          // var clinet:BaseSocketClient = new BaseSocketClient(socket);
