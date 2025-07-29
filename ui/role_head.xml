@@ -9,6 +9,8 @@
     <SubTexture name="CTZS" x="250" y="623" width="60" height="60"/>
     <SubTexture name="DCR" x="188" y="623" width="60" height="60"/>
     <SubTexture name="Damotwo" x="2" y="632" width="60" height="60"/>
+    <!-- 添加Doge -->
+    <SubTexture name="doge"  x="312" y="684" width="60" height="60"/>
     <SubTexture name="Es" x="64" y="624" width="60" height="60"/>
     <SubTexture name="GFN" x="126" y="623" width="60" height="60"/>
     <SubTexture name="Gudazi" x="436" y="561" width="60" height="60"/>
@@ -56,6 +58,10 @@
     <SubTexture name="heianwushi" x="250" y="313" width="60" height="60"/>
     <SubTexture name="heimian" x="188" y="313" width="60" height="60"/>
     <SubTexture name="hfh.jpeg" x="2" y="322" width="60" height="60"/>
+    <!-- 添加火元素 -->
+    <SubTexture name="hongguaiwu"  x="188" y="684" width="60" height="60"/>
+    <!-- 添加滑稽 -->
+    <SubTexture name="huaji"  x="250" y="684" width="60" height="60"/>
     <SubTexture name="huolongaisi" x="64" y="314" width="60" height="60"/>
     <SubTexture name="hzluo" x="126" y="313" width="60" height="60"/>
     <SubTexture name="jianhun" x="436" y="251" width="60" height="60"/>
@@ -74,6 +80,7 @@
     <SubTexture name="paojie" x="188" y="189" width="60" height="60"/>
     <SubTexture name="penhuolong" x="2" y="198" width="60" height="60"/>
     <SubTexture name="qiyu" x="384" y="2" width="60" height="61"/>
+    <!-- 添加灵梦 -->
     <SubTexture name="Ruimu"  x="436" y="684" width="60" height="60"/>
     <SubTexture name="saber" x="64" y="190" width="60" height="60"/>
     <SubTexture name="shalu" x="126" y="189" width="60" height="60"/>
@@ -83,7 +90,8 @@
     <SubTexture name="shourenjialulu" x="60" y="756" width="60" height="59"/>
     <SubTexture name="suolong.jpeg" x="384" y="127" width="60" height="60"/>
     <SubTexture name="telankesi.jpeg" x="322" y="127" width="60" height="60"/>
-    <SubTexture name="Tom"  x="376" y="684" width="60" height="60"/>
+    <!-- 添加汤姆 -->
+    <SubTexture name="Tom"  x="374" y="684" width="60" height="60"/>
     <SubTexture name="tongrendandao" x="2" y="818" width="60" height="59"/>
     <SubTexture name="wbbd" x="260" y="127" width="60" height="60"/>
     <SubTexture name="weizhi" x="198" y="127" width="60" height="60"/>
@@ -99,6 +107,7 @@
     <SubTexture name="yuzhiboyou" x="322" y="65" width="60" height="60"/>
     <SubTexture name="zhaomei" x="260" y="65" width="60" height="60"/>
     <SubTexture name="zhixubaimian" x="198" y="65" width="60" height="60"/>
+    <!-- 添加志志雄真实（纹4） -->
     <SubTexture name="zhizhixiong" x="2" y="74" width="60" height="60"/>
     <SubTexture name="zhouzuo" x="136" y="65" width="60" height="60"/>
     <SubTexture name="zzx" x="2" y="74" width="60" height="60"/>
