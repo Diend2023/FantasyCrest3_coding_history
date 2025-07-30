@@ -3,7 +3,7 @@ xmin -40
 ymin -40
 xmax 6639
 ymax 400
-// password 1
+// password 1 //去除密码属性（使用时请手动去掉所有注释）
 font 4
 height 360
 color #ffffcc00

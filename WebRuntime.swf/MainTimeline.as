@@ -33,9 +33,9 @@ package WebRuntime_fla
    public dynamic class MainTimeline extends MovieClip
    {
       
-      private const DESIGN_WIDTH:int = 1000; //
+      private const DESIGN_WIDTH:int = 1000; //设置宽度
       
-      private const DESIGN_HEIGHT:int = 600; //
+      private const DESIGN_HEIGHT:int = 600; //设置高度
       
       private var container:Sprite; //
       
@@ -77,6 +77,7 @@ package WebRuntime_fla
          addFrameScript(0,this.frame1);
       }
 
+      // 用于使登录界面居中显示，且支持缩放
       private function handleStageResize(e:Event = null) : void //
       { //
          if(!stage) //
@@ -103,13 +104,14 @@ package WebRuntime_fla
       
       public function clear(param1:MouseEvent) : void
       {
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = {}; //
-         SharedObject.getLocal("net.zygame.hxwz.air").data.address = ""; //
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userName = ""; //
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = ""; //
-         SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
-         this.loading.userData = {}; //
-         this.loading.address.text = ""; //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = {}; // 清除用户数据缓存
+         SharedObject.getLocal("net.zygame.hxwz.air").data.address = ""; // 清除联机地址缓存
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userName = ""; // 清除用户名缓存
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = ""; // 清除用户密码缓存
+         SharedObject.getLocal("net.zygame.hxwz.air").flush(); // 刷新缓存
+         this.loading.userData = {}; // 清除当前生成的用户数据
+         this.loading.address.text = ""; // 清除当前生成的联机地址
+         // 去除原本的清除缓存代码
          // this.loading.pname.text = ""; //
          // this.loading.pcode.text = ""; //
 
@@ -296,6 +298,7 @@ package WebRuntime_fla
                this.loading.start.visible = true;
                this.loading.clear.visible = true;
                md5File = File.applicationStorageDirectory.resolvePath("md5.data");
+               // 去除原本的md5保存代码
                // fileSave = new FileStream();
                // fileSave.open(md5File,FileMode.WRITE);
                // fileSave.writeUTFBytes(this.md5Data);
@@ -315,50 +318,51 @@ package WebRuntime_fla
       
       public function login(param1:MouseEvent) : void
       {
-            if(this.loading.pname.text == "") //
-            { //
-                this.loginError(); //
-                return; //
-            } //
-            if(this.loading.pname.text.indexOf("#") > -1) //
-            { //
-            } //
-            else //
-            { //
-               this.loading.pname.text = this.loading.pname.text + "#" + String(Math.round(Math.random() * 10000)); //
-            } //
-            if(!this.loading.userData.nickName) //
-            { //
-               this.loading.userData = { //
-                  nickName: this.loading.pname.text, //
-                  coin: 0, //
-                  crystal: 0, //
+         if(this.loading.pname.text == "") // 不允许用户名为空
+         { //
+               this.loginError(); //
+               return; //
+         } //
+         if(this.loading.pname.text.indexOf("#") > -1) // 给用户名自动添加后缀防止重复
+         { //
+         } //
+         else //
+         { //
+            this.loading.pname.text = this.loading.pname.text + "#" + String(Math.round(Math.random() * 10000)); //
+         } //
+         if(!this.loading.userData.nickName) // 如果没有用户名则创建
+         { //
+            this.loading.userData = { //
+               nickName: this.loading.pname.text, //
+               coin: 0, //
+               crystal: 0, //
+               fight: "", //
+               ofigth: "", //
+               fbs: "", //
+               userData: { //
+                  buys: [], //
                   fight: "", //
+                  allFight: 0, //
                   ofigth: "", //
-                  fbs: "", //
-                  userData: { //
-                     buys: [], //
-                     fight: "", //
-                     allFight: 0, //
-                     ofigth: "", //
-                     vip: 0, //
-                     version: "", //
-                     fbs: "" //
-                  }, //
-                  _4399userData: this.loading._4399userData[0] //
-               }; //
-            } //
-            else if(this.loading.userData.nickName != this.loading.pname.text) //
-            { //
-               this.loading.userData.nickName = this.loading.pname.text; //
-            } //
-            trace("userData2",JSON.stringify(this.loading.userData)); //
-            this.loading.address.text = this.loading.pcode.text; //
-            this.loading.userData._4399userData = this.loading._4399userData; //
-            this.loading.userData._4399userData[0].nickName = this.loading.pname.text; //
-            this.loading.userData._4399userData[0].userName = this.loading.pname.text; //
-            trace("登录"); //
-            startGame(); //
+                  vip: 0, //
+                  version: "", //
+                  fbs: "" //
+               }, //
+               _4399userData: this.loading._4399userData[0] //
+            }; //
+         } //
+         else if(this.loading.userData.nickName != this.loading.pname.text) // 更新用户名
+         { //
+            this.loading.userData.nickName = this.loading.pname.text; //
+         } //
+         trace("userData2",JSON.stringify(this.loading.userData)); //
+         this.loading.address.text = this.loading.pcode.text; // 存入联机地址
+         this.loading.userData._4399userData = this.loading._4399userData; // 存入4399用户数据
+         this.loading.userData._4399userData[0].nickName = this.loading.pname.text; // 存入昵称
+         this.loading.userData._4399userData[0].userName = this.loading.pname.text; // 存入用户名
+         trace("登录"); //
+         startGame(); // 开始游戏
+         // 下面的代码是原本的登录代码，已被注释掉
         //  var clinet:BaseSocketClient = null;
         //  var e:MouseEvent = param1;
         //  var socket:Socket = new Socket("120.220.73.176",24888); //
@@ -414,9 +418,10 @@ package WebRuntime_fla
       public function startGame() : void
       {
          SharedObject.getLocal("net.zygame.hxwz.air").data.userName = this.loading.pname.text;
+         // 原本的缓存密码代码
          // SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = this.loading.pcode.text;
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = this.loading.pname.text; //
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = this.loading.userData; //缓存userData
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userCode = this.loading.pname.text; // 缓存用户名并且作为密码
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = this.loading.userData; //缓存用户数据
          SharedObject.getLocal("net.zygame.hxwz.air").data.address = this.loading.address.text; //缓存地址
          SharedObject.getLocal("net.zygame.hxwz.air").flush();
          trace("startGame");
@@ -450,7 +455,7 @@ package WebRuntime_fla
             var ip:String = this.loading.address.text.split(":")[0]; //获取ip
             var port:String = this.loading.address.text.split(":")[1]; //获取端口
          } //
-         else if (this.loading.address.text.indexOf("：") > -1)
+         else if (this.loading.address.text.indexOf("：") > -1) // 兼容中文冒号
          { //
             var ip:String = this.loading.address.text.split("：")[0]; //获取ip
             var port:String = this.loading.address.text.split("：")[1]; //获取端口
@@ -469,11 +474,12 @@ package WebRuntime_fla
          loader.contentLoaderInfo.addEventListener(Event.COMPLETE,function(param1:Event):void
          {
             loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userName"] = loading.pname.text;
+            // 这是原本的预加载用户密码的代码
             // loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userCode"] = loading.pcode.text;
-            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userCode"] = SharedObject.getLocal("net.zygame.hxwz.air").data.userCode; //
-            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_ip"] = ip; //
-            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_port"] = port; //
-            loader.contentLoaderInfo.applicationDomain.getDefinition("zygame.server.Service")["userData"] = loading.userData; //
+            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_userCode"] = loading.pname.text; // 使用用户名作为密码
+            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_ip"] = ip; // 预加载联机地址ip
+            loader.contentLoaderInfo.applicationDomain.getDefinition("game.view.GameOnlineRoomListView")["_port"] = port; // 预加载联机地址端口
+            loader.contentLoaderInfo.applicationDomain.getDefinition("zygame.server.Service")["userData"] = loading.userData; // 预加载用户数据
          });
          this.loading.visible = false;
       }
@@ -552,7 +558,7 @@ package WebRuntime_fla
          this.errorCount = 0;
          this.nextLoad(); //
         //  this.cheakUpdate();
-         loading._4399userData = [ //
+         loading._4399userData = [ // 初始化4399用户数据
             { //
                nickName: "", //
                userName: "", //
@@ -563,7 +569,7 @@ package WebRuntime_fla
                vip: 0, //
                version: "", //
                fbs: ""}]; //
-         loading.userData = { //
+         loading.userData = { // 初始化用户数据
             nickName: "???", //
             coin: 0, //
             crystal: 0, //
@@ -581,17 +587,18 @@ package WebRuntime_fla
             }, //
             _4399userData: loading._4399userData //
          }; //
-         loading.address = {text:""}; //
+         loading.address = {text:""}; // 初始化联机地址
          trace("userData1",JSON.stringify(loading.userData)); //
          setTimeout(function():void
          {
             try
             {
                loading.pname.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userName;
+               // 原本的读取密码缓存代码
                // loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.userCode;
-               loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.address; //
-               loading.userData = SharedObject.getLocal("net.zygame.hxwz.air").data.userData; //
-               loading.address.text = SharedObject.getLocal("net.zygame.hxwz.air").data.address; //
+               loading.pcode.text = SharedObject.getLocal("net.zygame.hxwz.air").data.address; // 读取联机地址缓存
+               loading.userData = SharedObject.getLocal("net.zygame.hxwz.air").data.userData; // 读取用户数据缓存
+               loading.address.text = SharedObject.getLocal("net.zygame.hxwz.air").data.address; // 读取联机地址缓存
             }
             catch(e:Error)
             {

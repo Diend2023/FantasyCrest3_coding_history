@@ -30,38 +30,40 @@ package game.view
       
       private var _list:List;
       
+      // 原本的IP地址定义
       // private var _ip:String;
-      public static var _ip:String //
+      public static var _ip:String // 预加载的联机ip
 
-      public static var _port:String = "4888"; //
+      public static var _port:String = "4888"; // 预加载的联机端口
 
-      public static var ip:String //
+      public static var ip:String // 实际使用的联机ip
 
-      public static var port:int = 4888; //
+      public static var port:int = 4888; // 实际使用的联机端口
 
 
       private var _msg:TextField;
       
+      // 原本的联机大厅构造函数
       // public function GameOnlineRoomListView(ip:String = "120.79.155.18")
-      public function GameOnlineRoomListView(inIp:String = "") //
+      public function GameOnlineRoomListView(inIp:String = "") // 取消原本的默认联机ip
       {
          super();
-         if(inIp == "127.0.0.1") //
+         if(inIp == "127.0.0.1") // 使用本地ip和端口创建连接
          { //
             ip = inIp; //
             port = 4888; //
          } //
-         else if(inIp == _ip) //
+         else if(inIp == _ip) // 使用传入的ip和端口创建连接
          { //
             ip = _ip; //
             port = int(_port); //
          } //
-         else if(!inIp && !port) //
+         else if(!inIp && !port) // 如果没有传入ip和端口，默认创建本地连接服务器连接
          { //
             ip = "127.0.0.1"; //
             port = 4888; //
          } //
-         else //
+         else // 使用预加载的ip和端口创建连接
          { //
             ip = _ip; //
             port = int(_port); //
@@ -118,11 +120,11 @@ package game.view
          this.addChild(msg);
          msg.x = msg.y = 5;
          _msg = msg;
-         var onlineAddress:TextField = new TextField(stage.stageWidth,32,"联机大厅地址：" + ip + ":" + String(port),new TextFormat(GameFont.FONT_NAME,12,16776960,"left")); //
+         var onlineAddress:TextField = new TextField(stage.stageWidth,32,"联机大厅地址：" + ip + ":" + String(port),new TextFormat(GameFont.FONT_NAME,12,16776960,"left")); // 添加当前联机地址显示
          this.addChild(onlineAddress); //
          onlineAddress.x = 5; //
          onlineAddress.y = msg.y + 15; //
-         if(ip == "127.0.0.1") //
+         if(ip == "127.0.0.1") // 连接到本地联机服务器时清除端口，用于标记该链接是本地联机服务器连接
          { //
             port = null; //
          } //

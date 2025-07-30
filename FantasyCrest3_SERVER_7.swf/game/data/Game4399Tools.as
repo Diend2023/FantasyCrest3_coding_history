@@ -10,9 +10,9 @@ package game.data
    
    public class Game4399Tools
    {
-      
+      // 原本的定义4399服务的代码
       // public var serviceHold:Object;
-      public var serviceHold:ServiceHold; //
+      public var serviceHold:ServiceHold; // 自定义4399服务类
       
       public var data:Object;
       
@@ -29,7 +29,7 @@ package game.data
       public function Game4399Tools()
       {
          super();
-         serviceHold = new ServiceHold(); //
+         serviceHold = new ServiceHold(); // 初始化4399服务类
       }
       
       public function set main(pmain:Stage) : void

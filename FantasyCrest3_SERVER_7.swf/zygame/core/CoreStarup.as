@@ -174,6 +174,7 @@
 //    }
 // }
 
+// 直接更新整个文件以修复无法缩放的问题
 package zygame.core
 {
    import flash.display.BitmapData;

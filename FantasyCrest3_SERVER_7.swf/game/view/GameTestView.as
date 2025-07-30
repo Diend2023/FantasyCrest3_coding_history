@@ -7,10 +7,10 @@ package game.view
    import starling.text.TextField;
    import starling.text.TextFormat;
    import zygame.core.DataCore;
-   import zygame.core.SceneCore; //
+   import zygame.core.SceneCore; // 添加成功购买所有角色提示
    import zygame.display.KeyDisplayObject;
-   import zygame.server.Service; //
-   import flash.net.SharedObject; //
+   import zygame.server.Service; // 导入Service用于更新用户数据
+   import flash.net.SharedObject; // 导入SharedObject用于更新缓存的用户数据
 
    
    public class GameTestView extends KeyDisplayObject
@@ -44,8 +44,9 @@ package game.view
          var bg:Quad = new Quad(stage.stageWidth,stage.stageHeight,0);
          this.addChild(bg);
          bg.alpha = 0.7;
+         // 原本的考试标题文本
          // _title = new TextField(stage.stageWidth,64,"游戏内测前考试，合格(80分以上)就可以进入游戏，是否准备好？",new TextFormat(GameFont.FONT_NAME,20,16777215));
-         _title = new TextField(stage.stageWidth,64,"一键购买全角色考试(笑)，合格(80分以上)就可以一键解锁全部商店角色，是否准备好？",new TextFormat(GameFont.FONT_NAME,20,16777215)); //
+         _title = new TextField(stage.stageWidth,64,"一键购买全角色考试(笑)，合格(80分以上)就可以一键解锁全部商店角色，是否准备好？",new TextFormat(GameFont.FONT_NAME,20,16777215)); // 用于一键购买全角色考试
          this.addChild(_title);
          _title.y = 50;
          _abcd = new TextField(stage.stageWidth - 300,300,"【A】开始吧！",new TextFormat(GameFont.FONT_NAME,16,16777215,"left"));
@@ -77,7 +78,7 @@ package game.view
       {
          var score:int = 0;
          var str:String = null;
-         var buys:Array = ["jianxin","anotherJX","zzx","weizhi","suolong","lufei","shanzhi","kawendixu","AS","hzluo","telankesi","wukong","BLUEGOKU","xiaolin","shalu","fls","jianxin","jianxin","anotherJX","zzx","weizhi","suolong","lufei","shanzhi","kawendixu","AS","hzluo","telankesi","wukong","BLUEGOKU","xiaolin","shalu","fls","buluoli","jianhun","bingjieshi","axiuluo","guijianshi","heianwushi","cike","manyou","mixieer","lanquan","Damotwo","shengzhidashu","huolongaisi","hfh","HML","yumingfangshoushi","JS","tongrendandao","yasina","youzi","xiaomeiyan","wbbd","shenzi","hchq","meihong","BL","Marisa","YL","yihushi","dongshilang","TOF","baimian","Twelve","Naruto","yuzhiboyou","anyou","jiaojiao","Kaixa","KW","shourenjialulu","SUN","naci","penhuolong","Tom","lvbu","anheimolong","qiyu","xiaoguai1","guangyuansu","guanggong","DCR","saber","CTZS","paojie","XC","Gudazi","RG","Ruimu","zhaomei","MH","LX","LXF","Ruler","KKR","baijin","SLK","xiaoli","zhouzuo","mayi","Es","AFTERdragon","heimian","HTZR","Hibiki","erqiao","pop","Nine","zhixubaimian","HZ","YXL","Ruby","GFN","zhizhixiong","JIN","doge","huaji","hongguaiwu"]; //
+         var buys:Array = ["jianxin","anotherJX","zzx","weizhi","suolong","lufei","shanzhi","kawendixu","AS","hzluo","telankesi","wukong","BLUEGOKU","xiaolin","shalu","fls","jianxin","jianxin","anotherJX","zzx","weizhi","suolong","lufei","shanzhi","kawendixu","AS","hzluo","telankesi","wukong","BLUEGOKU","xiaolin","shalu","fls","buluoli","jianhun","bingjieshi","axiuluo","guijianshi","heianwushi","cike","manyou","mixieer","lanquan","Damotwo","shengzhidashu","huolongaisi","hfh","HML","yumingfangshoushi","JS","tongrendandao","yasina","youzi","xiaomeiyan","wbbd","shenzi","hchq","meihong","BL","Marisa","YL","yihushi","dongshilang","TOF","baimian","Twelve","Naruto","yuzhiboyou","anyou","jiaojiao","Kaixa","KW","shourenjialulu","SUN","naci","penhuolong","Tom","lvbu","anheimolong","qiyu","xiaoguai1","guangyuansu","guanggong","DCR","saber","CTZS","paojie","XC","Gudazi","RG","Ruimu","zhaomei","MH","LX","LXF","Ruler","KKR","baijin","SLK","xiaoli","zhouzuo","mayi","Es","AFTERdragon","heimian","HTZR","Hibiki","erqiao","pop","Nine","zhixubaimian","HZ","YXL","Ruby","GFN","zhizhixiong","JIN","doge","huaji","hongguaiwu"]; // 一键购买所有角色的角色列表
          if(!_isReady)
          {
             if(_right != i && _right != -1)
@@ -93,8 +94,8 @@ package game.view
                Starling.juggler.delayCall(removeFromParent,3);
                this.clearKey();
                Service.userData.userData.buys = buys; // 购买所有角色
-               SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
-               SceneCore.pushView(new GameTipsView("已购买所有角色")); //
+               SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; // 更新缓存的用户数据
+               SceneCore.pushView(new GameTipsView("已购买所有角色")); // 弹出提示
                return false;
             }
          }
@@ -116,8 +117,8 @@ package game.view
          Starling.juggler.delayCall(removeFromParent,3);
          this.clearKey();
          Service.userData.userData.buys = buys; // 购买所有角色
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
-         SceneCore.pushView(new GameTipsView("已购买所有角色")); //
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; // 更新缓存的用户数据
+         SceneCore.pushView(new GameTipsView("已购买所有角色")); // 弹出提示
          return false;
       }
       

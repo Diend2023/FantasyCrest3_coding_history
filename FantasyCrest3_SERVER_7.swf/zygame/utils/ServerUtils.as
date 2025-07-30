@@ -19,7 +19,7 @@ package zygame.utils
       
       public static function updateRoleData(userName:String, userCode:String, userData:Object, onUpdate:Function) : void
       {
-         if(userData.fight) //
+         if(userData.fight) // 更新游戏战力
          { //
             Service.userData.fight = userData.fight; //
          } //
@@ -29,13 +29,14 @@ package zygame.utils
             Service.userData.fbs = userData.fbs; //
          } //
          Service.userData.userData.fbs = Service.userData.fbs; //
-         if(userData.ofigth) //
+         if(userData.ofigth) // 更新联机战力
          { //
-            Service.userData.ofigth = userData.ofigth; //
+            Service.userData.ofigth = userData.ofigth; // 
          } //
-         Service.userData.userData.ofigth = Service.userData.ofigth; //
-         onUpdate(Service.userData); //
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
+         Service.userData.userData.ofigth = Service.userData.ofigth; // 更新联机战力至真正的在线用户数据内
+         onUpdate(Service.userData); // 游戏中更新用户数据
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; // 缓存用户数据
+         // 原本的更新用户数据的代码
          // var clinet:BaseSocketClient;
          // if(sending)
          // {
@@ -63,10 +64,10 @@ package zygame.utils
       
       public static function buyRole(userName:String, userCode:String, roleName:String, target:String, coin:int, type:int, onUpdate:Function, mail:String = null) : void
       {
-         if(type) //
+         if(type) // 水晶购买
          { //
             // if(Service.userData.crystal + coin >= 0) //
-            if(true) //
+            if(true) // 无论如何都能购买
             { //
                Service.userData.crystal += coin; //
                Service.userData.userData.buys.push(target) //
@@ -76,11 +77,11 @@ package zygame.utils
             { //
                onUpdate(null); //
             } //
-         }
-         else
-         {
+         } //
+         else // 金币购买
+         { //
             // if(Service.userData.coin + coin >= 0) //
-            if(true) //
+            if(true) // 无论如何都能购买
             { //
                Service.userData.coin += coin; //
                Service.userData.userData.buys.push(target) //
@@ -92,6 +93,7 @@ package zygame.utils
             } //
          } //
          SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //缓存userData
+         // 原本的购买角色的代码
          // var clinet:BaseSocketClient;
          // if(sending)
          // {
@@ -123,8 +125,9 @@ package zygame.utils
       
       public static function transferMoney(userName:String, userCode:String, coin:int, coinType:int, mail:String, onUpdate:Function) : void
       {
-         onUpdate(Service.userData); //
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
+         onUpdate(Service.userData); // 更新游戏中的用户数据
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; // 缓存用户数据
+         // 原本的转账代码
          // var clinet:BaseSocketClient;
          // if(sending)
          // {
@@ -154,9 +157,10 @@ package zygame.utils
       
       public static function addCoin(userName:String, userCode:String, coin:int, onUpdate:Function, codeType:String = "addCoin") : void
       {
-         Service.userData.coin += coin; //
-         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //缓存userData
-         onUpdate(Service.userData); //
+         Service.userData.coin += coin; // 增加金币
+         SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //缓存用户数据
+         onUpdate(Service.userData); // 更新游戏中的用户数据
+         // 原本的增加金币的代码
          // var clinet:BaseSocketClient;
          // if(sending)
          // {
@@ -187,6 +191,7 @@ package zygame.utils
          onUpdate(Service.userData); //
          SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; //
          return null; //
+         // 原本的创建Socket连接的代码
          // var socket:Socket = new Socket(ip,4888);
          // var clinet:BaseSocketClient = new BaseSocketClient(socket);
          // clinet.handFunc = function():void

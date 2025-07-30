@@ -267,8 +267,9 @@ package game.view
          }
          else if(true)
          {
+            // 原本的添加菜单按钮的代码
             // arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店"];
-            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号"];
+            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号"]; // 添加登陆账号
          }
          btnspr = new Sprite();
          this.addChild(btnspr);
@@ -304,8 +305,9 @@ package game.view
          {
             showUserState();
          }
+         // 原本的播放背景音乐的代码
          // GameCore.soundCore.playBGSound("main");
-         GameCore.soundCore.playBGSound(["main", "main1"][Math.floor(Math.random() * 2)]); //
+         GameCore.soundCore.playBGSound(["main", "main1"][Math.floor(Math.random() * 2)]); // 随机播放背景音乐
          isHW = Starling.context.driverInfo.toLowerCase().indexOf("software") == -1;
          tispbg = new Quad(stage.stageWidth,32,0);
          tispbg.alpha = 0.7;
@@ -329,7 +331,7 @@ package game.view
             music.upState = DataCore.getTextureAtlas("start_main").getTexture(GameCore.soundCore.volume == 0 ? "sound_close" : "sound_open");
          });
          // if(!Phone.isPhone() && false)
-         if (true) // 显示按钮
+         if (true) // 显示版本说明按钮
          {
             skin = DataCore.getTextureAtlas("start_main").getTexture("btn_style_1");
             button = new Button(skin,"版本说明");
@@ -337,9 +339,9 @@ package game.view
             button.scale = 0.7;
             button.textFormat.size = 18;
             // button.x = stage.stageWidth - button.width - 2;
-            button.x = stage.stageWidth - button.width - 4; //
+            button.x = stage.stageWidth - button.width - 4; // 按钮调整错误的位置
             // button.y = 2;
-            button.y = 8; //
+            button.y = 8; // 按钮调整错误的位置
             button.addEventListener("triggered",function(e:Event):void
             {
                SceneCore.pushView(new GameFPSTipsView());
@@ -461,8 +463,9 @@ package game.view
                SceneCore.pushView(new GameLANModeView());
                break;
             case "网络对战":
+               // 原本的连接到联机大厅的代码
                // SceneCore.replaceScene(new GameOnlineRoomListView());
-               SceneCore.pushView(new GameOnlineRoomListView(GameOnlineRoomListView._ip)); //
+               SceneCore.replaceScene(new GameOnlineRoomListView(GameOnlineRoomListView._ip)); // 使用预加载的ip和端口创建连接
                break;
             case "制作组":
                openSelect("左眼","老邪","巅峰","小鸟","虚伪","木姐","RS","菠萝","小研En","妹红","柠七");

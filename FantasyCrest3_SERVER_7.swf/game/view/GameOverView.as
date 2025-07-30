@@ -156,6 +156,7 @@ package game.view
                case _3V1:
                case _1VFB:
                   SceneCore.pushView(new GameTipsView("获得金币" + coin + "个"));
+                  // 原本的提交金币和用户数据的代码，由于阻止了本地更新战力和金币数据的提交，所以直接注释不使用
                   // if(Service.client != null && Service.client.connected == true)
                   // {
                   //    Service.client.send({

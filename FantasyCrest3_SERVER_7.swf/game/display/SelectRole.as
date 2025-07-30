@@ -389,9 +389,11 @@ package game.display
             for(var i in xmllist)
             {
                rootName = (xmllist[i] as XML).localName();
+               // 原本的加载角色条件
                // if(unlockData.indexOf("Role" + rootName) != -1 && rootName != "init" && String((xmllist[i] as XML).@visible) != "false" && (!config.showCoinRole || config.showCoinRole && (int((xmllist[i] as XML).@crystal) > 0 || int((xmllist[i] as XML).@coin) > 0)))
-               if(rootName != "init") //
+               if(rootName != "init") // 过滤默认角色
                {
+                  // 原本的加载角色条件
                   // if(!(false && (int((xmllist[i] as XML).@crystal) > 0 || int((xmllist[i] as XML).@coin) > 0) && String((xmllist[i] as XML).@in4399) != "true"))
                   {
                      arr.push({
