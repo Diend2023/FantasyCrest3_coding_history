@@ -144,7 +144,8 @@ package game.view
             userData.ofigth = Game.onlineData.toSaveData();
             trace("用户信息：",JSON.stringify(userData.ofigth));
          }
-         if(tag == OverTag.GAME_WIN)
+         // if(tag == OverTag.GAME_WIN)
+         if(true) //无论输赢
          {
             switch(World.defalutClass)
             {

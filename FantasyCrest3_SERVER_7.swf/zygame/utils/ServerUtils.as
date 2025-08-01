@@ -34,8 +34,8 @@ package zygame.utils
             Service.userData.ofigth = userData.ofigth; // 
          } //
          Service.userData.userData.ofigth = Service.userData.ofigth; // 更新联机战力至真正的在线用户数据内
-         onUpdate(Service.userData); // 游戏中更新用户数据
          SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; // 缓存用户数据
+         onUpdate(Service.userData); // 游戏中更新用户数据
          // 原本的更新用户数据的代码
          // var clinet:BaseSocketClient;
          // if(sending)
