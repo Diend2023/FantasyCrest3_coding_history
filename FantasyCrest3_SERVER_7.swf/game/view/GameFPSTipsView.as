@@ -32,7 +32,7 @@ package game.view
          text = new TextField(stage.stageWidth - 100,stage.stageHeight - 100,"",new TextFormat(GameFont.FONT_NAME,18,16777215,"left"));
          // 原本的提示文本
          // text.text = "关于游戏会卡的解决方案：\n掉帧的原因：\n游戏没有启动硬件加速，因此导致掉帧，只要开启硬件加速或者使用默认启动硬件加速的浏览器进行游戏即可得到流畅体验。\n\n方案1：\n1、选择Internet Explorer浏览器或者其他浏览器进行游戏。\n\n方案2：\n1、右键游戏窗口，点击设置。\n2、弹出小窗口后，选择最左边的选项，开启硬件加速。\n3、刷新页面重启游戏。\n4、如果失败，请转试用方案1。";
-         text.text = "幻想纹章3本地版0.2\n\n这是一个由多位幻想纹章爱好者共同协助逆向得到的版本。历时两个月的研究，我们终于得到一个可玩的版本\n\n感谢@IS 和@碎风 的指路，感谢@风吟棠华落 提供数据解密方法，感谢@忆雪 提供的角色指导\n\n再次感谢所有幻想纹章爱好者的支持，如果你不是免费得到的该版本，请立刻举报\n\n幻想纹章3交流群：1055702064"; // 修改为版本介绍
+         text.text = "幻想纹章3本地版0.3\n\n这是一个由多位幻想纹章爱好者共同协助逆向得到的版本。历时两个月的研究，我们终于得到一个可玩的版本\n\n感谢@IS 和@碎风 的指路，感谢@风吟棠华落 提供数据解密方法，感谢@忆雪 提供的角色指导，感谢@正义永无止境 提供真幻想纹章3本地版\n\n再次感谢所有幻想纹章爱好者的支持，如果你不是免费得到的该版本，请立刻举报\n\n幻想纹章3交流群：1055702064"; // 修改为版本介绍
          this.addChild(text);
          text.x = 50;
          skin = DataCore.getTextureAtlas("start_main").getTexture("btn_style_1");
@@ -54,6 +54,15 @@ package game.view
          {
             removeFromParent(true);
             SceneCore.pushView(new GameTestView()); // 弹出一键购买所有角色测试视图
+         }); //
+         button2 = new Button(skin,"版本介绍"); // 添加版本介绍按钮
+         this.addChild(button2); //
+         button2.textFormat.size = 18; //
+         button2.x = button.x + button2.width + 16; //
+         button2.y = stage.stageHeight - button2.height * 2 - 16; //
+         button2.addEventListener("triggered",function(e:Event):void //
+         { //
+            text.text = "幻想纹章3本地版0.3更新内容：\n\n1、添加角色：Doge、滑稽、火元素\n\n2、修复角色：汤姆头像、汤姆立绘、Doge头像、Doge立绘、滑稽头像、滑稽立绘、火元素头像、火元素立绘\n\n3、添加功能：游戏战力（4399战力）、联机战力、联机战绩、角色战力、随机bgm\n\n4、修复问题：登录界面缩放、游戏界面缩放\n\n5、角色调整：削弱功夫男生命值至十万、削弱如月琴恩伤害至0.5"; //
          }); //
       }
    }
