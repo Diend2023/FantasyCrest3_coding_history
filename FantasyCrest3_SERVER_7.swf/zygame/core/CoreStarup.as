@@ -233,6 +233,12 @@ package zygame.core
       
       private var _loadContextImage:BitmapData;
       
+      private var _designWidth:int = 0;
+      
+      private var _designHeight:int = 0;
+      
+      private var _targetAspectRatio:Number = 0;
+      
       public function CoreStarup()
       {
          super();
@@ -249,6 +255,10 @@ package zygame.core
       {
          trace("窗口大小改变:",stage.stageWidth,stage.stageHeight);
          updateStarlingViewPort();
+         if(_mStarling)
+         {
+            _mStarling.setRequiresRedraw();
+         }
       }
       
       protected function initStarling(configPath:String, mainClass:Class, HDHeight:int = 960, debug:Boolean = true, isPc:Boolean = false, stage3DProfile:String = "auto", isMultitouch:Boolean = true, runMode:String = "auto", antiAliasing:int = 4, loadContextImage:BitmapData = null) : void
@@ -272,19 +282,13 @@ package zygame.core
          STLConstant.nativeStage = stage;
          trace("初始化高度比：",HDHeight);
          Starling.multitouchEnabled = isMultitouch;
-         stageWidth = _isPc ? stage.stageWidth : stage.stageWidth;
-         stageHeight = _isPc ? stage.stageHeight : stage.stageHeight;
-         viewPort = _viewRect ? _viewRect : new Rectangle(0,0,stageWidth,stageHeight);
-         if(viewPort.width == 0)
-         {
-            viewPort.width = 800;
-         }
-         if(viewPort.height == 0)
-         {
-            viewPort.height = 550;
-         }
-         viewPort.y = _statusBarHeight;
-         viewPort.height -= _statusBarHeight;
+         stageWidth = stage.stageWidth;
+         stageHeight = stage.stageHeight;
+         _designWidth = stageWidth;
+         _designHeight = stageHeight;
+         _targetAspectRatio = _designWidth / _designHeight;
+         trace("设计尺寸:",_designWidth,"x",_designHeight,"宽高比:",_targetAspectRatio);
+         viewPort = calculateViewPort();
          hscale = viewPort.height / HDHeight;
          wscale = viewPort.width / HDHeight;
          scale = Math.min(hscale,wscale);
@@ -331,37 +335,26 @@ package zygame.core
          restoreTextureUtils = new RestoreTextureUtils(stage,_mStarling,loadContextImage);
       }
       
+      private function calculateViewPort() : Rectangle
+      {
+         // 直接使用整个屏幕区域，去除黑边
+         return new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
+      }
+      
       private function updateStarlingViewPort() : void
       {
-         var stageWidth:Number = _isPc ? stage.stageWidth : stage.stageWidth;
-         var stageHeight:Number = _isPc ? stage.stageHeight : stage.stageHeight;
-         var viewPort:Rectangle = _viewRect ? _viewRect : new Rectangle(0,0,stageWidth,stageHeight);
-         if(viewPort.width == 0)
+         if(!_mStarling)
          {
-            viewPort.width = 800;
+            return;
          }
-         if(viewPort.height == 0)
-         {
-            viewPort.height = 550;
-         }
-         viewPort.y = _statusBarHeight;
-         viewPort.height -= _statusBarHeight;
-         var hscale:Number = viewPort.height / _HDHeight;
-         var wscale:Number = viewPort.width / _HDHeight;
-         var scale:Number = Math.min(hscale,wscale);
-         STLConstant.scale = scale;
-         STLConstant.StageWidth = viewPort.width / scale;
-         STLConstant.StageHeight = viewPort.height / scale;
-         var offsetX:Number = (stageWidth - viewPort.width) / 2;
-         viewPort.x = Math.max(0,offsetX);
+         var viewPort:Rectangle = calculateViewPort();
          _mStarling.viewPort = viewPort;
          _mStarling.stage.stageWidth = STLConstant.StageWidth;
          _mStarling.stage.stageHeight = STLConstant.StageHeight;
-         _mStarling.setRequiresRedraw();
-         trace("updateStarlingViewPort - Scale:" + STLConstant.scale);
-         trace("updateStarlingViewPort - StageWidth:" + STLConstant.StageWidth);
-         trace("updateStarlingViewPort - StageHeight:" + STLConstant.StageHeight);
-         trace("updateStarlingViewPort - WindowViewPort:" + viewPort);
+         trace("自动缩放更新:");
+         trace("当前窗口: " + stage.stageWidth + "x" + stage.stageHeight);
+         trace("新视口: " + viewPort);
+         trace("设计尺寸: " + STLConstant.StageWidth + "x" + STLConstant.StageHeight);
       }
       
       public function onActivate(event:Event) : void

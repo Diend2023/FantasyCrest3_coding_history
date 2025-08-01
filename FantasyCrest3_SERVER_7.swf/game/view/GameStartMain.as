@@ -307,7 +307,7 @@ package game.view
          }
          // 原本的播放背景音乐的代码
          // GameCore.soundCore.playBGSound("main");
-         GameCore.soundCore.playBGSound(["main", "main1"][Math.floor(Math.random() * 2)]); // 随机播放背景音乐
+         GameCore.soundCore.playBGSound(["main", "main1", "main2"][Math.floor(Math.random() * 3)]); // 随机播放背景音乐
          isHW = Starling.context.driverInfo.toLowerCase().indexOf("software") == -1;
          tispbg = new Quad(stage.stageWidth,32,0);
          tispbg.alpha = 0.7;
@@ -440,7 +440,8 @@ package game.view
       private function showUserState() : void
       {
          _loginButton.visible = false;
-         _rankButton.visible = true;
+         // 暂不展示排行榜按钮
+         // _rankButton.visible = true;
          _tips.visible = false;
          _tipsText.visible = true;
          _tipsText.text = Game.game4399Tools.nickName + "(" + Game.game4399Tools.userName + ")";

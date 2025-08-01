@@ -35,7 +35,7 @@ package WebRuntime_fla
       
       private const DESIGN_WIDTH:int = 1000; //设置宽度
       
-      private const DESIGN_HEIGHT:int = 600; //设置高度
+      private const DESIGN_HEIGHT:int = 550; //设置高度
       
       private var container:Sprite; //
       
@@ -84,12 +84,11 @@ package WebRuntime_fla
          { //
             return; //
          } //
-         var scaleX:Number = stage.stageWidth / DESIGN_WIDTH; //
-         var scaleY:Number = stage.stageHeight / DESIGN_HEIGHT; //
-         var scale:Number = Math.min(scaleX,scaleY); //
-         container.scaleX = container.scaleY = scale; //
-         container.x = (stage.stageWidth - DESIGN_WIDTH * scale) / 2; //
-         container.y = (stage.stageHeight - DESIGN_HEIGHT * scale) / 2; //
+         // 从比例缩放改为全屏拉伸
+         container.scaleX = stage.stageWidth / DESIGN_WIDTH;
+         container.scaleY = stage.stageHeight / DESIGN_HEIGHT;
+         container.x = 0;
+         container.y = 0;
       } //
       
       public function zhuceFunc(param1:MouseEvent) : void
