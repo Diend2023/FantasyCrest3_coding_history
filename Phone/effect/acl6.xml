@@ -1,0 +1,9 @@
+<TextureAtlas imagePath="acl6.png" px="-312" py="-140" class="" sound="">
+  <SubTexture name="元件 60000" x="1" y="1" width="566" height="183" frameX="0" frameY="0" frameWidth="566" frameHeight="204" hitPoint="-303,-3 -85,-61 147,-46 260,-19 244,20 93,37 -10,51 -150,34" hitEffect="2" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="元件 60001" x="1" y="185" width="495" height="197" frameX="0" frameY="0" frameWidth="566" frameHeight="204" hitPoint="" hitEffect="2" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="元件 60002" x="497" y="185" width="459" height="204" frameX="0" frameY="0" frameWidth="566" frameHeight="204"/>
+  <SubTexture name="元件 60003" x="1" y="390" width="440" height="202" frameX="0" frameY="0" frameWidth="566" frameHeight="204"/>
+  <SubTexture name="元件 60004" x="442" y="390" width="428" height="200" frameX="0" frameY="0" frameWidth="566" frameHeight="204"/>
+  <SubTexture name="元件 60005" x="1" y="593" width="402" height="194" frameX="0" frameY="0" frameWidth="566" frameHeight="204"/>
+  <SubTexture name="元件 60006" x="404" y="593" width="390" height="172" frameX="0" frameY="0" frameWidth="566" frameHeight="204"/>
+</TextureAtlas>

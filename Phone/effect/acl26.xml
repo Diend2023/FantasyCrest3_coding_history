@@ -1,0 +1,6 @@
+<TextureAtlas imagePath="acl26.png" px="-146" py="-153" class="" sound="">
+  <SubTexture name="元件 260000" x="1" y="1" width="262" height="262" frameX="0" frameY="0" frameWidth="300" frameHeight="262"/>
+  <SubTexture name="元件 260001" x="1" y="264" width="300" height="247" frameX="0" frameY="0" frameWidth="300" frameHeight="262"/>
+  <SubTexture name="元件 260002" x="1" y="512" width="251" height="242" frameX="0" frameY="0" frameWidth="300" frameHeight="262"/>
+  <SubTexture name="元件 260003" x="253" y="512" width="167" height="180" frameX="0" frameY="0" frameWidth="300" frameHeight="262"/>
+</TextureAtlas>
