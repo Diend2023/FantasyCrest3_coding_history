@@ -562,7 +562,7 @@ package game.view
             case "对战模式":
                if(Phone.isPhone())
                {
-                  openSelect("1PVS2P","2V2普通对战","2V2搭档对战","电脑模式","练习模式"); // 同步本地版
+                  openSelect("1PVS2P","2V2普通对战","2V2搭档对战","网络对战","局域网对战"); // 同步本地版
                   // 原本的手机版对战模式
                   // openSelect("网络对战","局域网对战");
                }
