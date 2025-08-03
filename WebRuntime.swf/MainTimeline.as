@@ -29,6 +29,7 @@ package WebRuntime_fla
    import flash.xml.*;
    import zygame.server.BaseSocketClient;
    import zygame.utils.SendDataUtils;
+   import flash.net.FileReference; // 添加FileReference用于读取存档
    
    public dynamic class MainTimeline extends MovieClip
    {
@@ -93,7 +94,30 @@ package WebRuntime_fla
       
       public function zhuceFunc(param1:MouseEvent) : void
       {
-         this.zhuce.visible = true;
+         // 原本的注册按钮功能
+         // this.zhuce.visible = true;
+         // 将注册按钮改为导入存档按钮
+         var fileRef:FileReference = new FileReference(); //
+         fileRef.addEventListener(Event.SELECT, function(e:Event):void { //
+            fileRef.load(); //
+         }); //
+         fileRef.addEventListener(Event.COMPLETE, function(e:Event):void { //
+            try { //
+               var jsonData:String = fileRef.data.toString(); //
+               var importedData:Object = JSON.parse(jsonData); //
+               if (importedData.nickName) { //
+                  loading.userData = importedData; //
+                  loading.pname.text = importedData.nickName; //
+                  SharedObject.getLocal("net.zygame.hxwz.air").data.userData = importedData; //
+                  SharedObject.getLocal("net.zygame.hxwz.air").data.userName = importedData.nickName; //
+                  SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
+                  trace("import UserData success:", jsonData); //
+               } //
+            } catch (error:Error) { //
+               trace("import UserData failed:", error.message); //
+            } //
+         }); //
+         fileRef.browse([new FileFilter("存档文件", "*.json")]); //
       }
       
       public function mimaFunc(param1:MouseEvent) : void

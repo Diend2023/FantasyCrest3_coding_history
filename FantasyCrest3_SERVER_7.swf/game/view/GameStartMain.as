@@ -43,6 +43,7 @@ package game.view
    import zygame.display.TouchDisplayObject;
    import zygame.server.Service;
    import zygame.utils.ServerUtils;
+   import flash.net.FileReference; // 导入FileReference用于导出存档
    
    public class GameStartMain extends TouchDisplayObject
    {
@@ -269,7 +270,7 @@ package game.view
          {
             // 原本的添加菜单按钮的代码
             // arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店"];
-            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号"]; // 添加登陆账号
+            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号","关于游戏"]; // 添加登陆账号按钮、关于游戏按钮
          }
          btnspr = new Sprite();
          this.addChild(btnspr);
@@ -334,7 +335,8 @@ package game.view
          if (true) // 显示版本说明按钮
          {
             skin = DataCore.getTextureAtlas("start_main").getTexture("btn_style_1");
-            button = new Button(skin,"版本说明");
+            // button = new Button(skin,"解决掉帧问题"); // 原本的按钮文本
+            button = new Button(skin, "导出存档"); // 添加导出存档按钮
             this.addChild(button);
             button.scale = 0.7;
             button.textFormat.size = 18;
@@ -344,7 +346,8 @@ package game.view
             button.y = 8; // 按钮调整错误的位置
             button.addEventListener("triggered",function(e:Event):void
             {
-               SceneCore.pushView(new GameFPSTipsView());
+               // SceneCore.pushView(new GameFPSTipsView()); // 原本的按钮事件
+               exportUserData(); // 调用导出存档函数
             });
          }
          ServerUtils.updateRoleData(GameOnlineRoomListView._userName,GameOnlineRoomListView._userCode,{},function(userData:Object):void
@@ -446,6 +449,32 @@ package game.view
          _tipsText.visible = true;
          _tipsText.text = Game.game4399Tools.nickName + "(" + Game.game4399Tools.userName + ")";
       }
+
+      
+      
+      private function exportUserData() : void //导出用户数据
+      { //
+         try //
+         { //
+            if (Service.userData) { //
+               var jsonString:String = JSON.stringify(Service.userData, null, 2); //
+               var fileRef:FileReference = new FileReference(); //
+               var date:Date = new Date(); //
+               var fileName:String = "幻想纹章3存档_" + date.getFullYear() + (date.getMonth() + 1) + date.getDate() + "_" + date.getHours() + date.getMinutes() + ".json"; //
+               fileRef.save(jsonString, fileName); //
+               SceneCore.pushView(new GameTipsView("导出成功")); //
+               trace("export userData success,userData: ", JSON.stringify(Service.userData)); //
+            } else { //
+               trace("export userData failed: no userData"); //
+               SceneCore.pushView(new GameTipsView("导出失败：无用户数据")); //
+            } //
+         } //
+         catch (e:Error) //
+         { //
+            SceneCore.pushView(new GameTipsView("导出失败：" + e.message)); //
+            trace("export userData failed: ", e.message); //
+         } //
+      } //
       
       private function onSelect(e:Event) : void
       {
@@ -584,6 +613,9 @@ package game.view
                break;
             case "英雄":
                openSelect("英雄库","制作组");
+               break;
+            case "关于游戏": // 添加关于游戏按钮的事件处理
+               SceneCore.pushView(new GameFPSTipsView()); //
          }
       }
       
