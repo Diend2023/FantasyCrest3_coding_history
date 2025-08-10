@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="BLL20.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="元件 240001" x="271" y="0" width="271" height="166"/>
+	<SubTexture name="元件 240001" x="271" y="0" width="271" height="166"/>
+	<SubTexture name="元件 240002" x="542" y="0" width="271" height="166"/>
+	<SubTexture name="元件 240003" x="0" y="166" width="271" height="166"/>
+	<SubTexture name="元件 240004" x="271" y="166" width="271" height="166"/>
+	<SubTexture name="元件 240005" x="542" y="166" width="271" height="166"/>
+	<SubTexture name="元件 240006" x="0" y="332" width="271" height="166"/>
+</TextureAtlas>

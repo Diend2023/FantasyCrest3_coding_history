@@ -1,0 +1,22 @@
+<TextureAtlas imagePath="txjs107.png" px="-254" py="-343" class="" sound="">
+  <SubTexture name="元件 30000" x="0" y="0" width="500" height="500"/>
+  <SubTexture name="元件 30001" x="500" y="0" width="500" height="500"/>
+  <SubTexture name="元件 30002" x="1000" y="0" width="500" height="500"/>
+  <SubTexture name="元件 30003" x="1500" y="0" width="500" height="500"/>
+  <SubTexture name="元件 30004" x="0" y="500" width="500" height="500"/>
+  <SubTexture name="元件 30005" x="500" y="500" width="500" height="500"/>
+  <SubTexture name="元件 30006" x="1000" y="500" width="500" height="500"/>
+  <SubTexture name="元件 30007" x="1500" y="500" width="500" height="500"/>
+  <SubTexture name="元件 30008" x="0" y="1000" width="500" height="500"/>
+  <SubTexture name="元件 30009" x="500" y="1000" width="500" height="500"/>
+  <SubTexture name="元件 30010" x="1000" y="1000" width="500" height="500"/>
+  <SubTexture name="元件 30011" x="1500" y="1000" width="500" height="500"/>
+  <SubTexture name="元件 30012" x="0" y="1500" width="500" height="500"/>
+  <SubTexture name="元件 30013" x="500" y="1500" width="500" height="500"/>
+  <SubTexture name="元件 30014" x="1000" y="1500" width="500" height="500"/>
+  <SubTexture name="元件 30015" x="1500" y="1500" width="500" height="500"/>
+  <SubTexture name="元件 30016" x="0" y="2000" width="500" height="500"/>
+  <SubTexture name="元件 30017" x="500" y="2000" width="500" height="500"/>
+  <SubTexture name="元件 30018" x="1000" y="2000" width="500" height="500"/>
+  <SubTexture name="元件 30019" x="1500" y="2000" width="500" height="500"/>
+</TextureAtlas>

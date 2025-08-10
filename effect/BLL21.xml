@@ -1,0 +1,11 @@
+<TextureAtlas imagePath="BLL21.png" px="-271" py="-313" class="" sound="">
+  <SubTexture name="元件 10004" x="0" y="547" width="279" height="487" frameX="-137" frameY="-61" frameWidth="547" frameHeight="587"/>
+  <SubTexture name="元件 10005" x="279" y="547" width="255" height="548" frameX="-148" frameY="0" frameWidth="547" frameHeight="587"/>
+  <SubTexture name="元件 10006" x="534" y="547" width="217" height="533" frameX="-146" frameY="-2" frameWidth="547" frameHeight="587" hitPoint="-301,-252 319,-250 317,233 -298,235" hitEffect="10" hurtInterval="2" cardFrame="0"/>
+  <SubTexture name="元件 10007" x="751" y="547" width="485" height="503" frameX="-57" frameY="-42" frameWidth="547" frameHeight="587"/>
+  <SubTexture name="元件 10008" x="1236" y="547" width="437" height="521" frameX="-82" frameY="-51" frameWidth="547" frameHeight="587"/>
+  <SubTexture name="元件 10009" x="1673" y="547" width="368" height="437" frameX="-101" frameY="-80" frameWidth="547" frameHeight="587"/>
+  <SubTexture name="元件 10010" x="0" y="1095" width="413" height="416" frameX="-42" frameY="-67" frameWidth="547" frameHeight="587"/>
+  <SubTexture name="元件 10011" x="413" y="1095" width="404" height="461" frameX="-53" frameY="-39" frameWidth="547" frameHeight="587"/>
+  <SubTexture name="元件 10012" x="817" y="1095" width="374" height="452" frameX="-80" frameY="-33" frameWidth="547" frameHeight="587"/>
+</TextureAtlas>

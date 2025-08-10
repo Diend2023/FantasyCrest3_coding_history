@@ -1,0 +1,9 @@
+<TextureAtlas imagePath="baozhaR.png" px="-235" py="-246" class="" sound="">
+  <SubTexture name="元件 1 实例 10000" x="0" y="0" width="455" height="313" frameX="-5" frameY="3" frameWidth="455" frameHeight="455" hitPoint="-103,1 116,6 110,-148 -101,-150" hitEffect="5" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="元件 1 实例 10001" x="455" y="0" width="455" height="313" hitPoint=""/>
+  <SubTexture name="元件 1 实例 10002" x="0" y="313" width="455" height="313"/>
+  <SubTexture name="元件 1 实例 10003" x="455" y="313" width="455" height="313"/>
+  <SubTexture name="元件 1 实例 10004" x="0" y="626" width="455" height="313"/>
+  <SubTexture name="元件 1 实例 10005" x="455" y="626" width="455" height="313"/>
+  <SubTexture name="元件 1 实例 10006" x="0" y="939" width="455" height="313"/>
+</TextureAtlas>

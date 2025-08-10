@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="SKH41.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="元件 250003" x="494" y="1184" width="222" height="556" frameX="-108" frameY="-341" frameWidth="454" frameHeight="1254"/>
+	<SubTexture name="元件 250004" x="257" y="1254" width="237" height="650" frameX="-105" frameY="-292" frameWidth="454" frameHeight="1254"/>
+	<SubTexture name="元件 250005" x="0" y="1254" width="257" height="710" frameX="-96" frameY="-267" frameWidth="454" frameHeight="1254"/>
+	<SubTexture name="元件 250006" x="1522" y="1052" width="293" height="812" frameX="-79" frameY="-213" frameWidth="454" frameHeight="1254"/>
+	<SubTexture name="元件 250007" x="1203" y="1103" width="319" height="831" frameX="-59" frameY="-206" frameWidth="454" frameHeight="1254"/>
+</TextureAtlas>

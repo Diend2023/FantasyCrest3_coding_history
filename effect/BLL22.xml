@@ -1,0 +1,28 @@
+<TextureAtlas imagePath="BLL22.png" px="-71" py="-61" tips="" class="" sound="">
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10003" x="0" y="118" width="140" height="118" hitPoint="-60,-56 -71,38 52,63 71,-43" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10004" x="140" y="118" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10005" x="280" y="118" width="140" height="118" hitPoint="-44,-51 -67,31 47,46 53,-45 3,-66" hitEffect="1" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10006" x="0" y="236" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10007" x="140" y="236" width="140" height="118" hitPoint="-37,-52 -61,11 -19,55 47,41 54,-17 26,-55" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10008" x="280" y="236" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10009" x="0" y="354" width="140" height="118" hitPoint="-36,-55 -55,-20 -48,39 2,55 52,37 55,-19 37,-53" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10010" x="140" y="354" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10011" x="280" y="354" width="140" height="118" hitPoint="-37,-51 -55,-9 -43,31 3,61 49,30 52,-24 30,-61" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10012" x="0" y="472" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10013" x="140" y="472" width="140" height="118" hitPoint="-23,-61 -52,-28 -54,30 -24,57 41,55 61,5 47,-51" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10014" x="280" y="472" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10015" x="0" y="590" width="140" height="118" hitPoint="-30,-57 -54,-8 -31,55 24,46 55,14 50,-47" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10016" x="140" y="590" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10017" x="280" y="354" width="140" height="118" hitPoint="-18,-65 -26,-64 -52,-27 -56,34 -4,52 39,35 55,-4 47,-54" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10018" x="0" y="472" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10019" x="140" y="472" width="140" height="118" hitPoint="-28,-58 -47,-24 -48,22 -12,54 27,47 46,-7 49,-39" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10020" x="280" y="590" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10021" x="0" y="590" width="140" height="118" hitPoint="-31,-67 -53,-30 -53,14 -36,50 8,48 39,39 53,8 54,-40" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10022" x="140" y="590" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10023" x="280" y="354" width="140" height="118" hitPoint="-28,-70 -48,-41 -56,13 -13,57 35,42 54,-2 45,-53" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10024" x="0" y="472" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10025" x="140" y="472" width="140" height="118" hitPoint="-32,-70 -61,-24 -51,24 -20,54 33,45 61,16 64,-33 43,-61" hitEffect="1" hurtInterval="3" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10026" x="280" y="590" width="140" height="118"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10027" x="0" y="590" width="140" height="118" hitPoint="-17,-66 -50,-40 -58,11 -36,50 15,47 56,33 56,-24" hitEffect="1" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="鍏冧欢 1 瀹炰緥 10028" x="140" y="590" width="140" height="118"/>
+</TextureAtlas>

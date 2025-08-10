@@ -1,0 +1,8 @@
+<TextureAtlas imagePath="bll1.png" px="-61" py="-62" class="" sound="">
+  <SubTexture name="元件 1 实例 10000" x="0" y="0" width="129" height="129" hitPoint="-26,-48 -50,-11 -40,41 -12,54 17,49 38,45 50,15 51,-8 43,-46" hitEffect="5" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="元件 1 实例 10001" x="129" y="0" width="129" height="129" hitPoint="" hitEffect="0" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="元件 1 实例 10002" x="258" y="0" width="129" height="129" hitPoint=""/>
+  <SubTexture name="元件 1 实例 10003" x="0" y="129" width="129" height="129" hitPoint=""/>
+  <SubTexture name="元件 1 实例 10004" x="129" y="129" width="129" height="129" hitPoint=""/>
+  <SubTexture name="元件 1 实例 10005" x="258" y="129" width="129" height="129" hitPoint=""/>
+</TextureAtlas>

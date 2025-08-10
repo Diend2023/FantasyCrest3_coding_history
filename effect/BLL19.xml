@@ -1,0 +1,5 @@
+<TextureAtlas imagePath="BLL19.png">
+  <SubTexture name="元件 1 实例 10001" x="0" y="140" width="129" height="140"/>
+  <SubTexture name="元件 1 实例 10001" x="0" y="140" width="129" height="140"/>
+  <SubTexture name="元件 1 实例 10001" x="0" y="140" width="129" height="140"/>
+</TextureAtlas>

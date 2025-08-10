@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="HMH22.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="元件 220000" x="0" y="0" width="370" height="317"/>
+	<SubTexture name="元件 220001" x="370" y="0" width="370" height="317"/>
+	<SubTexture name="元件 220002" x="0" y="317" width="370" height="317"/>
+	<SubTexture name="元件 220003" x="370" y="317" width="370" height="317"/>
+	<SubTexture name="元件 220004" x="0" y="634" width="370" height="317"/>
+	<SubTexture name="元件 220005" x="370" y="634" width="370" height="317"/>
+	<SubTexture name="元件 220006" x="0" y="951" width="370" height="317"/>
+	<SubTexture name="元件 220007" x="370" y="951" width="370" height="317"/>
+	<SubTexture name="元件 220008" x="0" y="1268" width="370" height="317"/>
+	<SubTexture name="元件 220009" x="0" y="1585" width="370" height="317"/>
+	<SubTexture name="元件 220010" x="370" y="1268" width="370" height="317"/>
+</TextureAtlas>
