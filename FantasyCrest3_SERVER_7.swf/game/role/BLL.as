@@ -40,7 +40,6 @@ package game.role
       override public function onInit() : void
       {
          super.onInit();
-         trace("BLL initialized");
          try
          {
             this.setRoleValue("atk", attribute.power);
@@ -62,9 +61,11 @@ package game.role
             viual = 0;
             hit = 0;
             hit2 = 0;
-            cgData = new EffectDisplay("BLL13",null,this,3,3);
-            cgData.x = this.x - cgData.width / 2;
-            cgData.y = this.y - cgData.height / 2;
+            worldFouncDisplay = world.centerSprite;
+            // cgData = new EffectDisplay("BLL13",null,this,3,3);
+            // cgData.go(0);
+            // cgData.x = this.x - 500;
+            // cgData.y = this.y + 300;
          }
          catch (error:Error)
          {
@@ -93,32 +94,41 @@ package game.role
          attribute.magic = matk;
          attribute.armorDefense = def;
          attribute.magicDefense = mdef;
-         // trace("BLL updated with Frame",count,attribute.power,attribute.magic,attribute.armorDefense,attribute.magicDefense);
          listData.getItemAt(0).msg = attribute.power;
          listData.updateItemAt(0);
 
          // 普通攻击后续
          if (actionName == "普通攻击" && frameAt(8,14))
          {
-            trace("BLL onAction 0");
             if (isKeyDown(74))
             {
-               trace("KeyDown(74)");
                mandatorySkill = 1;
                playSkill("[隐藏]普通攻击后续");
                mandatorySkill = 1;
-               trace("playSkill 1");
             }
          }
          if (actionName == "[隐藏]普通攻击后续" && frameAt(15,20))
          {
-            trace("BLL onAction 1");
             if (isKeyDown(74))
             {
-               trace("KeyDown(74)");
                mandatorySkill = 1;
                playSkill("[隐藏]普通攻击后续2");
-               trace("playSkill 2");
+            }
+         }
+         // 普通攻击后续2抓取实现
+         if (actionName == "[隐藏]普通攻击后续2")
+         {
+            if (frameAt(5, 17))
+            {
+               isHand = hand(200, 100, 100, 200, 100, 0);
+               if (!isHand && currentFrame == 16)
+               {
+                  breakAction();
+               }
+            }
+            else if (currentFrame == 22)
+            {
+               hand(200, 100, 100, 200, 0, 250);
             }
          }
 
@@ -127,7 +137,6 @@ package game.role
          {
             if (isKeyDown(73))
             {
-               trace("KeyDown(73)");
                mandatorySkill = 1;
                playSkill("[隐藏]套索后续");
                mandatorySkill = 1;
@@ -150,16 +159,6 @@ package game.role
          if (isKeyDown(87) && isKeyDown(76))
          {
             playSkill("超级冲击");
-            // for(var i in this.world.getRoleList())
-            // {
-            //    this.world.getRoleList()[i].cardFrame = 240;
-            // }
-            // this.world.parent.addChild(cgData);
-            // var tw:Tween = new Tween(cgData,1);
-            // tw.fadeTo(0);
-            // tw.delay = 3;
-            // tw.onComplete = cgData.removeFromParent;
-            // Starling.juggler.add(tw);
          }
 
          // SJ龙冲击抓取以及跳转实现
@@ -232,14 +231,7 @@ package game.role
             {
                if(frameAt(3, 19) && role.isJump())
                {
-                  this.cardFrame = 0;
-                  for(var i in this.world.getRoleList())
-                  {
-                     if(this.world.getRoleList()[i] != this)
-                     {
-                        this.world.getRoleList()[i].cardFrame = 3;
-                     }
-                  }
+                  shiting(3);
                }
                if (currentFrame == 11)
                {
@@ -250,6 +242,19 @@ package game.role
             }
          }
 
+         // O抹杀加农炮镜头锁定实现
+         if (actionName == "抹杀加农炮")
+         {
+            if (currentFrame == 0)
+            {
+               shiting(90);
+               world.founcDisplay = this;
+            }
+            if (currentFrame == 31)
+            {
+               world.founcDisplay = world.centerSprite;
+            }
+         }
       }
 
       override public function onHitEnemy(beData:BeHitData, enemy:BaseRole) : void
@@ -257,17 +262,7 @@ package game.role
          // 被动当攻击敌人1hit后增加攻击代码实现
          addAtk2 = int(++hit2 * 0.464);
          addmAtk2 = int(++hit2 * 0.572);
-         trace("BLL updated with HitEnemy",addAtk2,addmAtk2);
          super.onHitEnemy(beData,enemy);
-
-         if (inFrame("[隐藏]普通攻击后续2",18))
-         {
-            trace("BLL onAction 2 18");
-            if (isKeyDown(74))
-            {
-               hand(200, 100, 100, 200, 48, 200);
-            }
-         }
 
          // SU巨爪击破防和跳转后续和调整敌方位置实现
          if (actionName == "[抓取]巨抓击" && frameAt(8,16))
@@ -306,7 +301,6 @@ package game.role
          super.onBeHit(beData);
          addDef2 = int(++hit * 0.05);
          addmDef2 = int(++hit * 0.05);
-         trace("BLL updated with BeHit",addDef2,addmDef2);
       }
 
       public function hand(topRange:int = 200, bottomRange:int = 200, backRange:int = 100, frontRange:int = 200,  toX:int = 0, toY:int = 0):Boolean
@@ -335,11 +329,13 @@ package game.role
           {
               rect.width += rect.x; // 把溢出的部分减掉
               rect.x = 0;
+              toX = 0;
           }
           // 修正右边界
           if(rect.x + rect.width > world.map.getWidth())
           {
               rect.width = world.map.getWidth() - rect.x;
+              toX = 0;
           }
       
           if(rect.width > 0 && rect.height > 0)
@@ -355,6 +351,17 @@ package game.role
               }
           }
           return false;
+      }
+
+      public function shiting(cardFrame:int):void
+      {
+         for(var i in this.world.getRoleList())
+         {
+            if(this.world.getRoleList()[i] != this)
+            {
+               this.world.getRoleList()[i].cardFrame = cardFrame;
+            }
+         }
       }
 
       public function setRoleValue(key:String, value:*):void
