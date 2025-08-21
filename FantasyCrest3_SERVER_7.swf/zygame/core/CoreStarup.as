@@ -351,10 +351,10 @@ package zygame.core
          _mStarling.viewPort = viewPort;
          _mStarling.stage.stageWidth = STLConstant.StageWidth;
          _mStarling.stage.stageHeight = STLConstant.StageHeight;
-         trace("自动缩放更新:");
-         trace("当前窗口: " + stage.stageWidth + "x" + stage.stageHeight);
-         trace("新视口: " + viewPort);
-         trace("设计尺寸: " + STLConstant.StageWidth + "x" + STLConstant.StageHeight);
+         // trace("自动缩放更新:");
+         // trace("当前窗口: " + stage.stageWidth + "x" + stage.stageHeight);
+         // trace("新视口: " + viewPort);
+         // trace("设计尺寸: " + STLConstant.StageWidth + "x" + STLConstant.StageHeight);
       }
       
       public function onActivate(event:Event) : void

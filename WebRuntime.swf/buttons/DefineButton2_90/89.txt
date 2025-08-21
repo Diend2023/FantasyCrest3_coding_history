@@ -1,0 +1,24 @@
+<html>[3] : BUTTONRECORD</html>
+<html>reserved : UB[2] = 0</html>
+<html>buttonHasBlendMode : boolean = false</html>
+<html>buttonHasFilterList : boolean = false</html>
+<html>buttonStateHitTest : boolean = true</html>
+<html>buttonStateDown : boolean = true</html>
+<html>buttonStateOver : boolean = true</html>
+<html>buttonStateUp : boolean = false</html>
+<html>characterId : UI16 = 89</html>
+<html>placeDepth : UI16 = 2</html>
+<html>placeMatrix : MATRIX</html>
+<html>hasScale : boolean = true</html>
+<html>scaleX : FB[nScaleBits] = 0.9078827</html>
+<html>scaleY : FB[nScaleBits] = 0.9078827</html>
+<html>hasRotate : boolean = false</html>
+<html>translateX : SB[nTranslateBits] = 190</html>
+<html>translateY : SB[nTranslateBits] = -442</html>
+<html>nTranslateBits : UB[5] = 10</html>
+<html>nRotateBits : UB[5] = 0</html>
+<html>nScaleBits : UB[5] = 17</html>
+<html>colorTransform : CXFORMWITHALPHA</html>
+<html>hasAddTerms : boolean = false</html>
+<html>hasMultTerms : boolean = false</html>
+<html>nbits : UB[4] = 1</html>

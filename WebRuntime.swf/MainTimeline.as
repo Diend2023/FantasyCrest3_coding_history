@@ -94,9 +94,17 @@ package WebRuntime_fla
       
       public function zhuceFunc(param1:MouseEvent) : void
       {
-         // 原本的注册按钮功能
-         // this.zhuce.visible = true;
-         // 将注册按钮改为导入存档按钮
+         this.zhuce.visible = true;
+      }
+      
+      public function mimaFunc(param1:MouseEvent) : void
+      {
+         this.mimaxiugai.visible = true;
+      }
+
+      // 新增导入存档按钮功能
+      public function loadFunc(param1:MouseEvent) : void //
+      { //
          var fileRef:FileReference = new FileReference(); //
          fileRef.addEventListener(Event.SELECT, function(e:Event):void { //
             fileRef.load(); //
@@ -117,14 +125,9 @@ package WebRuntime_fla
                trace("import UserData failed:", error.message); //
             } //
          }); //
-         fileRef.browse([new FileFilter("存档文件", "*.json")]); //
-      }
-      
-      public function mimaFunc(param1:MouseEvent) : void
-      {
-         this.mimaxiugai.visible = true;
-      }
-      
+         fileRef.browse([new FileFilter("幻想纹章3存档文件", "*.json")]); //
+      } //
+
       public function clear(param1:MouseEvent) : void
       {
          SharedObject.getLocal("net.zygame.hxwz.air").data.userData = {}; // 清除用户数据缓存
@@ -570,6 +573,7 @@ package WebRuntime_fla
          this.loading.start.addEventListener(MouseEvent.CLICK,this.login);
          this.loading.zhuce.addEventListener(MouseEvent.CLICK,this.zhuceFunc);
          this.loading.mimaxiug.addEventListener(MouseEvent.CLICK,this.mimaFunc);
+         this.loading.load.addEventListener(MouseEvent.CLICK,this.loadFunc); // 新增导入存档按钮功能
          this.loading.clear.addEventListener(MouseEvent.CLICK,this.clear);
          this.path2 = "http://www.4399api.com/system/attachment/100/05/24/100052440/";
          this.path = "http://www.4399api.com/system/attachment/100/05/24/100052440/";

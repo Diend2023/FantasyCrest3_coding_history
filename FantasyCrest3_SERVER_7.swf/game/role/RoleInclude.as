@@ -6,6 +6,8 @@ package game.role
       public function RoleInclude()
       {
          super();
+         JIN;
+         HeiMain;
          MingRen;
          JianXin;
          Hchq;
