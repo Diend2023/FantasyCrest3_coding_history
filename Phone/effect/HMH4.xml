@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="HMH4.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="元件 40000" x="0" y="0" width="251" height="251"/>
+	<SubTexture name="元件 40001" x="0" y="251" width="251" height="251"/>
+	<SubTexture name="元件 40002" x="0" y="502" width="251" height="251"/>
+	<SubTexture name="元件 40003" x="0" y="753" width="251" height="251"/>
+	<SubTexture name="元件 40004" x="251" y="0" width="251" height="251"/>
+	<SubTexture name="元件 40005" x="251" y="251" width="251" height="251"/>
+	<SubTexture name="元件 40006" x="251" y="502" width="251" height="251"/>
+	<SubTexture name="元件 40007" x="251" y="753" width="251" height="251"/>
+	<SubTexture name="元件 40008" x="502" y="0" width="251" height="251"/>
+	<SubTexture name="元件 40009" x="502" y="251" width="251" height="251"/>
+</TextureAtlas>

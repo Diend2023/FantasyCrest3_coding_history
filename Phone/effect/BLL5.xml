@@ -1,0 +1,14 @@
+<TextureAtlas imagePath="BLL5.png" px="-225" py="-211" class="" sound="">
+  <SubTexture name="元件 1 实例 10000" x="0" y="0" width="454" height="376" frameX="0" frameY="-1" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10001" x="454" y="0" width="452" height="374" frameX="-1" frameY="-1" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10002" x="906" y="0" width="453" height="376" frameX="-1" frameY="0" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10003" x="1359" y="0" width="453" height="380" frameX="-1" frameY="0" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10004" x="0" y="380" width="452" height="380" frameX="-2" frameY="0" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10005" x="452" y="380" width="453" height="380" frameX="-1" frameY="0" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10006" x="905" y="380" width="454" height="376" frameX="0" frameY="-1" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10007" x="1359" y="380" width="452" height="376" frameX="-1" frameY="-1" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10008" x="0" y="760" width="453" height="377" frameX="-1" frameY="0" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10009" x="453" y="760" width="453" height="377" frameX="-1" frameY="0" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10010" x="906" y="760" width="452" height="379" frameX="-2" frameY="0" frameWidth="454" frameHeight="380"/>
+  <SubTexture name="元件 1 实例 10011" x="1358" y="760" width="453" height="377" frameX="-1" frameY="0" frameWidth="454" frameHeight="380"/>
+</TextureAtlas>

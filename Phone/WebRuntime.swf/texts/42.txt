@@ -1,0 +1,19 @@
+[
+xmin -40
+ymin -40
+xmax 2846
+ymax 1077
+multiline 1
+readonly 1
+wasstatic 1
+html 1
+font 13
+height 640
+color #ffffcc00
+align left
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]// <p align="left"><font face="Verdana" size="32" color="#ffcc00" letterSpacing="0.00" kerning="0"> &nbsp;&nbsp;密码：</font></p>
+<p align="left"><font face="Microsoft YaHei" size="32" color="#ffcc00" letterSpacing="0.00" kerning="0"> &nbsp;&nbsp;密码：</font></p> // 切换字体为微软雅黑

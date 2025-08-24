@@ -1,0 +1,6 @@
+<TextureAtlas imagePath="steal5.png" px="-129" py="-117" class="" sound="">
+  <SubTexture name="元件 50000" x="0" y="0" width="238" height="211" hitPoint="-87,-96 98,-76 78,72 -81,73" hitEffect="1" hurtInterval="0" cardFrame="0"/>
+  <SubTexture name="元件 50001" x="238" y="0" width="238" height="211"/>
+  <SubTexture name="元件 50002" x="0" y="211" width="238" height="211"/>
+  <SubTexture name="元件 50003" x="238" y="211" width="238" height="211"/>
+</TextureAtlas>

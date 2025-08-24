@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:e26b5bca3cadcd0e6beba625221fc368:1/1$ -->
+<TextureAtlas imagePath="map_image.png">
+    <SubTexture name="map1.jpeg" x="606" y="203" width="298" height="200"/>
+    <SubTexture name="map2.jpeg" x="304" y="204" width="300" height="200"/>
+    <SubTexture name="map3.jpeg" x="304" y="2" width="300" height="200"/>
+    <SubTexture name="map4.jpeg" x="2" y="2" width="300" height="201"/>
+    <SubTexture name="map5.jpeg" x="2" y="205" width="300" height="200"/>
+    <SubTexture name="map_lvbu.jpeg" x="606" y="2" width="300" height="199"/>
+    <!-- 添加zhuren_1 -->
+    <SubTexture name="zhuren_1.jpeg" x="2" y="406" width="300" height="200"/>
+    <!-- 添加map_anheimolong -->
+    <SubTexture name="map_anheimolong.jpeg" x="304" y="406" width="300" height="200"/>
+    <!-- 添加syzlb-->
+    <SubTexture name="syzlb.jpeg" x="606" y="2" width="300" height="199"/>
+</TextureAtlas>

@@ -1,0 +1,12 @@
+<TextureAtlas imagePath="txjs125.png" px="-261" py="-245" class="" sound="">
+  <SubTexture name="元件 30000" x="0" y="0" width="500" height="500"/>
+  <SubTexture name="元件 30001" x="500" y="0" width="500" height="500"/>
+  <SubTexture name="元件 30002" x="1000" y="0" width="500" height="500"/>
+  <SubTexture name="元件 30003" x="1500" y="0" width="500" height="500"/>
+  <SubTexture name="元件 30004" x="0" y="500" width="500" height="500"/>
+  <SubTexture name="元件 30005" x="500" y="500" width="500" height="500"/>
+  <SubTexture name="元件 30006" x="1000" y="500" width="500" height="500"/>
+  <SubTexture name="元件 30007" x="1500" y="500" width="500" height="500"/>
+  <SubTexture name="元件 30008" x="0" y="1000" width="500" height="500"/>
+  <SubTexture name="元件 30009" x="500" y="1000" width="500" height="500"/>
+</TextureAtlas>

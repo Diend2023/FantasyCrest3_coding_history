@@ -29,15 +29,16 @@ package WebRuntime_fla
    import flash.xml.*;
    import zygame.server.BaseSocketClient;
    import zygame.utils.SendDataUtils;
+   import flash.net.FileReference; // 添加FileReference用于读取存档
    
    public dynamic class MainTimeline extends MovieClip
    {
       
-      private const DESIGN_WIDTH:int = 1000; //设置宽度
+      // private const DESIGN_WIDTH:int = 1000; //设置宽度
       
-      private const DESIGN_HEIGHT:int = 550; //设置高度
+      // private const DESIGN_HEIGHT:int = 550; //设置高度
       
-      private var container:Sprite; //
+      // private var container:Sprite; //
       
       public var loading:MovieClip;
       
@@ -78,18 +79,18 @@ package WebRuntime_fla
       }
 
       // 用于使登录界面居中显示，且支持缩放
-      private function handleStageResize(e:Event = null) : void //
-      { //
-         if(!stage) //
-         { //
-            return; //
-         } //
-         // 从比例缩放改为全屏拉伸
-         container.scaleX = stage.stageWidth / DESIGN_WIDTH;
-         container.scaleY = stage.stageHeight / DESIGN_HEIGHT;
-         container.x = 0;
-         container.y = 0;
-      } //
+      // private function handleStageResize(e:Event = null) : void //
+      // { //
+      //    if(!stage) //
+      //    { //
+      //       return; //
+      //    } //
+      //    // 从比例缩放改为全屏拉伸
+      //    container.scaleX = stage.stageWidth / DESIGN_WIDTH;
+      //    container.scaleY = stage.stageHeight / DESIGN_HEIGHT;
+      //    container.x = 0;
+      //    container.y = 0;
+      // } //
       
       public function zhuceFunc(param1:MouseEvent) : void
       {
@@ -100,7 +101,33 @@ package WebRuntime_fla
       {
          this.mimaxiugai.visible = true;
       }
-      
+
+      // 新增导入存档按钮功能
+      public function loadFunc(param1:MouseEvent) : void //
+      { //
+         var fileRef:FileReference = new FileReference(); //
+         fileRef.addEventListener(Event.SELECT, function(e:Event):void { //
+            fileRef.load(); //
+         }); //
+         fileRef.addEventListener(Event.COMPLETE, function(e:Event):void { //
+            try { //
+               var jsonData:String = fileRef.data.toString(); //
+               var importedData:Object = JSON.parse(jsonData); //
+               if (importedData.nickName) { //
+                  loading.userData = importedData; //
+                  loading.pname.text = importedData.nickName; //
+                  SharedObject.getLocal("net.zygame.hxwz.air").data.userData = importedData; //
+                  SharedObject.getLocal("net.zygame.hxwz.air").data.userName = importedData.nickName; //
+                  SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
+                  trace("import UserData success:", jsonData); //
+               } //
+            } catch (error:Error) { //
+               trace("import UserData failed:", error.message); //
+            } //
+         }); //
+         fileRef.browse([new FileFilter("幻想纹章3存档文件", "*.json")]); //
+      } //
+
       public function clear(param1:MouseEvent) : void
       {
          SharedObject.getLocal("net.zygame.hxwz.air").data.userData = {}; // 清除用户数据缓存
@@ -532,20 +559,22 @@ package WebRuntime_fla
       
       internal function frame1() : *
       {
-         container = new Sprite(); //
-         while(this.numChildren > 0) //
-         { //
-            container.addChild(this.getChildAt(0)); //
-         } //
-         this.addChild(container); //
+         // container = new Sprite(); //
+         // while(this.numChildren > 0) //
+         // { //
+         //    container.addChild(this.getChildAt(0)); //
+         // } //
+         // this.addChild(container); //
          stage.scaleMode = StageScaleMode.NO_SCALE;
          stage.align = StageAlign.TOP_LEFT;
-         stage.addEventListener(Event.RESIZE,handleStageResize); //
-         handleStageResize(); //
-         this.loadName = "FantasyCrest3_SERVER_7";
+         // stage.addEventListener(Event.RESIZE,handleStageResize); //
+         // handleStageResize(); //
+         // this.loadName = "FantasyCrest3_SERVER_7";
+         this.loadName = "FantasyCrest3_PHONE_5"; //
          this.loading.start.addEventListener(MouseEvent.CLICK,this.login);
          this.loading.zhuce.addEventListener(MouseEvent.CLICK,this.zhuceFunc);
          this.loading.mimaxiug.addEventListener(MouseEvent.CLICK,this.mimaFunc);
+         this.loading.load.addEventListener(MouseEvent.CLICK,this.loadFunc); // 新增导入存档按钮功能
          this.loading.clear.addEventListener(MouseEvent.CLICK,this.clear);
          this.path2 = "http://www.4399api.com/system/attachment/100/05/24/100052440/";
          this.path = "http://www.4399api.com/system/attachment/100/05/24/100052440/";

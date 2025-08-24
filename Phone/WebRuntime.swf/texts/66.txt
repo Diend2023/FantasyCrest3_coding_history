@@ -1,0 +1,17 @@
+[
+xmin -40
+ymin -40
+xmax 12634
+ymax 936
+readonly 1
+html 1
+font 12
+height 640
+color #ff000000
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]// <p align="center"><font face="Verdana" size="32" color="#000000" letterSpacing="0.00" kerning="0">恭喜你注册成功！</font></p>
+<p align="center"><font face="Microsoft YaHei" size="32" color="#000000" letterSpacing="0.00" kerning="0">恭喜你注册成功！</font></p> // 切换字体为微软雅黑
