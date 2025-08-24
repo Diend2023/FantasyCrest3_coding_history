@@ -34,11 +34,11 @@ package WebRuntime_fla
    public dynamic class MainTimeline extends MovieClip
    {
       
-      // private const DESIGN_WIDTH:int = 1000; //设置宽度
+      private const DESIGN_WIDTH:int = 1000; //设置宽度
       
-      // private const DESIGN_HEIGHT:int = 550; //设置高度
+      private const DESIGN_HEIGHT:int = 550; //设置高度
       
-      // private var container:Sprite; //
+      private var container:Sprite; //
       
       public var loading:MovieClip;
       
@@ -79,18 +79,18 @@ package WebRuntime_fla
       }
 
       // 用于使登录界面居中显示，且支持缩放
-      // private function handleStageResize(e:Event = null) : void //
-      // { //
-      //    if(!stage) //
-      //    { //
-      //       return; //
-      //    } //
-      //    // 从比例缩放改为全屏拉伸
-      //    container.scaleX = stage.stageWidth / DESIGN_WIDTH;
-      //    container.scaleY = stage.stageHeight / DESIGN_HEIGHT;
-      //    container.x = 0;
-      //    container.y = 0;
-      // } //
+      private function handleStageResize(e:Event = null) : void //
+      { //
+         if(!stage) //
+         { //
+            return; //
+         } //
+         // 从比例缩放改为全屏拉伸
+         container.scaleX = stage.stageWidth / DESIGN_WIDTH;
+         container.scaleY = stage.stageHeight / DESIGN_HEIGHT;
+         container.x = 0;
+         container.y = 0;
+      } //
       
       public function zhuceFunc(param1:MouseEvent) : void
       {
@@ -559,16 +559,16 @@ package WebRuntime_fla
       
       internal function frame1() : *
       {
-         // container = new Sprite(); //
-         // while(this.numChildren > 0) //
-         // { //
-         //    container.addChild(this.getChildAt(0)); //
-         // } //
-         // this.addChild(container); //
+         container = new Sprite(); //
+         while(this.numChildren > 0) //
+         { //
+            container.addChild(this.getChildAt(0)); //
+         } //
+         this.addChild(container); //
          stage.scaleMode = StageScaleMode.NO_SCALE;
          stage.align = StageAlign.TOP_LEFT;
-         // stage.addEventListener(Event.RESIZE,handleStageResize); //
-         // handleStageResize(); //
+         stage.addEventListener(Event.RESIZE,handleStageResize); //
+         handleStageResize(); //
          // this.loadName = "FantasyCrest3_SERVER_7";
          this.loadName = "FantasyCrest3_PHONE_5"; //
          this.loading.start.addEventListener(MouseEvent.CLICK,this.login);
