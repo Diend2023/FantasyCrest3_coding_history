@@ -615,7 +615,8 @@ package game.display
                });
             };
          }
-         if(_list.selectedItem.passive != undefined)
+         // if(_list.selectedItem.passive != undefined)
+         if(_list.selectedItem.passive != undefined && _list.selectedItem.passive != "") // 增加被动为空的逻辑
          {
             _passivetext.text = _list.selectedItem.passive;
          }
@@ -623,7 +624,8 @@ package game.display
          {
             _passivetext.text = "左眼还没设计他的被动吧...";
          }
-         if(_list.selectedItem.introduce != undefined)
+         // if(_list.selectedItem.introduce != undefined)
+         if(_list.selectedItem.introduce != undefined && _list.selectedItem.introduce != "") // 增加介绍为空的逻辑
          {
             _roleIntroduce.data = _list.selectedItem.introduce;
          }
@@ -636,10 +638,12 @@ package game.display
             str = "";
             if(config.showActhor)
             {
-               str = _list.selectedItem.acthor != undefined ? "作者：" + _list.selectedItem.acthor : "未知作者";
+               // str = _list.selectedItem.acthor != undefined ? "作者：" + _list.selectedItem.acthor : "未知作者";
+               str = _list.selectedItem.acthor != undefined && _list.selectedItem.acthor != "" ? "作者：" + _list.selectedItem.acthor : "未知作者"; // 增加作者为空的逻辑
             }
             _acthor.text = str + "  ";
-            _acthor.text += _list.selectedItem.profession != undefined ? "擅长：" + _list.selectedItem.profession : "擅长：无";
+            // _acthor.text += _list.selectedItem.profession != undefined ? "擅长：" + _list.selectedItem.profession : "擅长：无";
+            _acthor.text += _list.selectedItem.profession != undefined && _list.selectedItem.profession != "" ? "擅长：" + _list.selectedItem.profession : "擅长：无";
          }
          this.updateFight();
       }

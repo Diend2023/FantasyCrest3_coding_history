@@ -22,6 +22,8 @@
     <SubTexture name="Hibiki" x="374" y="623" width="60" height="60"/>
     <SubTexture name="Hyde" x="312" y="623" width="60" height="60"/>
     <SubTexture name="JIN" x="308" y="685" width="60" height="58" frameX="0" frameY="-2" frameWidth="60" frameHeight="60"/>
+    <!-- 添加旧版琴恩 -->
+    <SubTexture name="JIN_old" x="308" y="685" width="60" height="58" frameX="0" frameY="-2" frameWidth="60" frameHeight="60"/>
     <SubTexture name="JO" x="2" y="74" width="60" height="61"/>
     <SubTexture name="JS" x="250" y="623" width="60" height="60"/>
     <SubTexture name="KKR" x="188" y="623" width="60" height="60"/>
