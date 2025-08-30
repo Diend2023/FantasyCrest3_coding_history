@@ -1,0 +1,3 @@
+<TextureAtlas imagePath="map_jiuwei.png">
+	<SubTexture name="map_jiuwei.jpg" x="0" y="0" width="2048" height="848"/>
+</TextureAtlas>
