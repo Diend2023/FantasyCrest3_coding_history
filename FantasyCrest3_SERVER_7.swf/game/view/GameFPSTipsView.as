@@ -5,12 +5,15 @@ package game.view
    import starling.display.Quad;
    import starling.events.Event;
    import starling.text.TextField;
-   import starling.text.TextFormat;
+   // 原本使用的是starling的TextField
+   // import starling.text.TextFormat;
+   import flash.text.TextFormat; // feathers的ScrollText使用的是flash的TextFormat
    import starling.textures.Texture;
    import zygame.core.DataCore;
    import zygame.core.SceneCore; // 导入SceneCore用于弹出提示
    import zygame.display.DisplayObjectContainer;
-   
+   import feathers.controls.ScrollText; // 使用feathers的ScrollText
+
    public class GameFPSTipsView extends DisplayObjectContainer
    {
       
@@ -22,18 +25,26 @@ package game.view
       override public function onInit() : void
       {
          var bg:Quad;
-         var text:TextField;
+         // 原本使用的是starling的TextField
+         // var text:TextField;
+         var text:ScrollText; // 使用feathers的ScrollText
          var skin:Texture;
          var button:Button;
          super.onInit();
          bg = new Quad(stage.stageWidth,stage.stageHeight,0);
          this.addChild(bg);
          bg.alpha = 0.7;
-         text = new TextField(stage.stageWidth - 100,stage.stageHeight - 100,"",new TextFormat(GameFont.FONT_NAME,18,16777215,"left"));
+         // 原本设置的TextField
+         // text = new TextField(stage.stageWidth - 100,stage.stageHeight - 100,"",new TextFormat(GameFont.FONT_NAME,18,16777215,"left"));
+         text = new ScrollText(); // 调整高度以适应新增按钮
+         text.textFormat = new TextFormat(GameFont.FONT_NAME,18,16777215); // feathers的ScrollText使用的是flash的TextFormat
+         text.width = stage.stageWidth - 100; // 调整宽度
+         text.height = stage.stageHeight - 200; // 调整高度
          // 原本的提示文本
          // text.text = "关于游戏会卡的解决方案：\n掉帧的原因：\n游戏没有启动硬件加速，因此导致掉帧，只要开启硬件加速或者使用默认启动硬件加速的浏览器进行游戏即可得到流畅体验。\n\n方案1：\n1、选择Internet Explorer浏览器或者其他浏览器进行游戏。\n\n方案2：\n1、右键游戏窗口，点击设置。\n2、弹出小窗口后，选择最左边的选项，开启硬件加速。\n3、刷新页面重启游戏。\n4、如果失败，请转试用方案1。";
          text.text = "幻想纹章3本地版0.5\n\n这是一个由多位幻想纹章爱好者共同协助逆向得到的版本。历时两个月的研究，我们终于得到一个可玩的版本\n\n感谢@IS 和@碎风 的指路，感谢@风吟棠华落 提供数据解密方法，感谢@忆雪 提供的角色指导，感谢@正义永无止境 提供真幻想纹章3本地版，感谢@桐 提供的最终更新缓存\n\n再次感谢所有幻想纹章爱好者的支持，如果你不是免费得到的该版本，请立刻举报\n\n幻想纹章3交流群：1055702064"; // 修改为版本介绍
          this.addChild(text);
+         text.y = 50; // 调整文本位置
          text.x = 50;
          skin = DataCore.getTextureAtlas("start_main").getTexture("btn_style_1");
          button = new Button(skin,"我知道了");
