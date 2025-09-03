@@ -22,7 +22,9 @@ package game.display
    import zygame.data.RoleAttributeData;
    import zygame.display.KeyDisplayObject;
    import zygame.utils.MemoryUtils;
-   
+   import feathers.controls.ScrollText; // 使用feathers的ScrollText
+   import flash.text.TextFormat; // feathers的ScrollText使用的是flash的TextFormat
+
    public class SelectRole extends KeyDisplayObject
    {
       
@@ -40,7 +42,9 @@ package game.display
       
       private var _nametext:TextField;
       
-      private var _passivetext:TextField;
+      // private var _passivetext:TextField;
+      public var _passivetext:ScrollText; // 使用feathers的ScrollText
+
       
       private var _roleIntroduce:RoleIntroduce;
       
@@ -166,14 +170,21 @@ package game.display
          pnametext.y = pname.y;
          this.addChild(pnametext);
          this._nametext = pnametext;
-         var bdtext:TextField = new TextField(bd.width,bd.height,"每次使用技能将恢复生命最大值1%",new TextFormat(GameFont.FONT_NAME,12,16777215,"left"));
+         // var bdtext:TextField = new TextField(bd.width,bd.height,"每次使用技能将恢复生命最大值1%",new TextFormat(GameFont.FONT_NAME,12,16777215,"left"));
+         var bdtext:ScrollText = new ScrollText(); // 使用feathers的ScrollText
+         bdtext.width = bd.width; //
+         bdtext.height = bd.height - 5; //
+         bdtext.text = "每次使用技能将恢复生命最大值1%"; //
+         bdtext.textFormat = new flash.text.TextFormat(GameFont.FONT_NAME,12,16777215); // 使用flash的TextFormat
          this.addChild(bdtext);
-         bdtext.format.leading = 3;
+         // bdtext.format.leading = 3;
+         bdtext.textFormat.leading = 3; //
          bdtext.x = bd.x + 2;
          bdtext.y = bd.y;
          _passivetext = bdtext;
          _passivetext.filter = new GlowFilter(0,1,1,1);
-         var bg:Quad = new Quad(bd.x,32,0);
+         // var bg:Quad = new Quad(bd.x,32,0);
+         var bg:Quad = new Quad(bd.x - 5,32,0); //
          bg.alpha = 0.5;
          this.addChild(bg);
          bg.x = 0;
@@ -220,6 +231,7 @@ package game.display
          this.addChild(acthorBg);
          var acthor:TextField = new TextField(stage.stageWidth / 2 - 10,32,"作者：木姐",new TextFormat(GameFont.FONT_NAME,12,268431360,"left"));
          this.addChild(acthor);
+         this.setChildIndex(_passivetext,this.getChildIndex(acthor) + 1); //
          acthor.x = 5;
          acthor.y = acthorBg.y;
          acthorBg.width = bg.width;
@@ -385,8 +397,11 @@ package game.display
          var unlockData:String = unlock.toString();
          if(figth)
          {
+            var version:String = String(figth.@version); // 提前获取版本号
             xmllist = figth.children();
-            for(var i in xmllist)
+            var len:int = xmllist.length(); //
+            // for(var i in xmllist)
+            for (i = 0; i < len; i++) //
             {
                rootName = (xmllist[i] as XML).localName();
                // 原本的加载角色条件
@@ -395,7 +410,7 @@ package game.display
                {
                   // 原本的加载角色条件
                   // if(!(false && (int((xmllist[i] as XML).@crystal) > 0 || int((xmllist[i] as XML).@coin) > 0) && String((xmllist[i] as XML).@in4399) != "true"))
-                  {
+                  // {
                      arr.push({
                         "passive":xmllist[i].@passive,
                         "head":String(xmllist[i].@head).replace(".png",""),
@@ -407,12 +422,13 @@ package game.display
                         "profession":xmllist[i].@profession,
                         "coin":int(xmllist[i].@coin),
                         "crystal":int(xmllist[i].@crystal),
-                        "isNew":String(xmllist[i].@version) == String(DataCore.getXml("fight").@version),
+                        // "isNew":String(xmllist[i].@version) == String(DataCore.getXml("fight").@version),
+                        "isNew":String(xmllist[i].@version) == version, //
                         "lock":true,
                         "xml":xmllist[i]
                      });
                      allcoin += int(xmllist[i].@coin);
-                  }
+                  // }
                }
             }
          }
@@ -669,6 +685,12 @@ package game.display
             _list.dispose();
          }
          _list = null;
+         if(_passivetext) // 尝试清除_passivetext
+         { //
+            _passivetext.parent.removeChild(_passivetext); //
+            _passivetext.dispose(); //
+         } //
+         _passivetext = null; //
          this.config = null;
          this._acthor = null;
          this._acthorBG = null;
