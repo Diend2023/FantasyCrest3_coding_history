@@ -397,7 +397,7 @@ package game.display
          var unlockData:String = unlock.toString();
          if(figth)
          {
-            var version:String = String(figth.@version); // 提前获取版本号
+            var version:Number = Number(figth.@version); // 提前获取版本号
             xmllist = figth.children();
             var len:int = xmllist.length(); //
             // for(var i in xmllist)
@@ -423,7 +423,7 @@ package game.display
                         "coin":int(xmllist[i].@coin),
                         "crystal":int(xmllist[i].@crystal),
                         // "isNew":String(xmllist[i].@version) == String(DataCore.getXml("fight").@version),
-                        "isNew":String(xmllist[i].@version) == version, //
+                        "isNew":Number(xmllist[i].@version) >= version, //
                         "lock":true,
                         "xml":xmllist[i]
                      });
@@ -496,7 +496,8 @@ package game.display
             case 49:
             case 97:
             case 74:
-               if(lockButton)
+               // if(lockButton)
+               if(lockButton && _group.maxSelectNum <= _group.array.length + 1) // 选择满才隐藏锁定按钮
                {
                   lockButton.visible = false;
                }
@@ -685,7 +686,7 @@ package game.display
             _list.dispose();
          }
          _list = null;
-         if(_passivetext) // 尝试清除_passivetext
+         if(_passivetext && _passivetext.parent) // 尝试清除_passivetext
          { //
             _passivetext.parent.removeChild(_passivetext); //
             _passivetext.dispose(); //
