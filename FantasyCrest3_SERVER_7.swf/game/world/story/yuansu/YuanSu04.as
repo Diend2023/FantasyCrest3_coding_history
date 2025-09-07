@@ -1,11 +1,11 @@
-// 添加剧情副本世界YuanSu00
+// 添加剧情副本世界YuanSu04
 package game.world.story.yuansu
 {
 
-   public class YuanSu00 extends YuanSu
+   public class YuanSu04 extends YuanSu
    {
       
-      public function YuanSu00(mapName:String, toName:String)
+      public function YuanSu04(mapName:String, toName:String)
       {
          super(mapName,toName);
       }
@@ -14,8 +14,7 @@ package game.world.story.yuansu
       {
          super.onInit();
       }
-
-      // 重写检查游戏结束的方法，使得死亡会失败，胜利不结束
+      
       override public function cheakGameOver() : int
       {
          var arr:Array = [];
@@ -36,7 +35,6 @@ package game.world.story.yuansu
          }
          return -1;
       }
-
    }
 }
 

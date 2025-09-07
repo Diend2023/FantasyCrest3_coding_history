@@ -12,6 +12,10 @@
     <SubTexture name="zhuren_1.jpeg" x="2" y="406" width="300" height="200"/>
     <!-- 添加map_anheimolong -->
     <SubTexture name="map_anheimolong.jpeg" x="304" y="406" width="300" height="200"/>
-    <!-- 添加syzlb-->
-    <SubTexture name="syzlb.jpeg" x="606" y="2" width="300" height="199"/>
+    <!-- 添加syzlb_0 -->
+    <SubTexture name="syzlb_0.jpeg" x="606" y="2" width="300" height="199"/>
+    <!-- 添加map_jiuwei -->
+    <SubTexture name="map_jiuwei.jpeg" x="606" y="406" width="300" height="200"/>
+    <!-- 添加map6 -->
+    <SubTexture name="map6.jpeg" x="2" y="608" width="300" height="200"/>
 </TextureAtlas>

@@ -1,0 +1,16 @@
+<map version="1.0" orientation="orthogonal" width="64" height="23" tilewidth="32" tileheight="32" texture="&lt;null>" world="&lt;null>" bg="jiuwei" textureOffsetX="0" textureOffsetY="0">
+  <properties>
+    <property name="extend" value="{&quot;_eventSprite&quot;:[{&quot;height&quot;:100,&quot;x&quot;:450,&quot;poltData&quot;:&quot;bnVsbA==&quot;,&quot;width&quot;:100,&quot;path&quot;:&quot;&quot;,&quot;name&quot;:&quot;1p&quot;,&quot;go&quot;:&quot;&quot;,&quot;type&quot;:&quot;repeat_event&quot;,&quot;instanceName&quot;:&quot;1p&quot;,&quot;dialogue&quot;:&quot;left&quot;,&quot;other&quot;:&quot;&quot;,&quot;scaleX&quot;:1,&quot;noChange&quot;:false,&quot;y&quot;:575,&quot;scaleY&quot;:1,&quot;blendMode&quot;:null,&quot;to&quot;:&quot;&quot;},{&quot;height&quot;:100,&quot;x&quot;:1450,&quot;poltData&quot;:&quot;bnVsbA==&quot;,&quot;width&quot;:100,&quot;path&quot;:&quot;&quot;,&quot;name&quot;:&quot;2p&quot;,&quot;go&quot;:&quot;&quot;,&quot;type&quot;:&quot;repeat_event&quot;,&quot;instanceName&quot;:&quot;2p&quot;,&quot;dialogue&quot;:&quot;left&quot;,&quot;other&quot;:&quot;&quot;,&quot;scaleX&quot;:1,&quot;noChange&quot;:false,&quot;y&quot;:575,&quot;scaleY&quot;:1,&quot;blendMode&quot;:null,&quot;to&quot;:&quot;&quot;}],&quot;_npcLayer&quot;:[{&quot;height&quot;:412,&quot;x&quot;:1450,&quot;poltData&quot;:&quot;bnVsbA==&quot;,&quot;width&quot;:283,&quot;path&quot;:&quot;npc/jiuwei.xml&quot;,&quot;name&quot;:&quot;jiuwei&quot;,&quot;instanceName&quot;:&quot;&quot;,&quot;dialogue&quot;:&quot;left&quot;,&quot;other&quot;:&quot;&quot;,&quot;scaleX&quot;:1,&quot;noChange&quot;:false,&quot;y&quot;:575,&quot;scaleY&quot;:1,&quot;blendMode&quot;:null}],&quot;_bottomLayer&quot;:[{&quot;other&quot;:&quot;&quot;,&quot;rotation&quot;:0,&quot;scaleX&quot;:1,&quot;pingpu&quot;:false,&quot;name&quot;:&quot;jiuweizhidi.jpg&quot;,&quot;x&quot;:0,&quot;scaleY&quot;:1,&quot;instanceName&quot;:&quot;&quot;,&quot;target&quot;:&quot;jiuweizhidi&quot;,&quot;y&quot;:-100}],&quot;hit_layer&quot;:[],&quot;version&quot;:&quot;0.0.2&quot;,&quot;layers&quot;:[{&quot;type&quot;:&quot;data&quot;,&quot;id&quot;:&quot;_dataLayer&quot;,&quot;name&quot;:&quot;数据层（不可选）&quot;},{&quot;type&quot;:&quot;event&quot;,&quot;id&quot;:&quot;_eventSprite&quot;,&quot;name&quot;:&quot;事件层（不可选）&quot;},{&quot;type&quot;:&quot;scenery&quot;,&quot;id&quot;:&quot;_topLayer&quot;,&quot;name&quot;:&quot;装饰层1&quot;},{&quot;type&quot;:&quot;npc&quot;,&quot;id&quot;:&quot;_npcLayer&quot;,&quot;name&quot;:&quot;互动层（原生）&quot;},{&quot;type&quot;:&quot;scenery&quot;,&quot;id&quot;:&quot;_bottomLayer&quot;,&quot;name&quot;:&quot;装饰层2&quot;},{&quot;type&quot;:&quot;map&quot;,&quot;id&quot;:&quot;hit_layer&quot;,&quot;name&quot;:&quot;hit_layer&quot;}],&quot;_dataLayer&quot;:[],&quot;_topLayer&quot;:[],&quot;scenery&quot;:[{&quot;path&quot;:&quot;scenery/jiuweizhidi.xml&quot;,&quot;name&quot;:&quot;jiuweizhidi&quot;}]}"/>
+  </properties>
+  <objectgroup name="hit_layer" width="64" height="40">
+    <properties/>
+    <object x="-23" y="575">
+      <properties>
+        <property name="lines" value="[]"/>
+        <property name="mode" value="not_penetrate"/>
+      </properties>
+      <polygon points="0,0 2112.55,0 2155.95,736.4 -50.5,728.9"/>
+    </object>
+
+  </objectgroup>
+</map>

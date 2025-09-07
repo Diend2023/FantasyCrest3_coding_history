@@ -1,0 +1,29 @@
+<map version="1.0" orientation="orthogonal" width="64" height="23" tilewidth="32" tileheight="32" texture="&lt;null>" world="game.world.story.syzlvbu.SYZLvBu01>" bg="none" textureOffsetX="0" textureOffsetY="0">
+  <properties>
+    <property name="extend" value="{&quot;_eventSprite&quot;:[{&quot;height&quot;:100,&quot;x&quot;:556.05,&quot;poltData&quot;:&quot;bnVsbA==&quot;,&quot;width&quot;:100,&quot;path&quot;:&quot;&quot;,&quot;name&quot;:&quot;1p&quot;,&quot;go&quot;:&quot;&quot;,&quot;type&quot;:&quot;repeat_event&quot;,&quot;instanceName&quot;:&quot;1p&quot;,&quot;dialogue&quot;:&quot;left&quot;,&quot;other&quot;:&quot;&quot;,&quot;scaleX&quot;:1,&quot;noChange&quot;:false,&quot;y&quot;:407.75,&quot;scaleY&quot;:1,&quot;blendMode&quot;:null,&quot;to&quot;:&quot;&quot;},{&quot;height&quot;:100,&quot;x&quot;:1325.8,&quot;poltData&quot;:&quot;bnVsbA==&quot;,&quot;width&quot;:100,&quot;path&quot;:&quot;&quot;,&quot;name&quot;:&quot;2p&quot;,&quot;go&quot;:&quot;&quot;,&quot;type&quot;:&quot;repeat_event&quot;,&quot;instanceName&quot;:&quot;2p&quot;,&quot;dialogue&quot;:&quot;left&quot;,&quot;other&quot;:&quot;&quot;,&quot;scaleX&quot;:1,&quot;noChange&quot;:false,&quot;y&quot;:390.25,&quot;scaleY&quot;:1,&quot;blendMode&quot;:null,&quot;to&quot;:&quot;&quot;},{&quot;height&quot;:100,&quot;x&quot;:-111,&quot;poltData&quot;:&quot;W3siZGF0YSI6Ijxwb2x0PlxuICA8bSBtZXNzYWdlPVwi6LCB6IO96Zi75oyh5oiR77yfXCIgdGFyZ2V0PVwibHZidVwiLz5cbiAgPG0gbWVzc2FnZT1cIuaIkeeahOiyguidieWcqOWTqumHjO+8ge+8ge+8gVwiIHRhcmdldD1cImx2YnVcIi8+XG48L3BvbHQ+IiwibmFtZSI6Ium7mOiupCJ9XQ==&quot;,&quot;width&quot;:100,&quot;path&quot;:&quot;&quot;,&quot;name&quot;:&quot;polt&quot;,&quot;go&quot;:&quot;&quot;,&quot;type&quot;:&quot;repeat_event&quot;,&quot;instanceName&quot;:&quot;polt&quot;,&quot;dialogue&quot;:&quot;left&quot;,&quot;other&quot;:&quot;&quot;,&quot;scaleX&quot;:1,&quot;noChange&quot;:false,&quot;y&quot;:-345.3,&quot;scaleY&quot;:1,&quot;blendMode&quot;:null,&quot;to&quot;:&quot;&quot;}],&quot;_npcLayer&quot;:[{&quot;height&quot;:412,&quot;x&quot;:991.5,&quot;poltData&quot;:&quot;bnVsbA==&quot;,&quot;width&quot;:283,&quot;path&quot;:&quot;npc/lvbu.xml&quot;,&quot;name&quot;:&quot;lvbu&quot;,&quot;instanceName&quot;:&quot;&quot;,&quot;dialogue&quot;:&quot;left&quot;,&quot;other&quot;:&quot;&quot;,&quot;scaleX&quot;:2,&quot;noChange&quot;:false,&quot;y&quot;:462.5,&quot;scaleY&quot;:2,&quot;blendMode&quot;:null}],&quot;_bottomLayer&quot;:[{&quot;other&quot;:&quot;&quot;,&quot;rotation&quot;:0,&quot;scaleX&quot;:1,&quot;pingpu&quot;:false,&quot;name&quot;:&quot;juedouchang.jpg&quot;,&quot;x&quot;:371,&quot;scaleY&quot;:1,&quot;instanceName&quot;:&quot;&quot;,&quot;target&quot;:&quot;juedouchang&quot;,&quot;y&quot;:25.5}],&quot;hit_layer&quot;:[],&quot;version&quot;:&quot;0.0.2&quot;,&quot;layers&quot;:[{&quot;type&quot;:&quot;data&quot;,&quot;id&quot;:&quot;_dataLayer&quot;,&quot;name&quot;:&quot;数据层（不可选）&quot;},{&quot;type&quot;:&quot;event&quot;,&quot;id&quot;:&quot;_eventSprite&quot;,&quot;name&quot;:&quot;事件层（不可选）&quot;},{&quot;type&quot;:&quot;scenery&quot;,&quot;id&quot;:&quot;_topLayer&quot;,&quot;name&quot;:&quot;装饰层1&quot;},{&quot;type&quot;:&quot;npc&quot;,&quot;id&quot;:&quot;_npcLayer&quot;,&quot;name&quot;:&quot;互动层（原生）&quot;},{&quot;type&quot;:&quot;scenery&quot;,&quot;id&quot;:&quot;_bottomLayer&quot;,&quot;name&quot;:&quot;装饰层2&quot;},{&quot;type&quot;:&quot;map&quot;,&quot;id&quot;:&quot;hit_layer&quot;,&quot;name&quot;:&quot;hit_layer&quot;}],&quot;_dataLayer&quot;:[],&quot;_topLayer&quot;:[],&quot;scenery&quot;:[{&quot;path&quot;:&quot;scenery/juedouchang.xml&quot;,&quot;name&quot;:&quot;juedouchang&quot;}]}"/>
+  </properties>
+  <objectgroup name="hit_layer" width="64" height="40">
+    <properties/>
+    <object x="357" y="545">
+      <properties>
+        <property name="lines" value="[]"/>
+        <property name="mode" value="not_penetrate"/>
+      </properties>
+      <polygon points="0,0 204.5,-24.55 350.85,-50.75 417.2,-62.55 635.4,-79.8 849,-72.55 920.85,-62.55 1062.65,-45.25 1278.1,-0.75 1316.3,-10.75 1300.85,297.45 -30.1,318.35 -26.45,10.2"/>
+    </object>
+    <object x="0" y="-20">
+      <properties>
+        <property name="lines" value="[]"/>
+        <property name="mode" value="not_penetrate"/>
+      </properties>
+      <polygon points="0,0 450,-1267.5 381.25,901.25 -1.25,890"/>
+    </object>
+    <object x="1657" y="-21">
+      <properties>
+        <property name="lines" value="[]"/>
+        <property name="mode" value="not_penetrate"/>
+      </properties>
+      <polygon points="-37.5,-1455 -17.5,911.35 438.8,937.25 416.3,-40.25"/>
+    </object>
+  </objectgroup>
+</map>
