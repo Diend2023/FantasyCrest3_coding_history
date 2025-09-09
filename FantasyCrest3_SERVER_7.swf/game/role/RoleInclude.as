@@ -77,6 +77,8 @@ package game.role
          ZhiZhiXiong; //添加志志雄真实(纹4)
          BLL; // 添加布罗利(纹4)
          JiFengZuo; // 添加疾风传佐助
+         MJMan; // 添加麻将人
+         Tom; // 添加汤姆
       }
    }
 }
