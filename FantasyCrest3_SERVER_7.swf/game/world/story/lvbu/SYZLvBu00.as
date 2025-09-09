@@ -3,7 +3,6 @@ package game.world.story.syzlvbu
 {
    import game.role.GameRole;
    import zygame.core.PoltCore;
-   import zygame.data.RoleAttributeData;
    
    public class SYZLvBu00 extends SYZLvBu
    {
@@ -15,12 +14,22 @@ package game.world.story.syzlvbu
       
       override public function onInit() : void
       {
-         var r:GameRole = null;
+         var lvbu:GameRole = null;
          super.onInit();
          if(PoltCore.hasEvent("syzlb_0_吕布_击败事件"))
          {
-            r = this.getRoleFormName("lvbu") as GameRole;
-            r.discarded();
+            lvbu = this.getRoleFormName("lvbu") as GameRole;
+            lvbu.discarded();
+            
+         }
+         if(PoltCore.getPoltState("",this.targetName) && PoltCore.getPoltState("",this.targetName) == "EventOver")
+         {
+            auto = true;
+         }
+         else
+         {
+            auto = false;
+            this.role.move("right");
          }
       }
       
@@ -49,10 +58,11 @@ package game.world.story.syzlvbu
       override public function onFrame() : void
       {
          super.onFrame();
+         var lvbu:GameRole = null;
          if(this.getRoleFormName("lvbu") && !PoltCore.hasEvent("syzlb_0_吕布_击败事件"))
          {
-            var r:GameRole = this.getRoleFormName("lvbu") as GameRole;
-            if(r.attribute.hp <= 0)
+            lvbu = this.getRoleFormName("lvbu") as GameRole;
+            if(lvbu.attribute.hp <= 0)
             {
                PoltCore.addEvent("syzlb_0_吕布_击败事件");
             }

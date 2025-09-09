@@ -2,6 +2,7 @@
 package game.world.story.syzlvbu
 {
    import zygame.core.PoltCore;
+   import game.role.GameRole;
    
    public class SYZLvBu01 extends SYZLvBu
    {
@@ -14,6 +15,9 @@ package game.world.story.syzlvbu
       override public function onInit() : void
       {
          super.onInit();
+         var lvbu:GameRole = null;
+         lvbu = this.getRoleFormName("lvbu") as GameRole;
+         super.changeNpcPower(lvbu,3,1.1); // 三倍属性，1.1倍大小
       }
       
       override public function cheakGameOver() : int

@@ -6,6 +6,7 @@ package game.world
    import game.view.GameStartMain; //
    import zygame.core.SceneCore; //
    import zygame.data.GameTroopData; //
+   import zygame.display.BaseRole; //
    
    public class _1VStory extends _1VFB
    {
@@ -71,6 +72,21 @@ package game.world
          }
          super.onFrame();
       }
+
+      public function changeNpcPower(npc:BaseRole, power:Number = NaN, scale:Number = NaN) : void //
+      { //
+         if(!isNaN(power))
+         {
+            npc.attribute.hpmax *= power; //
+            npc.attribute.hp *= power; //
+            npc.attribute.power *= power; //
+            npc.attribute.magic *= power; //
+         } //
+         if(!isNaN(scale))
+         { //
+            npc.contentScale = scale; //
+         } //
+      } //
    }
 }
 

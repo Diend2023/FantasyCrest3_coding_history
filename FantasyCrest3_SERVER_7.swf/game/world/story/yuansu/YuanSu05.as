@@ -1,9 +1,8 @@
-// 添加剧情副本世界YuanSu05
+// 添加剧情副本世界YuanSu06
 package game.world.story.yuansu
 {
    import game.role.GameRole;
    import zygame.core.PoltCore;
-   import zygame.data.RoleAttributeData;
 
    public class YuanSu05 extends YuanSu
    {
@@ -15,19 +14,23 @@ package game.world.story.yuansu
       
       override public function onInit() : void
       {
-         var anheimolong:GameRole = null;
-         var guanggong:GameRole = null;
+         var huolongaisi:GameRole = null;
          super.onInit();
-         if(PoltCore.hasEvent("dnf_yuansu_5_暗黑魔龙_击败事件"))
+         if(PoltCore.hasEvent("dnf_yuansu_5_艾斯库尔_击败事件"))
          {
-            anheimolong = this.getRoleFormName("anheimolong") as GameRole;
-            anheimolong.discarded();
+            huolongaisi = this.getRoleFormName("huolongaisi") as GameRole;
+            huolongaisi.discarded();
          }
-         if(PoltCore.hasEvent("dnf_yuansu_5_光之弓箭手_击败事件"))
+         if(PoltCore.getPoltState("",this.targetName) && PoltCore.getPoltState("",this.targetName) == "EventOver")
          {
-            guanggong = this.getRoleFormName("guanggong") as GameRole;
-            guanggong.discarded();
+            auto = true;
          }
+         else
+         {
+            auto = false;
+            this.role.move("right");
+         }
+
       }
       
       override public function cheakGameOver() : int
@@ -51,27 +54,18 @@ package game.world.story.yuansu
          return -1;
       }
 
-      override public function onFrame() : void //
-      { //
-         super.onFrame(); //
-         if(this.getRoleFormName("anheimolong") && !PoltCore.hasEvent("dnf_yuansu_5_暗黑魔龙_击败事件")) //
-         { //
-            var anheimolong:GameRole = this.getRoleFormName("anheimolong") as GameRole; //
-            if(anheimolong.attribute.hp <= 0) //
-            { //
-               PoltCore.addEvent("dnf_yuansu_5_暗黑魔龙_击败事件"); //
-            } //
-         } //
-         if(this.getRoleFormName("guanggong") && !PoltCore.hasEvent("dnf_yuansu_5_光之弓箭手_击败事件")) //
-         { //
-            var guanggong:GameRole = this.getRoleFormName("guanggong") as GameRole; //
-            if(guanggong.attribute.hp <= 0) //
-            { //
-               PoltCore.addEvent("dnf_yuansu_5_光之弓箭手_击败事件"); //
-            } //
-         } //
-      } //
-
+      override public function onFrame() : void
+      {
+         super.onFrame();
+         if(this.getRoleFormName("huolongaisi") && !PoltCore.hasEvent("dnf_yuansu_5_艾斯库尔_击败事件"))
+         {
+            var huolongaisi:GameRole = this.getRoleFormName("huolongaisi") as GameRole;
+            if(huolongaisi.attribute.hp <= 0)
+            {
+               PoltCore.addEvent("dnf_yuansu_5_艾斯库尔_击败事件");
+            }
+         }
+      }
    }
 }
 

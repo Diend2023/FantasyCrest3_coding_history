@@ -22,8 +22,9 @@ package game.world.story.yuansu
          super.over();
          PoltCore.removeEvent("dnf_yuansu_1_刺客_元素感染事件");
          PoltCore.changePoltState("","","dnf_yuansu_1");
-         PoltCore.removeEvent("dnf_yuansu_5_暗黑魔龙_击败事件");
-         PoltCore.removeEvent("dnf_yuansu_5_光之弓箭手_击败事件");
+         PoltCore.changePoltState("event2","","dnf_yuansu_1");
+         PoltCore.removeEvent("dnf_yuansu_6_暗黑魔龙_击败事件");
+         PoltCore.removeEvent("dnf_yuansu_5_艾斯库尔_击败事件");
          PoltCore.changePoltState("","","dnf_yuansu_5");
          PoltCore.changePoltState("","","dnf_yuansu_6");
          PoltCore.changePoltState("","","dnf_yuansu_0");
