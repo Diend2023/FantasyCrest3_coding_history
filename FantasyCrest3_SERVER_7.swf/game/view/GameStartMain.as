@@ -443,8 +443,7 @@ package game.view
       private function showUserState() : void
       {
          _loginButton.visible = false;
-         // 暂时隐藏排行榜按钮
-         // _rankButton.visible = true;
+         _rankButton.visible = true;
          _tips.visible = false;
          _tipsText.visible = true;
          _tipsText.text = Game.game4399Tools.nickName + "(" + Game.game4399Tools.userName + ")";

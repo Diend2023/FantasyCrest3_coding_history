@@ -34,7 +34,7 @@ package game.role
          if(this.attribute.hp < this.attribute.hpmax * 0.3 && !this.hasCounterAttack)
          {
             this.hasCounterAttack = true;
-            listData.getItemAt(0).msg = "Auto";
+            listData.getItemAt(0).msg = "On";
             listData.updateItemAt(0);
             this.attribute.power += 200;
             ms = 0.8;
