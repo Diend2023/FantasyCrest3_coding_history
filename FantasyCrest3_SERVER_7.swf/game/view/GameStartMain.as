@@ -361,6 +361,8 @@ package game.view
             Game.initData(userData.userData);
             Game.onlineData = new OnlineFightData(userData.userData.ofigth);
             updateUserData(userData);
+            Game.game4399Tools.onLogined(); //
+
          });
          SceneCore.pushView(new Communication());
          render = new Image(textures.getTexture("renders"));
@@ -422,6 +424,7 @@ package game.view
          }
          catch(e:Error)
          {
+            trace("onLogin error",e); //
          }
          if(!ONEC_LOGIN)
          {
@@ -437,7 +440,8 @@ package game.view
                Game.vip.value = int(Game.game4399Tools.data.vip);
             }
          }
-         Starling.juggler.delayCall(Game.submitScore,3);
+         // Starling.juggler.delayCall(Game.submitScore,3);
+         Game.submitScore(); // 立即提交分数
       }
       
       private function showUserState() : void

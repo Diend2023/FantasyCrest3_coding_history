@@ -385,7 +385,7 @@ package WebRuntime_fla
          this.loading.address.text = this.loading.pcode.text; // 存入联机地址
          this.loading.userData._4399userData = this.loading._4399userData; // 存入4399用户数据
          this.loading.userData._4399userData[0].nickName = this.loading.pname.text; // 存入昵称
-         this.loading.userData._4399userData[0].userName = this.loading.pname.text; // 存入用户名
+         this.loading.userData._4399userData[0].name = this.loading.pname.text; // 存入用户名
          trace("登录"); //
          startGame(); // 开始游戏
          // 下面的代码是原本的登录代码，已被注释掉
@@ -588,7 +588,7 @@ package WebRuntime_fla
          loading._4399userData = [ // 初始化4399用户数据
             { //
                nickName: "", //
-               userName: "", //
+               name: "", //
                uid: 0, //
                allFight: 0, //
                fight: "", //

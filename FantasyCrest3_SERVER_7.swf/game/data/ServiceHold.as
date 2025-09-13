@@ -18,11 +18,11 @@ package game.data
       public function ServiceHold()
       {
          super();
-         if(!Service.userData)
+         if(!SharedObject.getLocal("net.zygame.hxwz.air").data.userData)
          {
-            Service.userData = {"_4399userData":[]};
+            SharedObject.getLocal("net.zygame.hxwz.air").data.userData = {"_4399userData":[]};
          }
-         isLog = Service.userData._4399userData;
+         isLog = SharedObject.getLocal("net.zygame.hxwz.air").data.userData._4399userData;
       }
       
       private function decodeExtraField(extraString:String):Object
@@ -143,17 +143,113 @@ package game.data
       
       public function submitScoreToRankLists(index:int, scores:Array) : void
       {
+         if(!scores || scores.length == 0)
+         {
+         return;
+         }
+      
+         // 确保排行榜数据已加载
+         if(!_rankDataArray)
+         {
+            parseRankData();
+         }
+         if(!_rankDataArray)
+         {
+            _rankDataArray = [];
+         }
+         
+         var scoreData:Object = scores[0]; // 取第一个分数数据
+         var newScore:int = scoreData.score;
+         var rankId:int = scoreData.rId;
+         var extraData:Object = scoreData.extra;
+         
+         // 获取当前用户信息
+         var currentUser:Object = Game.game4399Tools.logInfo;
+         if(!currentUser) 
+         {
+            return;
+         }
+         
+         var userId:String = currentUser.uid || "unknown";
+         var userName:String = currentUser.nickName || currentUser.name || "未知用户";
+         
+         // 查找用户是否已在排行榜中
+         var existingIndex:int = -1;
+         for(var i:int = 0; i < _rankDataArray.length; i++) 
+         {
+            if(_rankDataArray[i].userId == userId) 
+            {
+                  existingIndex = i;
+                  break;
+            }
+         }
+         
+         var oldRank:int = existingIndex >= 0 ? _rankDataArray[existingIndex].rank : -1;
+         var oldScore:int = existingIndex >= 0 ? _rankDataArray[existingIndex].score : 0;
+         
+         // 如果用户已存在且新分数不高于旧分数，不更新
+         if(existingIndex >= 0 && newScore <= oldScore) 
+         {
+            return;
+         }
+         
+         // 移除旧记录（如果存在）
+         if(existingIndex >= 0) 
+         {
+            _rankDataArray.splice(existingIndex, 1);
+         }
+         
+         // 编码扩展数据
+         // var encodedExtra:String = "";
+         // if(extraData && extraData.highRole) 
+         // {
+         //    encodedExtra = encodeExtraField(extraData.highRole);
+         // }
+         
+         // 创建新记录
+         var newRecord:Object = {
+            rank: 1, // 临时排名，稍后重新计算
+            userId: userId,
+            userName: userName,
+            saveIndex: index,
+            score: newScore,
+            extra: extraData || {highRole: "unknown"},
+            area: "无地区数据"
+         };
+         
+         // 插入新记录到正确位置（按分数降序）
+         var insertIndex:int = 0;
+         for(var j:int = 0; j < _rankDataArray.length; j++) 
+         {
+            if(newScore > _rankDataArray[j].score) 
+            {
+                  insertIndex = j;
+                  break;
+            }
+            insertIndex = j + 1;
+         }
+         
+         _rankDataArray.splice(insertIndex, 0, newRecord);
+         
+         // 重新计算所有排名
+         for(var k:int = 0; k < _rankDataArray.length; k++) 
+         {
+            _rankDataArray[k].rank = k + 1;
+         }
       }
       
       public function getRankListsData(rankid:int, pageSize:int, page:int) : void
       {
          pageSize = 100;
-         parseRankData();
+         if(!_rankDataArray)
+         {
+            parseRankData();
+         }
          var startIndex:int = (page - 1) * pageSize;
          var endIndex:int = Math.min(startIndex + pageSize, _rankDataArray ? _rankDataArray.length : 0);
          var resultData:Array = [];
          
-         if(_rankDataArray)
+         if(_rankDataArray && rankid == 1941)
          {
             for(var i:int = startIndex; i < endIndex; i++)
             {
@@ -173,6 +269,37 @@ package game.data
 
       public function getOneRankInfo(rankid:int, userName:String) : void
       {
+         if(!_rankDataArray)
+         {
+            parseRankData();
+         }
+
+         var userRankData:Object = null;
+         var currentUser:Object = Game.game4399Tools.logInfo;
+
+         if(currentUser && _rankDataArray && rankid == 1941)
+         {
+            var userId:String = currentUser.uid;
+            for each (var item:Object in _rankDataArray)
+            {
+               if(item.userId == userId)
+               {
+                  userRankData = item;
+                  break;
+               }
+            }
+         }
+
+         var result:Array = [];
+         if(userRankData)
+         {
+            result.push(userRankData);
+         }
+
+         if(Game.game4399Tools && Game.game4399Tools.onRankSelf)
+         {
+            Game.game4399Tools.onRankSelf(result);
+         }
       }
    }
 }

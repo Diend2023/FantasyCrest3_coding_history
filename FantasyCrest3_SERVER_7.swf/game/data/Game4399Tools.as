@@ -30,6 +30,7 @@ package game.data
       {
          super();
          serviceHold = new ServiceHold(); // 初始化4399服务类
+         data = serviceHold.isLog[0]; //
       }
       
       public function set main(pmain:Stage) : void
@@ -109,7 +110,8 @@ package game.data
          {
             return null;
          }
-         return serviceHold.isLog;
+         // return serviceHold.isLog;
+         return serviceHold.isLog[0]; //
       }
       
       public function get nickName() : String
