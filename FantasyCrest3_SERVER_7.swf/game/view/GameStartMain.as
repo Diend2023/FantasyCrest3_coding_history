@@ -264,7 +264,8 @@ package game.view
          arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","登陆账号"];
          if(Phone.isPhone())
          {
-            arr = ["闯关模式","对战模式","练习模式","英雄","商店"];
+            // arr = ["闯关模式","对战模式","练习模式","英雄","商店"];
+            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号","关于游戏"]; // 添加登陆账号按钮、关于游戏按钮
          }
          else if(true)
          {
@@ -576,7 +577,8 @@ package game.view
             case "闯关模式":
                if(Phone.isPhone())
                {
-                  openSelect("英雄之迹","单人闯关模式","1V3挑战模式");
+                  // openSelect("英雄之迹","单人闯关模式","1V3挑战模式");
+                  openSelect("英雄之迹","单人闯关模式","双人闯关模式","1V3挑战模式","3V1BOSS模式"); //
                }
                else if(true)
                {
@@ -590,7 +592,8 @@ package game.view
             case "对战模式":
                if(Phone.isPhone())
                {
-                  openSelect("网络对战","局域网对战");
+                  // openSelect("网络对战","局域网对战");
+                  openSelect("1PVS2P","2V2普通对战","2V2搭档对战","网络对战","局域网对战"); //
                }
                else if(true)
                {
@@ -604,7 +607,8 @@ package game.view
             case "电脑模式":
                if(Phone.isPhone())
                {
-                  openSelect("1PVS2P_com","观战模式");
+                  // openSelect("1PVS2P_com","观战模式");
+                  openSelect("1PVS2P_com","2V2普通对战_com","2V2搭档对战_com","观战模式");
                }
                else
                {

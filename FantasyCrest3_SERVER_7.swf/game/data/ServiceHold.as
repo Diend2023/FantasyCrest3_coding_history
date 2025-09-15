@@ -1,3 +1,4 @@
+// 添加ServiceHold
 package game.data
 {
    import flash.net.SharedObject;
@@ -138,6 +139,7 @@ package game.data
             Service.userData.userData.fbs = data.fbs;
             Service.userData._4399userData[index] = isLog[index];
             SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData;
+            SharedObject.getLocal("net.zygame.hxwz.air").flush();
          }
       }
       

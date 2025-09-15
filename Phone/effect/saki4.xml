@@ -1,7 +1,0 @@
-<TextureAtlas imagePath="saki4.png" px="-425" py="-256" class="" sound="">
-  <SubTexture name="元件 40000" x="1" y="1" width="720" height="488" hitPoint="-147,-20 70,-180 217,-206 294,-106 288,13 289,56 256,82 210,100 -111,36" hitEffect="4" hurtInterval="0" cardFrame="0"/>
-  <SubTexture name="元件 40001" x="722" y="1" width="720" height="488"/>
-  <SubTexture name="元件 40002" x="1" y="490" width="720" height="488"/>
-  <SubTexture name="元件 40003" x="722" y="490" width="720" height="488"/>
-  <SubTexture name="元件 40004" x="1" y="979" width="720" height="488"/>
-</TextureAtlas>

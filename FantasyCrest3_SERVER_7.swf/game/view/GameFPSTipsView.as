@@ -13,6 +13,9 @@ package game.view
    import zygame.core.SceneCore; // 导入SceneCore用于弹出提示
    import zygame.display.DisplayObjectContainer;
    import feathers.controls.ScrollText; // 使用feathers的ScrollText
+   import game.uilts.Phone; // 导入Phone用于判断是否为手机版
+   import zygame.server.Service; // 导入Service用于更新用户数据
+   import flash.net.SharedObject; // 导入SharedObject用于更新缓存的用户数据
 
    public class GameFPSTipsView extends DisplayObjectContainer
    {
@@ -62,9 +65,21 @@ package game.view
          button1.x = button.x - button1.width - 16; //
          button1.y = stage.stageHeight - button1.height * 2 - 16; //
          button1.addEventListener("triggered",function(e:Event):void //
-         {
-            removeFromParent(true);
-            SceneCore.pushView(new GameTestView()); // 弹出一键购买所有角色测试视图
+         { //
+            if(Phone.isPhone()) //
+            { //
+               var buys:Array = ["jianxin","anotherJX","zzx","weizhi","suolong","lufei","shanzhi","kawendixu","AS","hzluo","telankesi","wukong","BLUEGOKU","xiaolin","shalu","fls","jianxin","jianxin","anotherJX","zzx","weizhi","suolong","lufei","shanzhi","kawendixu","AS","hzluo","telankesi","wukong","BLUEGOKU","xiaolin","shalu","fls","buluoli","jianhun","bingjieshi","axiuluo","guijianshi","heianwushi","cike","manyou","mixieer","lanquan","Damotwo","shengzhidashu","huolongaisi","hfh","HML","yumingfangshoushi","JS","tongrendandao","yasina","youzi","xiaomeiyan","wbbd","shenzi","hchq","meihong","BL","Marisa","YL","yihushi","dongshilang","TOF","baimian","Twelve","Naruto","yuzhiboyou","anyou","jiaojiao","Kaixa","KW","shourenjialulu","SUN","naci","penhuolong","Tom","lvbu","anheimolong","qiyu","xiaoguai1","guangyuansu","guanggong","DCR","saber","CTZS","paojie","XC","Gudazi","RG","Ruimu","zhaomei","MH","LX","LXF","Ruler","KKR","baijin","SLK","xiaoli","zhouzuo","mayi","Es","AFTERdragon","heimian","HTZR","Hibiki","erqiao","pop","Nine","zhixubaimian","HZ","YXL","Ruby","ziwan","lian","JIN","Weiss","Blake","devilman","JO","NN","AZ","huajy","Linne","Yuz","Hyde","MJman","GFN","zhizhixiong","doge","huaji","hongguaiwu","JIN_old","BLL","beijita","wukongS","jifengzuo","jiuwei"]; // 一键购买所有角色的角色列表
+               Service.userData.userData.buys = buys; // 购买所有角色
+               SharedObject.getLocal("net.zygame.hxwz.air").data.userData = Service.userData; // 更新缓存的用户数据
+               SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
+               SceneCore.pushView(new GameTipsView("已购买所有角色")); // 弹出提示
+               removeFromParent(true); //
+            } //
+            else
+            {
+               removeFromParent(true);
+               SceneCore.pushView(new GameTestView()); // 弹出一键购买所有角色测试视图
+            } //
          }); //
          button2 = new Button(skin,"版本介绍"); // 添加版本介绍按钮
          this.addChild(button2); //

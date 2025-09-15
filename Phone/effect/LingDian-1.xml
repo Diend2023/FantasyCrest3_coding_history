@@ -1,9 +1,0 @@
-<TextureAtlas imagePath="LingDian.png" px="-200" py="-50">
-  <SubTexture name="元件 30000" x="0" y="0" width="400" height="100" hitPoint="-220,-14 -170,-37 -90,-58 -40,-58 66,-60 157,-31 215,-3 115,55 -144,37" hitEffect="4" hurtInterval="0" cardFrame="0"/>
-  <SubTexture name="元件 30001" x="0" y="100" width="400" height="100" hitPoint="" hitEffect="4" hurtInterval="0" cardFrame="0"/>
-  <SubTexture name="元件 30002" x="0" y="200" width="400" height="100"/>
-  <SubTexture name="元件 30003" x="0" y="300" width="400" height="100"/>
-  <SubTexture name="元件 30004" x="0" y="400" width="400" height="100"/>
-  <SubTexture name="元件 30005" x="0" y="500" width="400" height="100"/>
-  <SubTexture name="元件 30006" x="0" y="500" width="400" height="100"/>
-</TextureAtlas>

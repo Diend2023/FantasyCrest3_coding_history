@@ -1,9 +1,0 @@
-<TextureAtlas imagePath="BLL12.png" px="0" py="0" tips="">
-  <SubTexture name="鍏冧欢 1 瀹炰緥 10000" x="0" y="0" width="250" height="250"/>
-  <SubTexture name="鍏冧欢 1 瀹炰緥 10001" x="250" y="0" width="250" height="250"/>
-  <SubTexture name="鍏冧欢 1 瀹炰緥 10002" x="500" y="0" width="250" height="250"/>
-  <SubTexture name="鍏冧欢 1 瀹炰緥 10003" x="750" y="0" width="250" height="250"/>
-  <SubTexture name="鍏冧欢 1 瀹炰緥 10004" x="0" y="250" width="250" height="250"/>
-  <SubTexture name="鍏冧欢 1 瀹炰緥 10005" x="250" y="250" width="250" height="250"/>
-  <SubTexture name="鍏冧欢 1 瀹炰緥 10006" x="500" y="250" width="250" height="250"/>
-</TextureAtlas>

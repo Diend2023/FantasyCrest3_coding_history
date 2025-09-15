@@ -1,7 +1,0 @@
-<TextureAtlas imagePath="SNOW8.png" px="-190" py="-155" fuck="1" class="" sound="">
-  <SubTexture name="元件 150001" x="426" y="0" width="426" height="310" hitPoint="-142,-66 -61,57 -14,109 138,106 180,70 184,25 109,-88 -22,-108" hitEffect="3" hurtInterval="0" cardFrame="0"/>
-  <SubTexture name="元件 150002" x="0" y="310" width="426" height="310"/>
-  <SubTexture name="元件 150003" x="426" y="310" width="426" height="310"/>
-  <SubTexture name="元件 150004" x="0" y="620" width="426" height="310"/>
-  <SubTexture name="元件 150005" x="426" y="620" width="426" height="310"/>
-</TextureAtlas>

@@ -1,3 +1,0 @@
-<TextureAtlas imagePath="Hit1.png" px="-379" py="-355" class="" sound="">
-  <SubTexture name="元件 20000" x="0" y="0" width="800" height="800" hitPoint="-97,-97 -99,103 106,107 95,-105"/>
-</TextureAtlas>
