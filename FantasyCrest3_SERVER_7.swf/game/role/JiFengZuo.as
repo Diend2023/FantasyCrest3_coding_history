@@ -52,7 +52,7 @@ package game.role
 
          if(this.attribute.getCD("麒麟") == 0)
          {
-            listData.getItemAt(0).msg = "ready";
+            listData.getItemAt(0).msg = "Ready";
          }
          else
          {

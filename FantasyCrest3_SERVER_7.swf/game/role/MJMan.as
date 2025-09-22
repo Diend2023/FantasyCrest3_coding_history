@@ -35,7 +35,7 @@ package game.role
             if(this.currentMp.value == 10)
             {
                this.attribute.updateCD("四 暗 刻 单 骑", 0);
-               listData.getItemAt(0).msg = "Auto";
+               listData.getItemAt(0).msg = "Ready";
             }
             else
             {
