@@ -44,7 +44,10 @@ package game.view
    import zygame.server.Service;
    import zygame.utils.ServerUtils;
    import flash.net.FileReference; // 导入FileReference用于导出存档
-   
+   import flash.filesystem.File; // 导入File用于文件操作
+   import flash.filesystem.FileMode; // 导入FileMode用于文件读写模式
+   import flash.filesystem.FileStream; // 导入FileStream用于文件流操作
+
    public class GameStartMain extends TouchDisplayObject
    {
       
@@ -265,13 +268,13 @@ package game.view
          if(Phone.isPhone())
          {
             // arr = ["闯关模式","对战模式","练习模式","英雄","商店"];
-            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号","关于游戏"]; // 添加登陆账号按钮、关于游戏按钮
+            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号","关于游戏","设置"]; // 添加登陆账号按钮、关于游戏按钮
          }
          else if(true)
          {
             // 原本的添加菜单按钮的代码
             // arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店"];
-            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号","关于游戏"]; // 添加登陆账号按钮、关于游戏按钮
+            arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号","关于游戏","设置"]; // 添加登陆账号按钮、关于游戏按钮
          }
          btnspr = new Sprite();
          this.addChild(btnspr);
@@ -281,7 +284,8 @@ package game.view
             btn = new CommonButton(arr[i]);
             btnspr.addChild(btn);
             btn.x = (btn.width * 2 + 60) / 4 + (btn.width + 30) * i - (btn.width + 30) * iy * 2;
-            btn.y = stage.stageHeight / 2 - 50 + iy * 70;
+            // btn.y = stage.stageHeight / 2 - 50 + iy * 70;
+            btn.y = stage.stageHeight / 2 - 75 + iy * 70; // 调整按钮位置
             btn.callBack = onBtnEvent;
             btn.name == arr[i];
             if(arr[i] == "登陆账号")
@@ -460,15 +464,32 @@ package game.view
       { //
          try //
          { //
-            if (Service.userData) { //
+            if (Service.userData) //
+            { //
                var jsonString:String = JSON.stringify(Service.userData, null, 2); //
-               var fileRef:FileReference = new FileReference(); //
                var date:Date = new Date(); //
                var fileName:String = "幻想纹章3存档_" + date.getFullYear() + (date.getMonth() + 1) + date.getDate() + "_" + date.getHours() + date.getMinutes() + ".json"; //
-               fileRef.save(jsonString, fileName); //
-               SceneCore.pushView(new GameTipsView("导出成功")); //
-               trace("export userData success,userData: ", JSON.stringify(Service.userData)); //
-            } else { //
+               
+               if(Phone.isPhone()) //
+               { //
+                  // var file:File = File.documentsDirectory.resolvePath(fileName); // 获取文档目录
+                  // var stream:FileStream = new FileStream(); // 创建文件流
+                  // stream.open(file, FileMode.WRITE); // 打开文件
+                  // stream.writeUTFBytes(jsonString); // 写入 JSON 数据
+                  // stream.close(); // 关闭文件流
+                  // SceneCore.pushView(new GameTipsView("导出成功，文件保存在文档目录")); // 显示导出成功提示
+                  // trace("export userData success to documents directory,userData: ", JSON.stringify(Service.userData)); // 跟踪日志
+               } //
+               else //
+               { //
+                  var fileRef:FileReference = new FileReference(); //
+                  fileRef.save(jsonString, fileName); //
+                  SceneCore.pushView(new GameTipsView("导出成功")); //
+                  trace("export userData success,userData: ", JSON.stringify(Service.userData)); //
+               } //
+            } //
+            else 
+            { //
                trace("export userData failed: no userData"); //
                SceneCore.pushView(new GameTipsView("导出失败：无用户数据")); //
             } //
@@ -623,6 +644,10 @@ package game.view
                break;
             case "关于游戏": // 添加关于游戏按钮的事件处理
                SceneCore.pushView(new GameFPSTipsView()); //
+               break; //
+            case "设置": // 添加设置按钮的事件处理
+               SceneCore.pushView(new GameSettingsView()); //
+               break; //
          }
       }
       

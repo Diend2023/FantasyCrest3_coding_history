@@ -128,7 +128,7 @@ package game.role
             }
             else if (currentFrame == 22)
             {
-               hand(200, 100, 100, 200, 0, 250);
+               hand(200, 100, 100, 200, 0, 200);
             }
          }
 
@@ -164,7 +164,7 @@ package game.role
          // SJ龙冲击抓取以及跳转实现
          if (actionName == "[无十二刀]龙冲击" && frameAt(3, 9))
          {
-            isHand = hand(100, 100, 200, 200, 90, 0);
+            isHand = hand(100, 100, 200, 200, 90, 10);
             if (isHand)
             {
                mandatorySkill = 1;
@@ -176,7 +176,7 @@ package game.role
          // SJ龙冲击后续
          if (actionName == "[抓取][无十二刀][隐藏]龙冲击后续" && frameAt(-1, 29))
          {
-            hand(100, 100, 200, 200, 90, 0);
+            hand(100, 100, 200, 200, 90, 10);
          }
 
          // P抹杀风暴抓取
@@ -196,7 +196,7 @@ package game.role
             }
             else if (frameAt(52, 64))
             {
-               hand(200, 200, 200, 200, 100, 0);
+               hand(200, 200, 200, 200, 100, 25);
             }
          }
 

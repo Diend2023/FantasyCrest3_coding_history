@@ -1,0 +1,20 @@
+[
+xmin -40
+ymin -40
+xmax 3120
+ymax 869
+multiline 1
+readonly 1
+noselect 1
+wasstatic 1 // 切换字体为html
+html 1 // 切换字体为html
+font 4
+height 640
+color #00ffcc00
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+// ]登录
+]<p align="center"><font face="Microsoft YaHei" size="32" color="#ffcc00" letterSpacing="0.00" kerning="0">登录</font></p> // 切换字体为html微软雅黑

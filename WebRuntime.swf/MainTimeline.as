@@ -30,7 +30,7 @@ package WebRuntime_fla
    import zygame.server.BaseSocketClient;
    import zygame.utils.SendDataUtils;
    import flash.net.FileReference; // 添加FileReference用于读取存档
-   
+
    public dynamic class MainTimeline extends MovieClip
    {
       
@@ -105,27 +105,58 @@ package WebRuntime_fla
       // 新增导入存档按钮功能
       public function loadFunc(param1:MouseEvent) : void //
       { //
-         var fileRef:FileReference = new FileReference(); //
-         fileRef.addEventListener(Event.SELECT, function(e:Event):void { //
-            fileRef.load(); //
-         }); //
-         fileRef.addEventListener(Event.COMPLETE, function(e:Event):void { //
-            try { //
-               var jsonData:String = fileRef.data.toString(); //
-               var importedData:Object = JSON.parse(jsonData); //
-               if (importedData.nickName) { //
-                  loading.userData = importedData; //
-                  loading.pname.text = importedData.nickName; //
-                  SharedObject.getLocal("net.zygame.hxwz.air").data.userData = importedData; //
-                  SharedObject.getLocal("net.zygame.hxwz.air").data.userName = importedData.nickName; //
-                  SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
-                  trace("import UserData success:", jsonData); //
+         if (File.applicationDirectory.resolvePath("phone.xml").exists) //
+         {
+            // var file:File = File.applicationStorageDirectory; // 或者使用 File.applicationStorageDirectory
+            // file.browseForOpen("选择存档文件", [new FileFilter("幻想纹章3存档文件", "*.json")]); //
+            // file.addEventListener(Event.SELECT, function(e:Event):void { //
+            //    var selectedFile:File = file; //
+            //    var stream:FileStream = new FileStream(); //
+            //    stream.addEventListener(Event.COMPLETE, function(e:Event):void { //
+            //       try { //
+            //          var jsonData:String = stream.readUTFBytes(stream.bytesAvailable); //
+            //          var importedData:Object = JSON.parse(jsonData); //
+            //          if (importedData.nickName) { //
+            //             loading.userData = importedData; //
+            //             loading.pname.text = importedData.nickName; //
+            //             SharedObject.getLocal("net.zygame.hxwz.air").data.userData = importedData; //
+            //             SharedObject.getLocal("net.zygame.hxwz.air").data.userName = importedData.nickName; //
+            //             SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
+            //             trace("import UserData success:", jsonData); //
+            //          } //
+            //       } catch (error:Error) { //
+            //          trace("import UserData failed:", error.message); //
+            //       } //
+            //       stream.close(); //
+            //    }); //
+            //    stream.open(selectedFile, FileMode.READ); //
+            //    stream.load(); //
+            // }); //
+         } //
+         else //
+         { //
+            var fileRef:FileReference = new FileReference(); //
+            fileRef.addEventListener(Event.SELECT, function(e:Event):void { //
+               fileRef.load(); //
+            }); //
+            fileRef.addEventListener(Event.COMPLETE, function(e:Event):void { //
+               try { //
+                  var jsonData:String = fileRef.data.toString(); //
+                  var importedData:Object = JSON.parse(jsonData); //
+                  if (importedData.nickName) { //
+                     loading.userData = importedData; //
+                     loading.pname.text = importedData.nickName; //
+                     SharedObject.getLocal("net.zygame.hxwz.air").data.userData = importedData; //
+                     SharedObject.getLocal("net.zygame.hxwz.air").data.userName = importedData.nickName; //
+                     SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
+                     trace("import UserData success:", jsonData); //
+                  } //
+               } catch (error:Error) { //
+                  trace("import UserData failed:", error.message); //
                } //
-            } catch (error:Error) { //
-               trace("import UserData failed:", error.message); //
-            } //
-         }); //
-         fileRef.browse([new FileFilter("幻想纹章3存档文件", "*.json")]); //
+            }); //
+            fileRef.browse([new FileFilter("幻想纹章3存档文件", "*.json")]); //
+         } //
       } //
 
       public function clear(param1:MouseEvent) : void

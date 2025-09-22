@@ -335,13 +335,13 @@ package zygame.core
          restoreTextureUtils = new RestoreTextureUtils(stage,_mStarling,loadContextImage);
       }
       
-      private function calculateViewPort() : Rectangle
+      public function calculateViewPort() : Rectangle
       {
          // 直接使用整个屏幕区域，去除黑边
          return new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
       }
       
-      private function updateStarlingViewPort() : void
+      public function updateStarlingViewPort() : void
       {
          if(!_mStarling)
          {
@@ -351,6 +351,7 @@ package zygame.core
          _mStarling.viewPort = viewPort;
          _mStarling.stage.stageWidth = STLConstant.StageWidth;
          _mStarling.stage.stageHeight = STLConstant.StageHeight;
+         trace("updateStarlingViewPort");
          // trace("自动缩放更新:");
          // trace("当前窗口: " + stage.stageWidth + "x" + stage.stageHeight);
          // trace("新视口: " + viewPort);

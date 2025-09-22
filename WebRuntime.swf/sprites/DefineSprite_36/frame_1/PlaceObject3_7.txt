@@ -1,0 +1,31 @@
+<html>placeFlagHasClipActions : boolean = false</html>
+<html>placeFlagHasClipDepth : boolean = false</html>
+<html>placeFlagHasName : boolean = true</html>
+<html>placeFlagHasRatio : boolean = false</html>
+<html>placeFlagHasColorTransform : boolean = false</html>
+<html>placeFlagHasMatrix : boolean = true</html>
+<html>placeFlagHasCharacter : boolean = true</html>
+<html>placeFlagMove : boolean = false</html>
+<html>placeFlagHasImage : boolean = false</html>
+<html>placeFlagHasClassName : boolean = false</html>
+<html>placeFlagHasCacheAsBitmap : boolean = false</html>
+<html>placeFlagHasBlendMode : boolean = false</html>
+<html>placeFlagHasFilterList : boolean = false</html>
+<html>placeFlagOpaqueBackground : boolean = false</html>
+<html>placeFlagHasVisible : boolean = true</html>
+<html>depth : UI16 = 2</html>
+<html>characterId : UI16 = 7</html>
+<html>matrix : MATRIX</html>
+<html>hasScale : boolean = false</html>
+<html>hasRotate : boolean = false</html>
+<html>translateX : SB[nTranslateBits] = 5900</html>
+<html>translateY : SB[nTranslateBits] = -3134</html>
+<html>nTranslateBits : UB[5] = 14</html>
+<html>nRotateBits : UB[5] = 0</html>
+<html>nScaleBits : UB[5] = 0</html>
+<html>name : String = start</html>
+// <html>visible : int = 0</html>
+// 设置按钮可视
+<html>visible : int = 1</html>
+<html>reserved : boolean = false</html>
+<html>forceWriteAsLong : boolean = true</html>

@@ -20,6 +20,8 @@ package game.role
       override public function onInit() : void
       {
          super.onInit();
+         this.attribute.updateCD("麒麟", 60)
+
       }
 
       override public function onFrame() : void
@@ -48,13 +50,13 @@ package game.role
             }
          }
 
-         if(Number(this.attribute.getCD("麒麟") / 60).toFixed(1) == 0.0)
+         if(this.attribute.getCD("麒麟") == 0)
          {
-            listData.getItemAt(0).msg = "auto";
+            listData.getItemAt(0).msg = "ready";
          }
          else
          {
-            listData.getItemAt(0).msg = Number(this.attribute.getCD("麒麟") / 60).toFixed(1);
+            listData.getItemAt(0).msg = int(this.attribute.getCD("麒麟") / 60);
          }
          listData.updateItemAt(0);
       }
