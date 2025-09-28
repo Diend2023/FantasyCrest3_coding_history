@@ -470,7 +470,8 @@ package game.view
                var date:Date = new Date(); //
                var fileName:String = "幻想纹章3存档_" + date.getFullYear() + (date.getMonth() + 1) + date.getDate() + "_" + date.getHours() + date.getMinutes() + ".json"; //
                
-               if(Phone.isPhone()) //
+               // if(Phone.isPhone()) //
+               if (false) // 由于手机端无法使用FileReference保存文件，暂时注释掉该选项
                { //
                   // var file:File = File.documentsDirectory.resolvePath(fileName); // 获取文档目录
                   // var stream:FileStream = new FileStream(); // 创建文件流

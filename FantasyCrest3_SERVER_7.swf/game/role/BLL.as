@@ -12,27 +12,41 @@ package game.role
    import flash.geom.Rectangle; // 抓取用
    import game.server.HostRun2Model; // 时停用
    import starling.animation.Tween;// cg用
+   import zygame.core.GameCore;
+   import feathers.controls.List;
+   import game.uilts.GameFont;
    
    public class BLL extends GameRole
    {
-      public var _Data:Object;
       public var flag:int;
       public var time:int;
       public var cgData:EffectDisplay;
-      public var atk:int;
-      public var addAtk:int;
-      public var matk:int;
-      public var addmAtk:int;
-      public var def:int;
-      public var addDef:int;
-      public var mdef:int;
-      public var addmDef:int;
-      
+      public var baseAtk:int;
+      public var timeAddAtk:int;
+      public var baseMAtk:int;
+      public var timeAddMAtk:int;
+      public var baseDef:int;
+      public var timeAddDef:int;
+      public var baseMDef:int;
+      public var timeAddMDef:int;
+
       public function BLL(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
       {
          super(roleTarget,xz,yz,pworld,fps,pscale,troop,roleAttr);
-         listData = new ListCollection([{
+         this.listData = new ListCollection([{
             "icon":"liliang.png",
+            "msg":0
+         },
+         {
+            "icon":"mofa.png",
+            "msg":0
+         },
+         {
+            "icon":"fangyu.png",
+            "msg":0
+         },
+         {
+            "icon":"fangyu.png",
             "msg":0
          }]);
       }
@@ -40,62 +54,58 @@ package game.role
       override public function onInit() : void
       {
          super.onInit();
-         try
-         {
-            this.setRoleValue("atk", attribute.power);
-            this.setRoleValue("matk", attribute.magic);
-            this.setRoleValue("def", attribute.armorDefense);
-            this.setRoleValue("mdef", attribute.magicDefense);
-            addmDef = 0;
-            addDef = 0;
-            addAtk = 0;
-            addmAtk = 0;
-            addmDef2 = 0;
-            addDef2 = 0;
-            addAtk2 = 0;
-            addmAtk2 = 0;
-            atk = this.getRoleValue("atk", 232);
-            matk = this.getRoleValue("matk", 286);
-            def = this.getRoleValue("def", 36);
-            mdef = this.getRoleValue("mdef", 36);
-            viual = 0;
-            hit = 0;
-            hit2 = 0;
-            worldFouncDisplay = world.centerSprite;
-            // cgData = new EffectDisplay("BLL13",null,this,3,3);
-            // cgData.go(0);
-            // cgData.x = this.x - 500;
-            // cgData.y = this.y + 300;
-         }
-         catch (error:Error)
-         {
-            trace("Error initializing BLL: " + error.message);
-         }
+         var addAtk:int = 0;
+         var addMAtk:int = 0;
+         var addDef:int = 0;
+         var addMDef:int = 0;
+         baseAtk = this.attribute.power;
+         baseMAtk = this.attribute.magic;
+         baseDef = this.attribute.armorDefense;
+         baseMDef = this.attribute.magicDefense;
+         timeAddAtk = 0;
+         timeAddMAtk = 0;
+         timeAddDef = 0;
+         timeAddMDef = 0;
+         hitEnemyNumAddAtk = 0;
+         hitEnemyNumAddMAtk = 0;
+         beHitAddDef = 0;
+         beHitAddMDef = 0;
+         beHitNum = 0;
+         hitEnemyNum = 0;
       }
 
 	   override public function onFrame():void
       {
          super.onFrame();
          // 被动代码随时间加伤和防御代码实现
+         var stateList:List = this.hpmpDisplay.stateList;
+         if (stateList.width != listData.length * 100)
+         {
+            stateList.width = listData.length * 100;
+         }
          var count:int = (world as BaseGameWorld).frameCount;
-         var atk = this.getRoleValue("atk", 232);
-         var matk = this.getRoleValue("matk", 286);
-         var def = this.getRoleValue("def", 36);
-         var mdef = this.getRoleValue("mdef", 36);
-			addAtk = int(count * 0.00232 + atk);
-			addmAtk = int(count * 0.00286 + matk);
-			addDef = int(count * 0.00002 + def);
-			addmDef = int(count * 0.00002 + mdef);
-         atk = addAtk + addAtk2;
-         matk = addmAtk + addmAtk2;
-         def = addDef + addDef2;
-         mdef = addmDef + addmDef2;
-         attribute.power = atk;
-         attribute.magic = matk;
-         attribute.armorDefense = def;
-         attribute.magicDefense = mdef;
-         listData.getItemAt(0).msg = attribute.power;
-         listData.updateItemAt(0);
+			timeAddAtk = int(count * 0.00232 + baseAtk);
+			timeAddMAtk = int(count * 0.00286 + baseMAtk);
+			timeAddDef = int(count * 0.00002 + baseDef);
+			timeAddMDef = int(count * 0.00002 + baseMDef);
+         atk = timeAddAtk + hitEnemyNumAddAtk;
+         matk = timeAddMAtk + hitEnemyNumAddMAtk;
+         def = timeAddDef + beHitAddDef;
+         mdef = timeAddMDef + beHitAddMDef;
+         this.attribute.power = atk;
+         this.attribute.magic = matk;
+         this.attribute.armorDefense = def;
+         this.attribute.magicDefense = mdef;
+         this.listData.getItemAt(0).msg = this.attribute.power;
+         this.listData.updateItemAt(0);
+         this.listData.getItemAt(1).msg = this.attribute.magic;
+         this.listData.updateItemAt(1);
+         this.listData.getItemAt(2).msg = this.attribute.armorDefense;
+         this.listData.updateItemAt(2);
+         this.listData.getItemAt(3).msg = this.attribute.magicDefense;
+         this.listData.updateItemAt(3);
+
+         // oEffect = this.world.getEffectFormName("wuya",this);
 
          // 普通攻击后续
          if (actionName == "普通攻击" && frameAt(8,14))
@@ -146,7 +156,7 @@ package game.role
          // SU巨爪击抓取后续
          if (actionName == "[隐藏][抓取]抓取后续" && frameAt(-1, 9))
          {
-            hand(150, 150, 150, 150, 100, 0);
+            hand(150, 150, 150, 150, 100, 25);
          }
 
          // KI浩瀚重击取后续
@@ -231,7 +241,7 @@ package game.role
             {
                if(frameAt(3, 19) && role.isJump())
                {
-                  shiting(3);
+                  shiting(3, role);
                }
                if (currentFrame == 11)
                {
@@ -247,12 +257,56 @@ package game.role
          {
             if (currentFrame == 0)
             {
-               shiting(90);
-               world.founcDisplay = this;
+               for(var i in this.world.getRoleList())
+               {
+                  if (this.world.getRoleList()[i] != this)
+                  {
+                     shiting(90, this.world.getRoleList()[i]);
+                  }
+               }
+               (world as BaseGameWorld).founcDisplay = this;
             }
             if (currentFrame == 31)
             {
-               world.founcDisplay = world.centerSprite;
+               (world as BaseGameWorld).founcDisplay = (world as BaseGameWorld).centerSprite;
+            }
+         }
+
+         // KO巨量流星时停和cg实现
+         if (actionName == "巨量流星")
+         {
+            if (currentFrame == 0)
+            {
+               for(var i in this.world.getRoleList())
+               {
+                  if (this.world.getRoleList()[i] != this && this.world.getRoleList()[i].isJump())
+                  {
+                     shiting(30, this.world.getRoleList()[i]);
+                  }
+               }
+            }
+            if (currentFrame == 4)
+            {
+               for(var i in this.world.getRoleList())
+               {
+                  shiting(150, this.world.getRoleList()[i]);
+               }
+               currentFrame = 5;
+            }
+            if (currentFrame == 5)
+            {
+               var cgData = new EffectDisplay("BLL13",{blendMode:"normal"},this,2,2);
+               cgData.fps = 15;
+               (world as BaseGameWorld).addChild(cgData);
+               GameCore.soundCore.playEffect("BLL1");
+               cgData.posx = (world as BaseGameWorld).centerSprite.x - 640;
+               cgData.posy = (world as BaseGameWorld).centerSprite.y - 360;
+               cgData.alpha = 1;
+		         cgData.unhit = true;
+               currentFrame = 6;
+               cgData.blendMode = "normal";
+               trace("blendMode",cgData.blendMode);
+               trace("blendModeString",cgData.blendModeString);
             }
          }
       }
@@ -260,8 +314,8 @@ package game.role
       override public function onHitEnemy(beData:BeHitData, enemy:BaseRole) : void
       {
          // 被动当攻击敌人1hit后增加攻击代码实现
-         addAtk2 = int(++hit2 * 0.464);
-         addmAtk2 = int(++hit2 * 0.572);
+         hitEnemyNumAddAtk = int(++hitEnemyNum * 0.464);
+         hitEnemyNumAddmAtk = int(++hitEnemyNum * 0.572);
          super.onHitEnemy(beData,enemy);
 
          // SU巨爪击破防和跳转后续和调整敌方位置实现
@@ -298,9 +352,9 @@ package game.role
       override public function onBeHit(beData:BeHitData) : void
       {
          // 被动当收到一hit攻击后增加防御代码实现
+         beHitAddDef = int(++beHitNum * 0.05);
+         beHitAddmDef = int(++beHitNum * 0.05);
          super.onBeHit(beData);
-         addDef2 = int(++hit * 0.05);
-         addmDef2 = int(++hit * 0.05);
       }
 
       public function hand(topRange:int = 200, bottomRange:int = 200, backRange:int = 100, frontRange:int = 200,  toX:int = 0, toY:int = 0):Boolean
@@ -353,36 +407,17 @@ package game.role
           return false;
       }
 
-      public function shiting(cardFrame:int):void
+      public function shiting(cardFrame:int, role:BaseRole):void
       {
          for(var i in this.world.getRoleList())
          {
-            if(this.world.getRoleList()[i] != this)
+            if(this.world.getRoleList()[i] == role)
             {
                this.world.getRoleList()[i].cardFrame = cardFrame;
             }
          }
       }
 
-      public function setRoleValue(key:String, value:*):void
-      {
-         if (!_Data) _Data = {};
-         _Data[key] = value;
-         if (this.hasOwnProperty(key)) {
-            this[key] = value;
-         }
-      }
-      
-      public function getRoleValue(key:String, defaultValue:* = null):*
-      {
-         if (_Data && _Data.hasOwnProperty(key)) {
-            return _Data[key];
-         }
-         if (this.hasOwnProperty(key)) {
-            return this[key];
-         }
-         return defaultValue;
-      }
    }
 }
 
