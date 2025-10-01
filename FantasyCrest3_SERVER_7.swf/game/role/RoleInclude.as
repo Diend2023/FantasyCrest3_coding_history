@@ -79,6 +79,7 @@ package game.role
          JiFengZuo; // 添加疾风传佐助
          MJMan; // 添加麻将人
          Tom; // 添加汤姆
+         KW; // 添加空我
       }
    }
 }

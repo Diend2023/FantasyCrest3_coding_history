@@ -305,8 +305,6 @@ package game.role
 		         cgData.unhit = true;
                currentFrame = 6;
                cgData.blendMode = "normal";
-               trace("blendMode",cgData.blendMode);
-               trace("blendModeString",cgData.blendModeString);
             }
          }
       }

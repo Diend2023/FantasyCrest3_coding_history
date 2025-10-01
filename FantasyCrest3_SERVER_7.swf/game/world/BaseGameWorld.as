@@ -92,7 +92,8 @@ package game.world
          this.addChild(_centerSprite);
          _centerSprite.alignPivot();
          _centerSprite.visible = false;
-         ready();
+         // ready();
+         playAllEntrancesThenReady(); //
          createFrameBody();
          var tmxXML:XML = DataCore.getXml(targetName);
          if(String(tmxXML.@texture) == "<null>")
@@ -101,6 +102,99 @@ package game.world
          }
       }
       
+      // 入场动作逻辑
+      private function playAllEntrancesThenReady():void //
+      { //
+          // 使用 Vector 类型，避免类型转换错误
+          var rolesList:Vector.<BaseRole> = this.getRoleList() as Vector.<BaseRole>; //
+          var buffer:Number = 0.25; // 秒，缓冲时间
+      
+          if(!rolesList || rolesList.length == 0) //
+          { //
+              ready(); //
+              return; //
+          } //
+      
+          // 收集有入场动作的队列（顺序播放）
+          var queue:Array = []; //
+          for each(var prole:BaseRole in rolesList) //
+          { //
+              if(!prole) continue; //
+              var group:RoleFrameGroup = null; //
+              try //
+              { //
+                  group = prole.roleXmlData.getGroupAt("入场动作") as RoleFrameGroup; //
+              } //
+              catch(e:Error) //
+              { //
+                  group = null; //
+              }  //
+              if(group) //
+              { //
+                  queue.push({prole:prole, group:group}); //
+              } //
+          } //
+      
+          if(queue.length == 0) //
+          { //
+              ready(); //
+              return; //
+          } //
+          else //
+          { //
+               founcDisplay = _centerSprite; // 聚焦中心点
+          } //
+      
+          // 递归顺序播放队列
+          var playNext:Function = null; //
+          playNext = function(index:int = 0):void //
+          { //
+              if(index >= queue.length) //
+              { //
+                  ready(); //
+                  return; //
+              } //
+              var item:Object = queue[index]; //
+              var r:BaseRole = item.prole as BaseRole; //
+              var g:RoleFrameGroup = item.group as RoleFrameGroup; //
+      
+              try //
+              { //
+                  founcDisplay = r; // 聚焦当前角色 //
+                  r.playSkill("入场动作"); //
+              } //
+              catch(e2:Error) //
+              { //
+                  trace("e2 error", e2); //
+              } //
+      
+              var framesCount:int = 0; //
+              try //
+              { //
+                  framesCount = (g.frames is Vector) ? (g.frames as Vector).length : int(g.frames); //
+              } //
+              catch(e3:Error) //
+              { //
+                  trace("e3 error", e3); //
+                  framesCount = 0; //
+              } //
+              var groupFps:int = (g && g.fps) ? int(g.fps) : ((r && r.hasOwnProperty("fps")) ? int(r["fps"]) : 60); //
+              if(groupFps <= 0) groupFps = 60; //
+              var waitSeconds:Number = framesCount > 0 ? framesCount / groupFps : 0.9; //
+      
+              // 等待当前技能播放预计时长 + 缓冲，再播放下一个
+              Starling.juggler.delayCall(function():void //
+              { //
+                  playNext(index + 1); //
+              }, waitSeconds + buffer); //
+          }; //
+      
+         Starling.juggler.delayCall(function():void //
+         { //
+            playNext(0); //
+         }, buffer); // 保证先聚焦到中心点
+      } //
+
       public function createFrameBody() : void
       {
          _frameBody = new Body(BodyType.KINEMATIC);
@@ -120,6 +214,7 @@ package game.world
          _gameOver = false;
          auto = false;
          var image:Image = new Image(_textures.getTexture("READY.png"));
+         founcDisplay = _centerSprite; // 聚焦中心点
          this.parent.addChild(image);
          image.alignPivot();
          image.x = stage.stageWidth / 2;
