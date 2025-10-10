@@ -14,6 +14,7 @@ package game.view
    import starling.text.TextFormat;
    import starling.textures.Texture;
    import zygame.core.DataCore;
+   import zygame.core.GameCore;
    import zygame.core.SceneCore;
    import zygame.display.DisplayObjectContainer;
    import lzm.starling.STLConstant;
@@ -57,6 +58,22 @@ package game.view
                STLConstant.nativeStage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
             else
                STLConstant.nativeStage.displayState = StageDisplayState.NORMAL;
+         }));
+
+         mainContainer.addChild(createSettingItem("关闭声音", "toggle", (GameCore.soundCore.volume == 0), function(value:Boolean):void{
+            if(value)
+               GameCore.soundCore.volume = 0;
+            else
+               GameCore.soundCore.volume = 1;
+            if(GameStartMain.self && GameStartMain.self._music)
+               GameStartMain.self._music.upState = DataCore.getTextureAtlas("start_main").getTexture(GameCore.soundCore.volume == 0 ? "sound_close" : "sound_open");
+         }));
+
+         mainContainer.addChild(createSettingItem("关闭BGM", "toggle", (GameCore.soundCore.bgvolume == 0), function(value:Boolean):void{
+            if(value)
+               GameCore.soundCore.bgvolume = 0;
+            else
+               GameCore.soundCore.bgvolume = 0.4;
          }));
 
          skin = DataCore.getTextureAtlas("start_main").getTexture("btn_style_1");

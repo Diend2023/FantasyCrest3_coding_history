@@ -78,6 +78,8 @@ package game.view
       private var _mouseTips:Image;
       
       private var _high:Image;
+
+      public var _music:Button; // 添加音乐按钮引用
       
       public function GameStartMain()
       {
@@ -331,6 +333,7 @@ package game.view
          this.addChild(music);
          music.x = stage.stageWidth - music.width - 5;
          music.y = stage.stageHeight - music.height - 5;
+         _music = music; // 赋值给类成员变量
          music.addEventListener("triggered",function(e:Event):void
          {
             GameCore.soundCore.volume = GameCore.soundCore.volume == 0 ? 1 : 0;
