@@ -22,7 +22,8 @@ package game.display
    import zygame.data.RoleAttributeData;
    import zygame.display.KeyDisplayObject;
    import zygame.utils.MemoryUtils;
-   import game.view.item.PassiveTextItem; // 导入新建的 PassiveTextItem
+   import feathers.controls.ScrollText; // 使用feathers的ScrollText
+   import flash.text.TextFormat; // feathers的ScrollText使用的是flash的TextFormat
 
    public class SelectRole extends KeyDisplayObject
    {
@@ -41,11 +42,10 @@ package game.display
       
       private var _nametext:TextField;
       
-      private var _passivetextContainer:List; // 新的滚动容器
-
       // private var _passivetext:TextField;
-      private var _passivetext:String; // 被动文本
+      public var _passivetext:ScrollText; // 使用feathers的ScrollText
 
+      
       private var _roleIntroduce:RoleIntroduce;
       
       public var config:SelectGroupConfig;
@@ -170,25 +170,19 @@ package game.display
          pnametext.y = pname.y;
          this.addChild(pnametext);
          this._nametext = pnametext;
-         _passivetextContainer = new List(); // 创建新的滚动容器
-         _passivetextContainer.width = bd.width; //
-         _passivetextContainer.height = bd.height - 5; //
-         _passivetextContainer.itemRendererType = PassiveTextItem; //
-         _passivetextContainer.isSelectable = false; //
-         _passivetextContainer.dataProvider = new ListCollection(); //
-         this.addChild(_passivetextContainer); //
-         _passivetextContainer.x = bd.x + 2; //
-         _passivetextContainer.y = bd.y; //
          // var bdtext:TextField = new TextField(bd.width,bd.height,"每次使用技能将恢复生命最大值1%",new TextFormat(GameFont.FONT_NAME,12,16777215,"left"));
-         // bdtext.width = bd.width;
-         // bdtext.height = bd.height - 5;
-         // bdtext.text = "每次使用技能将恢复生命最大值1%";
-         // this.addChild(bdtext);
+         var bdtext:ScrollText = new ScrollText(); // 使用feathers的ScrollText
+         bdtext.width = bd.width; //
+         bdtext.height = bd.height - 5; //
+         bdtext.text = "每次使用技能将恢复生命最大值1%"; //
+         bdtext.textFormat = new flash.text.TextFormat(GameFont.FONT_NAME,12,16777215); // 使用flash的TextFormat
+         this.addChild(bdtext);
          // bdtext.format.leading = 3;
-         // bdtext.x = bd.x + 2;
-         // bdtext.y = bd.y;
-         // _passivetext = bdtext;
-         // _passivetext.filter = new GlowFilter(0,1,1,1);
+         bdtext.textFormat.leading = 3; //
+         bdtext.x = bd.x + 2;
+         bdtext.y = bd.y;
+         _passivetext = bdtext;
+         _passivetext.filter = new GlowFilter(0,1,1,1);
          // var bg:Quad = new Quad(bd.x,32,0);
          var bg:Quad = new Quad(bd.x - 5,32,0); //
          bg.alpha = 0.5;
@@ -206,10 +200,8 @@ package game.display
             texttips.x += texttips.width;
             pnametext.scaleX = -1;
             pnametext.x += pnametext.width;
-            // bdtext.scaleX = -1;
-            // bdtext.x += bdtext.width;
-            _passivetextContainer.scaleX = -1; //
-            _passivetextContainer.x += _passivetextContainer.width; //
+            bdtext.scaleX = -1;
+            bdtext.x += bdtext.width;
          }
          _nametext.text = _list.selectedItem.name;
          _roleImage = new Image(null);
@@ -239,7 +231,7 @@ package game.display
          this.addChild(acthorBg);
          var acthor:TextField = new TextField(stage.stageWidth / 2 - 10,32,"作者：木姐",new TextFormat(GameFont.FONT_NAME,12,268431360,"left"));
          this.addChild(acthor);
-         this.setChildIndex(_passivetextContainer,this.getChildIndex(acthor) + 1); //
+         this.setChildIndex(_passivetext,this.getChildIndex(acthor) + 1); //
          acthor.x = 5;
          acthor.y = acthorBg.y;
          acthorBg.width = bg.width;
@@ -643,18 +635,12 @@ package game.display
          // if(_list.selectedItem.passive != undefined)
          if(_list.selectedItem.passive != undefined && _list.selectedItem.passive != "") // 增加被动为空的逻辑
          {
-            // _passivetext.text = _list.selectedItem.passive;
-            _passivetext = _list.selectedItem.passive; //
+            _passivetext.text = _list.selectedItem.passive;
          }
          else
          {
-            // _passivetext.text = "左眼还没设计他的被动吧...";
-            _passivetext = "左眼还没设计他的被动吧..."; //
+            _passivetext.text = "左眼还没设计他的被动吧...";
          }
-         if (_passivetextContainer) //
-         { //
-           _passivetextContainer.dataProvider.data = [ _passivetext ]; //
-         } //
          // if(_list.selectedItem.introduce != undefined)
          if(_list.selectedItem.introduce != undefined && _list.selectedItem.introduce != "") // 增加介绍为空的逻辑
          {
@@ -700,16 +686,12 @@ package game.display
             _list.dispose();
          }
          _list = null;
-         if(_passivetextContainer ) // 尝试清除_passivetext
+         if(_passivetext && _passivetext.parent) // 尝试清除_passivetext
          { //
-            _passivetextContainer.dataProvider.dispose(function(item:Object):void
-            {
-               MemoryUtils.clearObject(item);
-            }); //
-            _passivetextContainer.dataProvider = null; //
-            _passivetextContainer.dispose(); //
+            _passivetext.parent.removeChild(_passivetext); //
+            _passivetext.dispose(); //
          } //
-         _passivetextContainer = null; //
+         _passivetext = null; //
          this.config = null;
          this._acthor = null;
          this._acthorBG = null;
