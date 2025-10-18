@@ -7,6 +7,7 @@ package game.role
    import zygame.core.GameCore;
    import zygame.data.BeHitData;
    import zygame.display.BaseRole;
+   import flash.geom.Rectangle; // 抓取用
    
    public class KW extends GameRole
    {
@@ -182,6 +183,23 @@ package game.role
                hurtMultipleAdd = 0;
             }
          }
+
+         // EX技能抓取逻辑实现
+         if(actionName == "【EX】Ultimate Smash")
+         {
+            // 抓取判定
+            if (currentFrame == 1)
+            {
+               isHand = hand(100,100,100,200,0,0);
+            }
+            // 抓取效果
+            if (frameAt(3,10) && isHand)
+            {
+               hand(100,100,100,200,30,75);
+            }
+         }
+
+
          this.listData.updateItemAt(0);
       }
 
@@ -268,6 +286,57 @@ package game.role
                this.world.getRoleList()[i].cardFrame = cardFrame;
             }
          }
+      }
+
+      // 抓取逻辑实现
+      public function hand(topRange:int = 200, bottomRange:int = 200, backRange:int = 100, frontRange:int = 200,  toX:int = 0, toY:int = 0):Boolean
+      {
+          var rect:Rectangle = this.body.bounds.toRect();
+          // 横向判定
+          if(this.scaleX > 0)
+          {
+              rect.width += frontRange;
+              rect.x -= backRange;
+              rect.width += backRange;
+          }
+          else
+          {
+              rect.x -= frontRange;
+              rect.width += frontRange;
+              rect.width += backRange;
+          }
+          // 纵向判定
+          rect.y -= topRange;
+          rect.height += topRange;
+          rect.height += bottomRange;
+      
+          // 修正左边界
+          if(rect.x < 0)
+          {
+              rect.width += rect.x; // 把溢出的部分减掉
+              rect.x = 0;
+              toX = 0;
+          }
+          // 修正右边界
+          if(rect.x + rect.width > world.map.getWidth())
+          {
+              rect.width = world.map.getWidth() - rect.x;
+              toX = 0;
+          }
+      
+          if(rect.width > 0 && rect.height > 0)
+          {
+              var role:BaseRole = findRole(rect);
+              if(role)
+              {
+                  role.clearDebuffMove();
+                  role.straight = 30;
+                  role.setX(this.x + toX * this.scaleX);
+                  role.setY(this.y - toY);
+                  return true;
+              }
+          }
+          return false;
       }
 
    }
