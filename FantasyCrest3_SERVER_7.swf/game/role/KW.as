@@ -140,7 +140,7 @@ package game.role
                {
                   if (this.world.getRoleList()[j] != this)
                   {
-                     shiting(3, this.world.getRoleList()[j]);
+                     shiting(2, this.world.getRoleList()[j]);
                   }
                }
             }
@@ -151,7 +151,7 @@ package game.role
                {
                   if (this.world.getRoleList()[k] != this)
                   {
-                     shiting(3, this.world.getRoleList()[k]);
+                     shiting(2, this.world.getRoleList()[k]);
                   }
                }
             }

@@ -272,6 +272,28 @@ package game.role
             }
          }
 
+         // O命中后续实现
+         var effectW:EffectDisplay = this.world.getEffectFormName("W",this);
+         if (effectW)
+         {
+            role = this.findRole(new Rectangle(0,0,world.map.getWidth(),world.map.getHeight()));
+            if(role)
+            {
+               if (Math.abs(role.x - effectW.x) < 100 && Math.abs(role.y - effectW.y) < 150)
+               {
+                  var effectTxjs125:EffectDisplay = new EffectDisplay("txjs125",{blendMode:"add",addColor:"0x66FF33"},this,1,1);
+                  effectTxjs125.name = "txjs125";
+                  effectTxjs125.scaleX = 2;
+                  effectTxjs125.scaleY = 2;
+                  effectTxjs125.fps = 16;
+                  (world as BaseGameWorld).addChild(effectTxjs125);
+                  effectTxjs125.x = role.x;
+                  effectTxjs125.y = role.y - 70;
+               }
+            }
+         }
+
+
          // KO巨量流星时停和cg实现
          if (actionName == "巨量流星")
          {
