@@ -29,6 +29,7 @@ package game.role
       public var timeAddDef:int;
       public var baseMDef:int;
       public var timeAddMDef:int;
+      public var groundY:int;
 
       public function BLL(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
       {
@@ -270,29 +271,79 @@ package game.role
             {
                (world as BaseGameWorld).founcDisplay = (world as BaseGameWorld).centerSprite;
             }
-         }
-
-         // O命中后续实现
-         var effectW:EffectDisplay = this.world.getEffectFormName("W",this);
-         if (effectW)
-         {
-            role = this.findRole(new Rectangle(0,0,world.map.getWidth(),world.map.getHeight()));
-            if(role)
+            // O命中后续实现
+            var effectW:EffectDisplay = this.world.getEffectFormName("W",this);
+            if (effectW)
             {
-               if (Math.abs(role.x - effectW.x) < 100 && Math.abs(role.y - effectW.y) < 150)
+               role = this.findRole(new Rectangle(0,0,world.map.getWidth(),world.map.getHeight()));
+               if(role)
                {
-                  var effectTxjs125:EffectDisplay = new EffectDisplay("txjs125",{blendMode:"add",addColor:"0x66FF33"},this,1,1);
-                  effectTxjs125.name = "txjs125";
-                  effectTxjs125.scaleX = 2;
-                  effectTxjs125.scaleY = 2;
-                  effectTxjs125.fps = 16;
-                  (world as BaseGameWorld).addChild(effectTxjs125);
-                  effectTxjs125.x = role.x;
-                  effectTxjs125.y = role.y - 70;
+                  if (Math.abs(role.x - effectW.x) < 100 && Math.abs(role.y - effectW.y) < 150)
+                  {
+                     var effectTxjs125:EffectDisplay = new EffectDisplay("txjs125",{blendMode:"changeColor",addColor:"0x66FF33"},this,1,1);
+                     effectTxjs125.name = "txjs125";
+                     effectTxjs125.scaleX = 2;
+                     effectTxjs125.scaleY = 2;
+                     effectTxjs125.fps = 16;
+                     (world as BaseGameWorld).addChild(effectTxjs125);
+                     effectTxjs125.x = role.x;
+                     effectTxjs125.y = role.y - 70;
+
+                     var effectBaozhaR:EffectDisplay = new EffectDisplay("baozhaR",{blendMode:"changeColor",addColor:"0x66FF33"},this,1,1);
+                     effectBaozhaR.name = "baozhaR";
+                     effectBaozhaR.scaleX = 2;
+                     effectBaozhaR.scaleY = 2;
+                     effectBaozhaR.fps = 16;
+                     effectBaozhaR.unhit = true;
+                     (world as BaseGameWorld).addChild(effectBaozhaR);
+                     effectBaozhaR.x = role.x;
+                     effectBaozhaR.y = role.y;
+
+                     var effectLongZhanEr:EffectDisplay = new EffectDisplay("LongZhanEr",{blendMode:"changeColor2",addColor:"0x66FF33"},this,1,1);
+                     effectLongZhanEr.name = "LongZhanEr";
+                     effectLongZhanEr.scaleX = 2;
+                     effectLongZhanEr.scaleY = 2;
+                     effectLongZhanEr.fps = 18;
+                     effectLongZhanEr.unhit = true;
+                     (world as BaseGameWorld).addChild(effectLongZhanEr);
+                     effectLongZhanEr.x = role.x;
+                     effectLongZhanEr.y = role.y - 70;
+
+                     var effectTxjs77R:EffectDisplay = new EffectDisplay("txjs77R",{blendMode:"changeColor",addColor:"0x66FF33"},this,1,1);
+                     effectTxjs77R.name = "txjs77R";
+                     effectTxjs77R.scaleX = 2;
+                     effectTxjs77R.scaleY = 2;
+                     effectTxjs77R.fps = 24;
+                     effectTxjs77R.unhit = true;
+                     (world as BaseGameWorld).addChild(effectTxjs77R);
+                     effectTxjs77R.x = role.x;
+                     effectTxjs77R.y = role.y - 70;
+
+                     var effectP:EffectDisplay = new EffectDisplay("P",{findName:"P",blendMode:"changeColor2",addColor:"0x000000",hitVibrationSize:35,stiff:60,mFight:1750},this,1,1);
+                     effectP.name = "P";
+                     effectP.scaleX = 1;
+                     effectP.scaleY = 2;
+                     effectP.cardFrame = 1;
+                     effectP.hitX = 1;
+                     effectP.hitY = 40;
+                     (world as BaseGameWorld).addChild(effectP);
+                     (world as BaseGameWorld).vibrationSize = 35;
+                     (world as BaseGameWorld).mapVibrationTime = 18;
+                     effectP.x = role.x;
+                     effectP.y = role.y;
+                     effectP.posx = role.x;
+                     effectP.posy = role.y;
+                     effectW.alpha = 0;
+                     (world as BaseGameWorld).removeChild(effectW);
+                  }
                }
             }
          }
 
+         if(actionName == "入场动作")
+         {
+            groundY = this.y - 70;
+         }
 
          // KO巨量流星时停和cg实现
          if (actionName == "巨量流星")
@@ -321,13 +372,84 @@ package game.role
                cgData.fps = 15;
                (world as BaseGameWorld).addChild(cgData);
                GameCore.soundCore.playEffect("BLL1");
-               cgData.posx = (world as BaseGameWorld).centerSprite.x - 640;
-               cgData.posy = (world as BaseGameWorld).centerSprite.y - 360;
+               if((world as BaseGameWorld).founcDisplay == this)
+               {
+                  cgData.posx = this.x - 640;
+                  cgData.posy = this.y - 360;
+               }
+               else
+               {
+                  cgData.posx = (world as BaseGameWorld).centerSprite.x - 640;
+                  cgData.posy = (world as BaseGameWorld).centerSprite.y - 360;
+               }
                cgData.alpha = 1;
 		         cgData.unhit = true;
                currentFrame = 6;
                cgData.blendMode = "normal";
             }
+         }
+
+         var effectBLL22:EffectDisplay = this.world.getEffectFormName("BLL22",this);
+         if (effectBLL22)
+         {
+            if (effectBLL22.currentFrame == 25)
+            {
+               effectBLL22.go(0);
+               effectBLL22.rotation += 1;
+            }
+
+            role = this.findRole(new Rectangle(0,0,world.map.getWidth(),world.map.getHeight()));
+            if(role)
+            {
+               if (Math.abs(role.x - effectBLL22.x) < 100 && Math.abs(role.y - effectBLL22.y) < 100)
+               {
+                  role.x = effectBLL22.x;
+                  role.y = effectBLL22.y;
+                  effectBLL22.scaleX = Math.max(-4, Math.min(effectBLL22.scaleX * 1.05, 4));
+                  effectBLL22.scaleY = Math.max(-4, Math.min(effectBLL22.scaleY * 1.05, 4));
+               }
+            }
+
+            if(effectBLL22.y >= groundY)
+            {
+               effectBLL22.removeFromParent();
+
+               var effectBLL25:EffectDisplay = new EffectDisplay("BLL25",{blendMode:"changeColor",addColor:0x66FF33,hitVibrationSize:20,stiff:50,mFight:100},this,1,1);
+               effectBLL25.scaleX = 2;
+               effectBLL25.scaleY = 2;
+               effectBLL25.fps = 60;
+               effectBLL25.hitY = 50;
+               (world as BaseGameWorld).addChild(effectBLL25);
+               (world as BaseGameWorld).vibrationSize = 20;
+               (world as BaseGameWorld).mapVibrationTime = 10;
+               effectBLL25.posx = effectBLL22.x;
+               effectBLL25.posy = effectBLL22.y - 770;
+
+               var effectBLL23:EffectDisplay = new EffectDisplay("BLL23",{blendMode:"changeColor",addColor:0x66FF33,hitVibrationSize:35,stiff:60,mFight:500},this,1,1);
+               effectBLL23.scaleX = 1.5;
+               effectBLL23.scaleY = 1.5;
+               effectBLL23.fps = 35;
+               effectBLL23.hitY = 60;
+               (world as BaseGameWorld).addChild(effectBLL23);
+               (world as BaseGameWorld).vibrationSize = 35;
+               (world as BaseGameWorld).mapVibrationTime = 18;
+               effectBLL23.posx = effectBLL22.x;
+               effectBLL23.posy = effectBLL22.y + 30;
+               
+               var effectRose1:EffectDisplay = new EffectDisplay("rose1",{blendMode:"changeColor2",addColor:0x66FF33},this,1,1);
+               effectRose1.scaleX = 2;
+               effectRose1.scaleY = 2;
+               (world as BaseGameWorld).addChild(effectRose1);
+               effectRose1.x = effectBLL22.x;
+               effectRose1.y = effectBLL22.y + 80;
+            }
+         }
+
+         // WP霸体实现
+         var effectTxjs107:EffectDisplay = this.world.getEffectFormName("txjs107",this);
+         if (effectTxjs107)
+         {
+            this.golden = 10;
          }
       }
 
