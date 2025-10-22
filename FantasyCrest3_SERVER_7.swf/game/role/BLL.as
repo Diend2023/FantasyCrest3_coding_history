@@ -273,7 +273,7 @@ package game.role
             }
             // O命中后续实现
             var effectW:EffectDisplay = this.world.getEffectFormName("W",this);
-            if (effectW)
+            if (effectW && effectW.name == "Obaozha")
             {
                role = this.findRole(new Rectangle(0,0,world.map.getWidth(),world.map.getHeight()));
                if(role)
@@ -319,12 +319,10 @@ package game.role
                      effectTxjs77R.x = role.x;
                      effectTxjs77R.y = role.y - 70;
 
-                     var effectP:EffectDisplay = new EffectDisplay("P",{findName:"P",blendMode:"changeColor2",addColor:"0x000000",hitVibrationSize:35,stiff:60,mFight:1750},this,1,1);
+                     var effectP:EffectDisplay = new EffectDisplay("P",{findName:"P",blendMode:"changeColor2",addColor:"0x000000",cardFrame:15,hitVibrationSize:35,stiff:60,mFight:1750},this,1,1);
                      effectP.name = "P";
                      effectP.scaleX = 1;
                      effectP.scaleY = 2;
-                     effectP.cardFrame = 1;
-                     effectP.hitX = 1;
                      effectP.hitY = 40;
                      (world as BaseGameWorld).addChild(effectP);
                      (world as BaseGameWorld).vibrationSize = 35;
@@ -333,14 +331,13 @@ package game.role
                      effectP.y = role.y;
                      effectP.posx = role.x;
                      effectP.posy = role.y;
-                     effectW.alpha = 0;
-                     (world as BaseGameWorld).removeChild(effectW);
+                     effectW.removeFromParent();
                   }
                }
             }
          }
 
-         if(actionName == "入场动作")
+         if(actionName == "待机")
          {
             groundY = this.y - 70;
          }
@@ -390,7 +387,7 @@ package game.role
          }
 
          var effectBLL22:EffectDisplay = this.world.getEffectFormName("BLL22",this);
-         if (effectBLL22)
+         if (effectBLL22 && effectBLL22.name == "BLL22")
          {
             if (effectBLL22.currentFrame == 25)
             {
@@ -414,22 +411,22 @@ package game.role
             {
                effectBLL22.removeFromParent();
 
-               var effectBLL25:EffectDisplay = new EffectDisplay("BLL25",{blendMode:"changeColor",addColor:0x66FF33,hitVibrationSize:20,stiff:50,mFight:100},this,1,1);
+               var effectBLL25:EffectDisplay = new EffectDisplay("BLL25",{blendMode:"changeColor",addColor:0x66FF33,cardFrame:15,hitVibrationSize:20,stiff:50,mFight:100},this,1,1);
                effectBLL25.scaleX = 2;
                effectBLL25.scaleY = 2;
                effectBLL25.fps = 60;
-               effectBLL25.hitY = 50;
+               effectBLL25.hitY = 10;
                (world as BaseGameWorld).addChild(effectBLL25);
                (world as BaseGameWorld).vibrationSize = 20;
                (world as BaseGameWorld).mapVibrationTime = 10;
                effectBLL25.posx = effectBLL22.x;
                effectBLL25.posy = effectBLL22.y - 770;
 
-               var effectBLL23:EffectDisplay = new EffectDisplay("BLL23",{blendMode:"changeColor",addColor:0x66FF33,hitVibrationSize:35,stiff:60,mFight:500},this,1,1);
+               var effectBLL23:EffectDisplay = new EffectDisplay("BLL23",{blendMode:"changeColor",addColor:0x66FF33,cardFrame:50,hitVibrationSize:35,stiff:60,mFight:500},this,1,1);
                effectBLL23.scaleX = 1.5;
                effectBLL23.scaleY = 1.5;
                effectBLL23.fps = 35;
-               effectBLL23.hitY = 60;
+               effectBLL23.hitY = 10;
                (world as BaseGameWorld).addChild(effectBLL23);
                (world as BaseGameWorld).vibrationSize = 35;
                (world as BaseGameWorld).mapVibrationTime = 18;
