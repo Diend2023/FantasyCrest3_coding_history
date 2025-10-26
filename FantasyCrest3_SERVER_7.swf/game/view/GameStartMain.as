@@ -471,7 +471,7 @@ package game.view
             { //
                var jsonString:String = JSON.stringify(Service.userData, null, 2); //
                var date:Date = new Date(); //
-               var fileName:String = "幻想纹章3存档_" + date.getFullYear() + (date.getMonth() + 1) + date.getDate() + "_" + date.getHours() + date.getMinutes() + ".json"; //
+               var fileName:String = "幻想纹章3存档.json"; //
                
                // if(Phone.isPhone()) //
                if (false) // 由于手机端无法使用FileReference保存文件，暂时注释掉该选项

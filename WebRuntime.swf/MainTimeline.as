@@ -108,7 +108,7 @@ package WebRuntime_fla
       { //
          if (File.applicationDirectory.resolvePath("phone.xml").exists) //
          { //
-            // var file:File = new File(); // 
+            // var file:File = new File(); //
             // file.addEventListener(PermissionEvent.PERMISSION_STATUS, function(e:PermissionEvent):void { //
             //    file.removeEventListener(PermissionEvent.PERMISSION_STATUS, arguments.callee); //
             //    if (e.status == PermissionStatus.DENIED || e.status == PermissionStatus.UNKNOWN) //
@@ -117,7 +117,7 @@ package WebRuntime_fla
             //    } //
             //    else //
             //    { //
-            //       file.browseForOpen("选择存档文件"); //
+            //       file.browseForDirectory("选择存档文件"); //
             //       file.addEventListener(Event.SELECT, function(e:Event):void { //
             //          var selectedFile:File = file; //
             //          var stream:FileStream = new FileStream(); //
@@ -144,6 +144,33 @@ package WebRuntime_fla
             //    }
             // }); //
             // file.requestPermission(); // 请求文件访问权限
+
+            var file:File = File.applicationDirectory;
+            file.addEventListener(Event.SELECT, function(e:Event):void { //
+               file.removeEventListener(Event.SELECT, arguments.callee); //
+               var selectedFile:File = file; //
+               var stream:FileStream = new FileStream(); //
+               stream.addEventListener(Event.COMPLETE, function(e:Event):void { //
+                  try { //
+                     var jsonData:String = stream.readUTFBytes(stream.bytesAvailable); //
+                     var importedData:Object = JSON.parse(jsonData); //
+                     if (importedData.nickName) { //
+                        loading.userData = importedData; //
+                        loading.pname.text = importedData.nickName; //
+                        SharedObject.getLocal("net.zygame.hxwz.air").data.userData = importedData; //
+                        SharedObject.getLocal("net.zygame.hxwz.air").data.userName = importedData.nickName; //
+                        SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
+                        trace("import UserData success:", jsonData); //
+                     } //
+                  } catch (error:Error) { //
+                     trace("import UserData failed:", error.message); //
+                  } //
+                  stream.close(); //
+               }); //
+               stream.openAsync(selectedFile.resolvePath("幻想纹章3存档.json"), FileMode.READ); //
+               // stream.load(); //
+            }); //
+            file.browseForDirectory("选择存档文件夹"); //
          } //
          else //
          { //
