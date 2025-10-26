@@ -106,11 +106,14 @@ package zygame.core
          trace("初始化高度比：",HDHeight);
          _isPc = isPc;
          Starling.multitouchEnabled = isMultitouch;
-         stageWidth = stage.stageWidth; //
-         stageHeight = stage.stageHeight; //
-         _designWidth = stageWidth; //
-         _designHeight = stageHeight; //
-         _targetAspectRatio = _designWidth / _designHeight; //
+         // stageWidth = stage.stageWidth; //
+         // stageHeight = stage.stageHeight; //
+         // _designWidth = stageWidth; //
+         // _designHeight = stageHeight; //
+         // _targetAspectRatio = _designWidth / _designHeight; //
+         _designHeight = HDHeight; // 使用传入的 960 或其他值作为基准高度
+         _targetAspectRatio = 10 / 5.5; // 定义一个固定的目标宽高比，例如 10:5.5
+         _designWidth = Math.round(_designHeight * _targetAspectRatio); // 根据高度和比例计算宽度
          trace("设计尺寸:",_designWidth,"x",_designHeight,"宽高比:",_targetAspectRatio); //
          // viewPort = _viewRect ? _viewRect : new Rectangle(0,0,isPc ? stage.stageWidth : stage.stageWidth,isPc ? stage.stageHeight : stage.stageHeight);
          // if(viewPort.width == 0)
