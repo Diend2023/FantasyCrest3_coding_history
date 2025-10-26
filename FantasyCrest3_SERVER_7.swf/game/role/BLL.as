@@ -256,7 +256,7 @@ package game.role
          // O抹杀加农炮镜头锁定实现
          if (actionName == "抹杀加农炮")
          {
-            if (currentFrame == 0)
+            if (currentFrame == 1)
             {
                for(var i in this.world.getRoleList())
                {
@@ -266,10 +266,12 @@ package game.role
                   }
                }
                (world as BaseGameWorld).founcDisplay = this;
+               trace("change founcDisplay to BLL");
             }
             if (currentFrame == 31)
             {
                (world as BaseGameWorld).founcDisplay = (world as BaseGameWorld).centerSprite;
+               trace("change founcDisplay to centerSprite");
             }
             // O命中后续实现
             var effectW:EffectDisplay = this.world.getEffectFormName("W",this);
