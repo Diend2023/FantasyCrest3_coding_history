@@ -20,7 +20,6 @@ package game.role
    {
       public var flag:int;
       public var time:int;
-      public var cgData:EffectDisplay;
       public var baseAtk:int;
       public var timeAddAtk:int;
       public var baseMAtk:int;
@@ -266,12 +265,10 @@ package game.role
                   }
                }
                (world as BaseGameWorld).founcDisplay = this;
-               trace("change founcDisplay to BLL");
             }
             if (currentFrame == 31)
             {
                (world as BaseGameWorld).founcDisplay = (world as BaseGameWorld).centerSprite;
-               trace("change founcDisplay to centerSprite");
             }
             // O命中后续实现
             var effectW:EffectDisplay = this.world.getEffectFormName("W",this);
@@ -367,24 +364,22 @@ package game.role
             }
             if (currentFrame == 5)
             {
-               var cgData = new EffectDisplay("BLL13",{blendMode:"normal"},this,2,2);
-               cgData.fps = 15;
-               (world as BaseGameWorld).addChild(cgData);
+               var effectBLL13:EffectDisplay = new EffectDisplay("BLL13",{blendMode:"normal"},this,2,2);
+               effectBLL13.fps = 15;
+               effectBLL13.unhit = true;
+               (world as BaseGameWorld).addChild(effectBLL13);
                GameCore.soundCore.playEffect("BLL1");
                if((world as BaseGameWorld).founcDisplay == this)
                {
-                  cgData.posx = this.x - 640;
-                  cgData.posy = this.y - 360;
+                  effectBLL13.posx = this.x - 640;
+                  effectBLL13.posy = this.y - 360;
                }
                else
                {
-                  cgData.posx = (world as BaseGameWorld).centerSprite.x - 640;
-                  cgData.posy = (world as BaseGameWorld).centerSprite.y - 360;
+                  effectBLL13.posx = (world as BaseGameWorld).centerSprite.x - 640;
+                  effectBLL13.posy = (world as BaseGameWorld).centerSprite.y - 360;
                }
-               cgData.alpha = 1;
-		         cgData.unhit = true;
                currentFrame = 6;
-               cgData.blendMode = "normal";
             }
          }
 

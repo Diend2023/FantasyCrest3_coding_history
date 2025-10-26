@@ -47,6 +47,8 @@ package game.view
    import flash.filesystem.File; // 导入File用于文件操作
    import flash.filesystem.FileMode; // 导入FileMode用于文件读写模式
    import flash.filesystem.FileStream; // 导入FileStream用于文件流操作
+   import lzm.starling.STLConstant; //导入STLConstant用于手机端自动全屏
+   import flash.display.StageDisplayState; //导入StageDisplayState用于手机端自动全屏
 
    public class GameStartMain extends TouchDisplayObject
    {
@@ -271,6 +273,7 @@ package game.view
          {
             // arr = ["闯关模式","对战模式","练习模式","英雄","商店"];
             arr = ["闯关模式","对战模式","电脑模式","练习模式","英雄","商店","登陆账号","关于游戏","设置"]; // 添加登陆账号按钮、关于游戏按钮
+            STLConstant.nativeStage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
          }
          else if(true)
          {
