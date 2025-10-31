@@ -80,6 +80,7 @@ package game.role
          MJMan; // 添加麻将人
          Tom; // 添加汤姆
          KW; // 添加空我
+         BaiJin; // 添加白金
       }
    }
 }
