@@ -40,14 +40,6 @@ package game.role
          {
             "icon":"mofa.png",
             "msg":0
-         },
-         {
-            "icon":"fangyu.png",
-            "msg":0
-         },
-         {
-            "icon":"fangyu.png",
-            "msg":0
          }]);
       }
       
@@ -78,11 +70,6 @@ package game.role
       {
          super.onFrame();
          // 被动代码随时间加伤和防御代码实现
-         var stateList:List = this.hpmpDisplay.stateList;
-         if (stateList.width != listData.length * 100)
-         {
-            stateList.width = listData.length * 100;
-         }
          var count:int = (world as BaseGameWorld).frameCount;
 			timeAddAtk = int(count * 0.00232 + baseAtk);
 			timeAddMAtk = int(count * 0.00286 + baseMAtk);
@@ -100,10 +87,6 @@ package game.role
          this.listData.updateItemAt(0);
          this.listData.getItemAt(1).msg = this.attribute.magic;
          this.listData.updateItemAt(1);
-         this.listData.getItemAt(2).msg = this.attribute.armorDefense;
-         this.listData.updateItemAt(2);
-         this.listData.getItemAt(3).msg = this.attribute.magicDefense;
-         this.listData.updateItemAt(3);
 
          // oEffect = this.world.getEffectFormName("wuya",this);
 
@@ -215,7 +198,7 @@ package game.role
          {
             if (currentFrame == 20)
             {
-               isHand = hand(200, 300, 200, 300, 100, -80);
+               isHand = hand(200, 300, 200, 300, 100, 50);
                if (!isHand)
                {
                   breakAction();
@@ -223,7 +206,7 @@ package game.role
             }
             else if (frameAt(23, 31))
             {
-               hand(200, 200, 200, 200, 100, -80);
+               hand(200, 200, 200, 200, 100, 0);
             }
          }
 
@@ -277,7 +260,7 @@ package game.role
                role = this.findRole(new Rectangle(0,0,world.map.getWidth(),world.map.getHeight()));
                if(role)
                {
-                  if (Math.abs(role.x - effectW.x) < 100 && Math.abs(role.y - effectW.y) < 150)
+                  if (Math.abs(role.x - effectW.x) < 100 && Math.abs(role.y - 100 - effectW.y) < 150)
                   {
                      var effectTxjs125:EffectDisplay = new EffectDisplay("txjs125",{blendMode:"changeColor",addColor:"0x66FF33"},this,1,1);
                      effectTxjs125.name = "txjs125";
@@ -330,7 +313,7 @@ package game.role
                      effectP.y = role.y;
                      effectP.posx = role.x;
                      effectP.posy = role.y;
-                     effectW.removeFromParent();
+                     // effectW.removeFromParent();
                   }
                }
             }

@@ -82,6 +82,7 @@ package game.role
          KW; // 添加空我
          BaiJin; // 添加白金
          XiaoLi; // 添加李洛克
+         ZhouZuo; // 添加咒印佐助
       }
    }
 }
