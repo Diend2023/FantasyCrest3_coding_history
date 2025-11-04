@@ -475,18 +475,28 @@ package game.view
                var jsonString:String = JSON.stringify(Service.userData, null, 2); //
                var date:Date = new Date(); //
                var fileName:String = "幻想纹章3存档.json"; //
-               
-               // if(Phone.isPhone()) //
-               if (false) // 由于手机端无法使用FileReference保存文件，暂时注释掉该选项
+               if(false) // 暂时不启用文件系统方式
                { //
-                  // var file:File = File.documentsDirectory.resolvePath(fileName); // 获取文档目录
-                  // var stream:FileStream = new FileStream(); // 创建文件流
-                  // stream.open(file, FileMode.WRITE); // 打开文件
-                  // stream.writeUTFBytes(jsonString); // 写入 JSON 数据
-                  // stream.close(); // 关闭文件流
-                  // SceneCore.pushView(new GameTipsView("导出成功，文件保存在文档目录")); // 显示导出成功提示
-                  // trace("export userData success to documents directory,userData: ", JSON.stringify(Service.userData)); // 跟踪日志
-               } //
+                  var file:File = new File(); //
+                  file.addEventListener(Event.SELECT, function(e:Event):void { //
+                     file.removeEventListener(Event.SELECT, arguments.callee); //
+                     try //
+                     {
+                        var selectedFile:File = file.resolvePath(fileName); //
+                        var stream:FileStream = new FileStream(); //
+                        stream.open(selectedFile, FileMode.WRITE); //
+                        stream.writeUTFBytes(jsonString); //
+                        stream.close(); //
+                        SceneCore.pushView(new GameTipsView("导出成功")); //
+                     }
+                     catch (error:Error) //
+                     { //
+                        SceneCore.pushView(new GameTipsView("导出失败：" + error.message)); //
+                        trace("export userData failed: ", error.message); //
+                     } //
+                  }); //
+                  file.browseForDirectory("创建并选择存档文件夹"); //
+               }
                else //
                { //
                   var fileRef:FileReference = new FileReference(); //

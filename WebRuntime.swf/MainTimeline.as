@@ -106,52 +106,17 @@ package WebRuntime_fla
       // 新增导入存档按钮功能
       public function loadFunc(param1:MouseEvent) : void //
       { //
+         // Android系统下使用File类读取存档文件
          if (File.applicationDirectory.resolvePath("phone.xml").exists) //
          { //
-            // var file:File = new File(); //
-            // file.addEventListener(PermissionEvent.PERMISSION_STATUS, function(e:PermissionEvent):void { //
-            //    file.removeEventListener(PermissionEvent.PERMISSION_STATUS, arguments.callee); //
-            //    if (e.status == PermissionStatus.DENIED || e.status == PermissionStatus.UNKNOWN) //
-            //    { //
-            //       trace("Error : Permission ungranted"); //
-            //    } //
-            //    else //
-            //    { //
-            //       file.browseForDirectory("选择存档文件"); //
-            //       file.addEventListener(Event.SELECT, function(e:Event):void { //
-            //          var selectedFile:File = file; //
-            //          var stream:FileStream = new FileStream(); //
-            //          stream.addEventListener(Event.COMPLETE, function(e:Event):void { //
-            //             try { //
-            //                var jsonData:String = stream.readUTFBytes(stream.bytesAvailable); //
-            //                var importedData:Object = JSON.parse(jsonData); //
-            //                if (importedData.nickName) { //
-            //                   loading.userData = importedData; //
-            //                   loading.pname.text = importedData.nickName; //
-            //                   SharedObject.getLocal("net.zygame.hxwz.air").data.userData = importedData; //
-            //                   SharedObject.getLocal("net.zygame.hxwz.air").data.userName = importedData.nickName; //
-            //                   SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
-            //                   trace("import UserData success:", jsonData); //
-            //                } //
-            //             } catch (error:Error) { //
-            //                trace("import UserData failed:", error.message); //
-            //             } //
-            //             stream.close(); //
-            //          }); //
-            //          stream.open(selectedFile, FileMode.READ); //
-            //          stream.load(); //
-            //       }); //
-            //    }
-            // }); //
-            // file.requestPermission(); // 请求文件访问权限
-
-            var file:File = File.applicationDirectory;
+            var file:File = new File(); //
             file.addEventListener(Event.SELECT, function(e:Event):void { //
                file.removeEventListener(Event.SELECT, arguments.callee); //
                var selectedFile:File = file; //
                var stream:FileStream = new FileStream(); //
                stream.addEventListener(Event.COMPLETE, function(e:Event):void { //
-                  try { //
+                  try //
+                  { //
                      var jsonData:String = stream.readUTFBytes(stream.bytesAvailable); //
                      var importedData:Object = JSON.parse(jsonData); //
                      if (importedData.nickName) { //
@@ -162,18 +127,29 @@ package WebRuntime_fla
                         SharedObject.getLocal("net.zygame.hxwz.air").flush(); //
                         trace("import UserData success:", jsonData); //
                      } //
-                  } catch (error:Error) { //
+                  } //
+                  catch (error:Error) //
+                  { //
                      trace("import UserData failed:", error.message); //
                   } //
                   stream.close(); //
                }); //
-               stream.openAsync(selectedFile.resolvePath("幻想纹章3存档.json"), FileMode.READ); //
-               // stream.load(); //
+               if (!selectedFile.resolvePath("幻想纹章3存档.json").exists) //
+               { //
+                  stream.openAsync(selectedFile.resolvePath("幻想纹章3存档.json"), FileMode.WRITE); //
+                  stream.writeUTFBytes("{}"); //
+                  stream.close(); //
+               } //
+               else //
+               { //
+                  stream.openAsync(selectedFile.resolvePath("幻想纹章3存档.json"), FileMode.READ); //
+               } //
             }); //
-            file.browseForDirectory("选择存档文件夹"); //
+            file.browseForDirectory("创建并选择存档文件夹"); //
          } //
          else //
          { //
+            // Window系统下使用FileReference读取存档文件
             var fileRef:FileReference = new FileReference(); //
             fileRef.addEventListener(Event.SELECT, function(e:Event):void { //
                fileRef.load(); //
