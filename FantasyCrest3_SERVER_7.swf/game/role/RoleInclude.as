@@ -83,6 +83,7 @@ package game.role
          BaiJin; // 添加白金
          XiaoLi; // 添加李洛克
          ZhouZuo; // 添加咒印佐助
+         ZhiXuBaiMian; // 添加秩序白面
       }
    }
 }

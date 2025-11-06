@@ -18,17 +18,17 @@ package game.role
    
    public class BLL extends GameRole
    {
-      public var flag:int;
-      public var time:int;
-      public var baseAtk:int;
-      public var timeAddAtk:int;
-      public var baseMAtk:int;
-      public var timeAddMAtk:int;
-      public var baseDef:int;
-      public var timeAddDef:int;
-      public var baseMDef:int;
-      public var timeAddMDef:int;
-      public var groundY:int;
+      private var flag:int;
+      private var time:int;
+      private var baseAtk:int;
+      private var timeAddAtk:int;
+      private var baseMAtk:int;
+      private var timeAddMAtk:int;
+      private var baseDef:int;
+      private var timeAddDef:int;
+      private var baseMDef:int;
+      private var timeAddMDef:int;
+      private var groundY:int;
 
       public function BLL(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
       {
