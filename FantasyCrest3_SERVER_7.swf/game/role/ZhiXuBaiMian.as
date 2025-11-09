@@ -39,15 +39,16 @@ package game.role
       {
          super.onBeHit(beData);
          // 被破防时获得1s霸体
-         if (isDefense() && (beData.isBreakDam() || !isRightInFront(beData.role)) && this.breakDamTimer <= 0)
+         if (this.breakDamTimer <= 0)
          {
-            this.clearDebuffMove();
-            this.golden = 60;
-            this.breakDamTimer = 900;
+            if(beData.isBreakDam || (this.isDefense() && !this.isRightInFront(beData.role)))
+               {
+                  this.clearDebuffMove();
+                  this.golden = 60;
+                  this.breakDamTimer = 900;
+               }
          }
          // 每次被攻击时，增加1点水晶
-         trace("this.currentMp.value:" + this.currentMp.value);
-         trace("this.attribute.hpmax:" + this.mpMax);
          if (this.currentMp.value < this.mpMax)
          {
             this.currentMp.value += 1;
