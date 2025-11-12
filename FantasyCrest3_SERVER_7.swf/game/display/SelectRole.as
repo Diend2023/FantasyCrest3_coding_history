@@ -400,8 +400,9 @@ package game.display
             var version:Number = Number(figth.@version); // 提前获取版本号
             xmllist = figth.children();
             var len:int = xmllist.length(); //
+            var i:int = 0; //
             // for(var i in xmllist)
-            for (i = 0; i < len; i++) //
+            for (i; i < len; i++) //
             {
                rootName = (xmllist[i] as XML).localName();
                // 原本的加载角色条件
