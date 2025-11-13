@@ -654,7 +654,8 @@ package game.view
                }
                break;
             case "练习模式":
-               createSelectView(false,true,1,_1VSB,false,false,false,!Phone.isPhone());
+               // createSelectView(false,true,1,_1VSB,false,false,false,!Phone.isPhone());
+               createSelectView(true,true,1,_1VSB,false,false,false,true); // 设置练习模式为双选，手机端开启选地图
                break;
             case "英雄":
                openSelect("英雄库","制作组");

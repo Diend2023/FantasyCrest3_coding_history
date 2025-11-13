@@ -5,6 +5,7 @@ package game.view
    import zygame.core.GameCore;
    import zygame.core.SceneCore;
    import zygame.display.KeyDisplayObject;
+   import game.world._1VSB; //
    
    public class GamePauseView extends KeyDisplayObject
    {
@@ -25,6 +26,10 @@ package game.view
          createBtn("返回选择",stage.stageHeight / 2 - 0,88);
          createBtn("继续游戏",stage.stageHeight / 2 - -42,13);
          createBtn("设置",stage.stageHeight / 2 - -84,83); // 添加设置按钮
+         if (GameCore.currentWorld is _1VSB) //
+         { //
+            createBtn("重置练习",stage.stageHeight / 2 - -126,8); // 添加重置练习按钮
+         } //
          this.openKey();
       }
       
@@ -74,6 +79,11 @@ package game.view
             case 83: // 设置按钮功能
                this.clearKey();
                SceneCore.pushView(new GameSettingsView()); //
+               break; //
+            case 8: // 重置练习按钮功能
+               this.clearKey(); //
+               GameCore.currentWorld.onDown(13); //
+               GameCore.currentWorld.reset(); //
          }
       }
    }
