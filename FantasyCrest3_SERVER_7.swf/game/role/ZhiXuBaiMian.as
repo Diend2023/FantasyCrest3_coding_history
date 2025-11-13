@@ -1,10 +1,14 @@
 // 添加秩序白面被动
 package game.role
 {
+   import zygame.display.BaseRole;
    import zygame.data.BeHitData;
    import zygame.data.RoleAttributeData;
    import zygame.display.World;
    import feathers.data.ListCollection;
+   import game.world.BaseGameWorld;
+   import zygame.display.EffectDisplay;
+   import zygame.data.RoleFrameGroup;
    
    public class ZhiXuBaiMian extends GameRole
    {
@@ -23,6 +27,22 @@ package game.role
 	   override public function onFrame():void
       {
          super.onFrame();
+         // 聚能回水晶实现
+         if (inFrame("聚能",11) || inFrame("入场动作",11))
+         {
+            if (this.currentMp.value < this.mpMax)
+            {
+               this.currentMp.value += 1;
+            }
+         }
+         if (this.actionName == "聚能" || this.actionName == "入场动作")
+         {
+            if (this.frameAt(2,12))
+            {
+               this.addMpPoint(1);
+            }
+         }
+         // 反破防被动计时
          if (this.breakDamTimer > 0)
          {
             this.breakDamTimer -= 1;
@@ -58,24 +78,78 @@ package game.role
          if (this.actionName == "虛空陣 悪滅" && this.frameAt(3,20))
          {
             this.clearDebuffMove();
-            this.actionName = "虛空陣 悪滅";
             this.currentFrame = 21;
-            if (!enemy.isOSkill())
-            {
-               enemy.breakAction();
-               enemy.straight = 180;
-            }
+            playSkillPainting("虛空陣 悪滅");
          }
          if (this.actionName == "虚空阵 雪风" && this.frameAt(4,21))
          {
             this.clearDebuffMove();
             this.currentFrame = 22;
+            playSkillPainting("虚空阵 雪风");
             if (!enemy.isOSkill())
             {
                enemy.breakAction();
                enemy.straight = 180;
             }
          }
+      }
+      override public function onHitEnemy(beData:BeHitData, enemy:BaseRole) : void
+      {
+         super.onHitEnemy(beData,enemy);
+         if (this.actionName == "聚能")
+         {
+            if (breakDamTimer >= 720 && this.currentMp.value >= 3 && isKeyDown(80))
+            {
+               this.playSkill("虚空阵 疾风");
+               this.currentMp.value -= 3;
+               enemy.breakAction();
+               enemy.straight = 120;
+            }
+         }
+      }
+
+      override public function runLockAction(str:String, canBreak:Boolean = false) : void
+      {
+         // 防反技能释放时取消播放大招动画，重写runLockAction
+         var group:RoleFrameGroup = this.roleXmlData.getGroupAt(str);
+         if(group && group.key && group.key.indexOf("O") != -1 && actionName != str && str =="虛空陣 悪滅" || str =="虚空阵 雪风")
+         {
+            if(group && group["mp"])
+            {
+               usePoint(int(group["mp"]));
+            }
+            if(!isLock)
+            {
+               if(isKeyDown(65))
+               {
+                  this.scaleX = -1;
+               }
+               else if(isKeyDown(68))
+               {
+                  this.scaleX = 1;
+               }
+            }
+            this.action = str;
+            this.isLock = true;
+            this.canBreakAction = canBreak;
+            return;
+         }
+         super.runLockAction(str,canBreak);
+      }
+
+      // 播放大招动画
+      public function  playSkillPainting(actionName:String):void
+      {
+         var effect:EffectDisplay = new EffectDisplay("bisha",null,this,1.5,1.5);
+         effect.x = this.x;
+         effect.y = this.y;
+         this.world.addChild(effect);
+         effect.fps = 24;
+         for(var i in this.world.getRoleList())
+         {
+            this.world.getRoleList()[i].cardFrame = 40;
+         }
+         (this.world as BaseGameWorld).showSkillPainting(targetName,actionName,troopid);
       }
    }
 }
