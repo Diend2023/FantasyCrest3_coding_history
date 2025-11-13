@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <application xmlns="http://ns.adobe.com/air/application/20.0">
     <id>net.zygame.hxwz</id>
-    <versionNumber>3.0.2</versionNumber>
+    <versionNumber>0.9</versionNumber>
     <filename>幻想纹章3.0.2</filename>
     <description></description>
     <!-- To localize the description, use the following format for the description element.
@@ -42,8 +42,6 @@
         <transparent>false</transparent>
         <visible>true</visible>
         <fullScreen>true</fullScreen>
-        <width>1080</width>
-        <height>600</height>
         <aspectRatio>portrait</aspectRatio>
         <renderMode>direct</renderMode>
         <maximizable>true</maximizable>
