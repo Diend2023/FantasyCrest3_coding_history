@@ -23,7 +23,7 @@ package game.view
    import zygame.core.SceneCore;
    import zygame.display.KeyDisplayObject;
    import zygame.display.World;
-   import starling.display.Quad; //
+   import starling.display.Quad; //添加Quad用于创建mask
 
    
    public class GameSelectView extends KeyDisplayObject

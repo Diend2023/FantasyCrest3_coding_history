@@ -61,7 +61,7 @@ package game.role
          // 被破防时获得1s霸体
          if (this.breakDamTimer <= 0)
          {
-            if(beData.isBreakDam || (this.isDefense() && !this.isRightInFront(beData.role)))
+            if(beData.isBreakDam || (this.actionName == "防御" && !this.isRightInFront(beData.role)))
                {
                   this.clearDebuffMove();
                   this.golden = 60;
@@ -79,6 +79,11 @@ package game.role
          {
             this.clearDebuffMove();
             this.currentFrame = 21;
+            if (!enemy.isOSkill())
+            {
+               enemy.breakAction();
+               enemy.straight = 180;
+            }
             playSkillPainting("虛空陣 悪滅");
          }
          if (this.actionName == "虚空阵 雪风" && this.frameAt(4,21))
@@ -86,13 +91,18 @@ package game.role
             this.clearDebuffMove();
             this.currentFrame = 22;
             playSkillPainting("虚空阵 雪风");
-            if (!enemy.isOSkill())
+            this.golden = 60;
+            enemy.cardFrame = 120;
+            for(var i in this.world.getRoleList())
             {
-               enemy.breakAction();
-               enemy.straight = 180;
+               if (this.world.getRoleList()[i] != this)
+               {
+                  shiting(120, this.world.getRoleList()[i]);
+               }
             }
          }
       }
+
       override public function onHitEnemy(beData:BeHitData, enemy:BaseRole) : void
       {
          super.onHitEnemy(beData,enemy);
@@ -150,6 +160,18 @@ package game.role
             this.world.getRoleList()[i].cardFrame = 40;
          }
          (this.world as BaseGameWorld).showSkillPainting(targetName,actionName,troopid);
+      }
+
+      // 时停
+      public function shiting(cardFrame:int, role:BaseRole):void
+      {
+         for(var i in this.world.getRoleList())
+         {
+            if(this.world.getRoleList()[i] == role)
+            {
+               this.world.getRoleList()[i].cardFrame = cardFrame;
+            }
+         }
       }
    }
 }
