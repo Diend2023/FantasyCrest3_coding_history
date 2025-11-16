@@ -314,10 +314,15 @@ package game.world
          mathCenterPos();
          founcDisplay = _centerSprite;
          moveMap(1);
-         var sound:Sound = DataCore.getSound(role.targetName); // 尝试播放角色bgm
-         if(sound) //
+         var _2pSound:Sound = DataCore.getSound(_2p.targetName); // 尝试播放角色bgm，从2p开始，1p覆盖2p
+         var _1pSound:Sound = DataCore.getSound(_1p.targetName); //
+         if(_2pSound) //
          { //
-            GameCore.soundCore.playBGSound(role.targetName); //
+            GameCore.soundCore.playBGSound(_2p.targetName); //
+         } //
+         if(_1pSound) //
+         { //
+            GameCore.soundCore.playBGSound(_1p.targetName); //
          } //
       }
       

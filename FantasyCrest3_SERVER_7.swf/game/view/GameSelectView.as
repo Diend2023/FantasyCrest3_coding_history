@@ -111,11 +111,11 @@ package game.view
          wbg.alpha = 0.5;
          _1p = new SelectRole(255,_config);
          this.addChild(_1p);
+         _2p = new SelectRole(16711680,_config);
+         this.addChild(_2p);
          var mask1P:Quad = new Quad(stage.stageWidth / 2, stage.stageHeight); //使用mask限制范围，解决1p角色列表右侧被2p遮挡的问题
          this.addChild(mask1P); // mask 对象也需要被添加到显示列表
          _1p.mask = mask1P; //
-         _2p = new SelectRole(16711680,_config);
-         this.addChild(_2p);
          var mask2P:Quad = new Quad(stage.stageWidth / 2, stage.stageHeight); //
          mask2P.x = stage.stageWidth / 2; // 将 2P 的遮罩移动到屏幕右半边
          this.addChild(mask2P); //

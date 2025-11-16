@@ -146,6 +146,17 @@ package game.display
          _list.selectedIndex = 0;
          _list.touchable = true;
          _list.addEventListener("change",onListChange);
+         _list.addEventListener("triggered", function(e:Event) // 适配点击锁定角色
+         { //
+            var index:int = _list.selectedIndex; //
+            callLate(function():void //
+            { //
+               if(_list.selectedIndex == index) //
+               { //
+                  onDown(74); //
+               } //
+            }); //
+         }); //
          _attribute = new AttributeView();
          this.addChild(_attribute);
          _attribute.x = abg.x;
@@ -288,6 +299,7 @@ package game.display
          var icon2:Image;
          var coinText:TextField;
          var coinText2:TextField;
+         this.mask = null; // 在只有一个角色列表时，取消遮罩，解决在GameSelectView中添加遮罩后角色列表不显示的问题
          _rowCount = 5;
          var textures:TextureAtlas = DataCore.getTextureAtlas("select_role");
          var frame:Texture = textures.getTexture("frame");
