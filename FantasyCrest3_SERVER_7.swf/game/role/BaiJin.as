@@ -25,7 +25,7 @@ package game.role
       {
          super.onFrame();
          // 连击数为0时，重置敌人魔防
-         for(var enemy:BaseRole in enemyBaseMagicDefense)
+         for each(var enemy:BaseRole in enemyBaseMagicDefense)
          {
             if(enemy && enemy.beHitCount == 0)
             {

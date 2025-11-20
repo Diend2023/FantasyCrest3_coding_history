@@ -8,13 +8,8 @@ package game.role
    import game.world.BaseGameWorld;
    import zygame.data.BeHitData;
    import zygame.display.BaseRole;
-   import starling.core.Starling;
-   import flash.geom.Rectangle; // 抓取用
-   import game.server.HostRun2Model; // 时停用
-   import starling.animation.Tween;// cg用
+   import flash.geom.Rectangle;
    import zygame.core.GameCore;
-   import feathers.controls.List;
-   import game.uilts.GameFont;
    
    public class BLL extends GameRole
    {
@@ -28,6 +23,13 @@ package game.role
       private var timeAddDef:int;
       private var baseMDef:int;
       private var timeAddMDef:int;
+      private var hitEnemyNumAddAtk:int;
+      private var hitEnemyNumAddMAtk:int;
+      private var beHitAddDef:int;
+      private var beHitAddMDef:int;
+      private var beHitNum:int;
+      private var hitEnemyNum:int;
+
       private var groundY:int;
 
       public function BLL(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
@@ -46,10 +48,6 @@ package game.role
       override public function onInit() : void
       {
          super.onInit();
-         var addAtk:int = 0;
-         var addMAtk:int = 0;
-         var addDef:int = 0;
-         var addMDef:int = 0;
          baseAtk = this.attribute.power;
          baseMAtk = this.attribute.magic;
          baseDef = this.attribute.armorDefense;
@@ -69,26 +67,30 @@ package game.role
 	   override public function onFrame():void
       {
          super.onFrame();
+         var addAtk:int = 0;
+         var addMAtk:int = 0;
+         var addDef:int = 0;
+         var addMDef:int = 0;
          // 被动代码随时间加伤和防御代码实现
          var count:int = (world as BaseGameWorld).frameCount;
+         var isHand:Boolean = false;
+         var role:BaseRole = null;
 			timeAddAtk = int(count * 0.00232 + baseAtk);
 			timeAddMAtk = int(count * 0.00286 + baseMAtk);
 			timeAddDef = int(count * 0.00002 + baseDef);
 			timeAddMDef = int(count * 0.00002 + baseMDef);
-         atk = timeAddAtk + hitEnemyNumAddAtk;
-         matk = timeAddMAtk + hitEnemyNumAddMAtk;
-         def = timeAddDef + beHitAddDef;
-         mdef = timeAddMDef + beHitAddMDef;
-         this.attribute.power = atk;
-         this.attribute.magic = matk;
-         this.attribute.armorDefense = def;
-         this.attribute.magicDefense = mdef;
+         addAtk = timeAddAtk + hitEnemyNumAddAtk;
+         addMAtk = timeAddMAtk + hitEnemyNumAddMAtk;
+         addDef = timeAddDef + beHitAddDef;
+         addMDef = timeAddMDef + beHitAddMDef;
+         this.attribute.power = addAtk;
+         this.attribute.magic = addMAtk;
+         this.attribute.armorDefense = addDef;
+         this.attribute.magicDefense = addMDef;
          this.listData.getItemAt(0).msg = this.attribute.power;
          this.listData.updateItemAt(0);
          this.listData.getItemAt(1).msg = this.attribute.magic;
          this.listData.updateItemAt(1);
-
-         // oEffect = this.world.getEffectFormName("wuya",this);
 
          // 普通攻击后续
          if (actionName == "普通攻击" && frameAt(8,14))
@@ -329,19 +331,19 @@ package game.role
          {
             if (currentFrame == 0)
             {
-               for(var i in this.world.getRoleList())
+               for(var j in this.world.getRoleList())
                {
-                  if (this.world.getRoleList()[i] != this && this.world.getRoleList()[i].isJump())
+                  if (this.world.getRoleList()[j] != this && this.world.getRoleList()[j].isJump())
                   {
-                     shiting(30, this.world.getRoleList()[i]);
+                     shiting(30, this.world.getRoleList()[j]);
                   }
                }
             }
             if (currentFrame == 4)
             {
-               for(var i in this.world.getRoleList())
+               for(var k in this.world.getRoleList())
                {
-                  shiting(150, this.world.getRoleList()[i]);
+                  shiting(150, this.world.getRoleList()[k]);
                }
                currentFrame = 5;
             }
@@ -432,9 +434,10 @@ package game.role
 
       override public function onHitEnemy(beData:BeHitData, enemy:BaseRole) : void
       {
+         var isHand:Boolean = false;
          // 被动当攻击敌人1hit后增加攻击代码实现
          hitEnemyNumAddAtk = int(++hitEnemyNum * 0.464);
-         hitEnemyNumAddmAtk = int(++hitEnemyNum * 0.572);
+         hitEnemyNumAddMAtk = int(++hitEnemyNum * 0.572);
          super.onHitEnemy(beData,enemy);
 
          // SU巨爪击破防和跳转后续和调整敌方位置实现
@@ -472,7 +475,7 @@ package game.role
       {
          // 被动当收到一hit攻击后增加防御代码实现
          beHitAddDef = int(++beHitNum * 0.05);
-         beHitAddmDef = int(++beHitNum * 0.05);
+         beHitAddMDef = int(++beHitNum * 0.05);
          super.onBeHit(beData);
       }
 
@@ -539,4 +542,3 @@ package game.role
 
    }
 }
-
