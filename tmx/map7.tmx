@@ -1,0 +1,15 @@
+<map version="1.0" orientation="orthogonal" width="64" height="64" tilewidth="32" tileheight="32" texture="&lt;null>" world="&lt;null>" bg="scene1" textureOffsetX="0" textureOffsetY="32">
+  <properties>
+    <property name="extend" value="{&quot;_dataLayer&quot;:[],&quot;layers&quot;:[{&quot;type&quot;:&quot;data&quot;,&quot;id&quot;:&quot;_dataLayer&quot;,&quot;name&quot;:&quot;数据层（不可选）&quot;},{&quot;type&quot;:&quot;event&quot;,&quot;id&quot;:&quot;_eventSprite&quot;,&quot;name&quot;:&quot;事件层（不可选）&quot;},{&quot;type&quot;:&quot;scenery&quot;,&quot;id&quot;:&quot;_topLayer&quot;,&quot;name&quot;:&quot;装饰层1&quot;},{&quot;type&quot;:&quot;npc&quot;,&quot;id&quot;:&quot;_npcLayer&quot;,&quot;name&quot;:&quot;互动层（原生）&quot;},{&quot;type&quot;:&quot;scenery&quot;,&quot;id&quot;:&quot;_bottomLayer&quot;,&quot;name&quot;:&quot;装饰层2&quot;},{&quot;type&quot;:&quot;map&quot;,&quot;id&quot;:&quot;hit_layer&quot;,&quot;name&quot;:&quot;hit_layer&quot;}],&quot;version&quot;:&quot;0.0.2&quot;,&quot;hit_layer&quot;:[],&quot;_eventSprite&quot;:[{&quot;height&quot;:100,&quot;x&quot;:810.7,&quot;blendMode&quot;:null,&quot;path&quot;:&quot;&quot;,&quot;name&quot;:&quot;1p&quot;,&quot;instanceName&quot;:&quot;1p&quot;,&quot;type&quot;:&quot;repeat_event&quot;,&quot;other&quot;:&quot;&quot;,&quot;y&quot;:1810,&quot;go&quot;:&quot;&quot;,&quot;noChange&quot;:false,&quot;dialogue&quot;:&quot;left&quot;,&quot;scaleX&quot;:1,&quot;poltData&quot;:&quot;bnVsbA==&quot;,&quot;scaleY&quot;:1,&quot;to&quot;:&quot;&quot;,&quot;width&quot;:100},{&quot;height&quot;:100,&quot;x&quot;:1213.8,&quot;blendMode&quot;:null,&quot;path&quot;:&quot;&quot;,&quot;name&quot;:&quot;2p&quot;,&quot;instanceName&quot;:&quot;2p&quot;,&quot;type&quot;:&quot;repeat_event&quot;,&quot;other&quot;:&quot;&quot;,&quot;y&quot;:1810,&quot;go&quot;:&quot;&quot;,&quot;noChange&quot;:false,&quot;dialogue&quot;:&quot;left&quot;,&quot;scaleX&quot;:1,&quot;poltData&quot;:&quot;bnVsbA==&quot;,&quot;scaleY&quot;:1,&quot;to&quot;:&quot;&quot;,&quot;width&quot;:100}],&quot;_npcLayer&quot;:[],&quot;_bottomLayer&quot;:[{&quot;x&quot;:-1.6,&quot;instanceName&quot;:&quot;&quot;,&quot;scaleX&quot;:1,&quot;y&quot;:1730,&quot;other&quot;:&quot;&quot;,&quot;pingpu&quot;:false,&quot;scaleY&quot;:1,&quot;rotation&quot;:0,&quot;target&quot;:&quot;scene1&quot;,&quot;name&quot;:&quot;scene1.png&quot;}],&quot;_topLayer&quot;:[],&quot;scenery&quot;:[{&quot;path&quot;:&quot;scenery/scene1.xml&quot;,&quot;name&quot;:&quot;scene1&quot;}]}"/>
+  </properties>
+  <objectgroup name="hit_layer" width="64" height="40">
+    <properties/>
+    <object x="0" y="1800">
+      <properties>
+        <property name="lines" value="[]"/>
+        <property name="mode" value="not_penetrate"/>
+      </properties>
+      <polygon points="0,0 2048,0 2048,736.4 -50.5,728.9"/>
+    </object>
+  </objectgroup>
+</map>

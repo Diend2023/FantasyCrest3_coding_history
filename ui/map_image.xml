@@ -18,4 +18,6 @@
     <SubTexture name="map_jiuwei.jpeg" x="606" y="406" width="300" height="200"/>
     <!-- 添加map6 -->
     <SubTexture name="map6.jpeg" x="2" y="608" width="300" height="200"/>
+    <!-- 添加map7 -->
+    <SubTexture name="map7.jpeg" x="304" y="608" width="300" height="200"/>
 </TextureAtlas>

@@ -56,6 +56,17 @@ package game.data
          "name":"map",
          "type":"sound"
       }];
+
+      public static const scene1:Object = [{ // 添加新地图幻想纹章4
+         "name":"4_0", //
+         "align":"bottom", //
+         "move":150, //
+         "moveY":150, //
+         "scale":4 //
+      },{ //
+         "name":"map7", //
+         "type":"sound" //
+      }]; //
       
       public function BGConfig()
       {
