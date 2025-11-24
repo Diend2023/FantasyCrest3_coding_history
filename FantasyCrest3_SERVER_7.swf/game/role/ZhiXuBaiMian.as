@@ -92,12 +92,13 @@ package game.role
             this.currentFrame = 22;
             playSkillPainting("虚空阵 雪风");
             this.golden = 60;
-            enemy.cardFrame = 120;
+            beData.cardFrame = 120;
             for(var i in this.world.getRoleList())
             {
                if (this.world.getRoleList()[i] != this)
                {
-                  shiting(120, this.world.getRoleList()[i]);
+                  shitingRole(120, this.world.getRoleList()[i]);
+                  shitingEffect(120, this.world.getRoleList()[i]);
                }
             }
          }
@@ -163,13 +164,34 @@ package game.role
       }
 
       // 时停
-      public function shiting(cardFrame:int, role:BaseRole):void
+      public function shitingRole(cardFrame:int, role:BaseRole):void
       {
          for(var i in this.world.getRoleList())
          {
             if(this.world.getRoleList()[i] == role)
             {
                this.world.getRoleList()[i].cardFrame = cardFrame;
+            }
+         }
+      }
+
+      public function shitingEffect(cardFrame:int, role:BaseRole):void
+      {
+         for(var i in this.world.getRoleList())
+         {
+            if(this.world.getRoleList()[i] == role)
+            {
+               var j:int = 0;
+               var effect:EffectDisplay = null;
+               var num:int = this.world.map.roleLayer.numChildren;
+               for(var j = 0; j < num; j++)
+               {
+                  effect = this.world.map.roleLayer.getChildAt(j) as EffectDisplay;
+                  if(effect && effect.role == role)
+                  {
+                     effect.cardFrame = cardFrame;
+                  }
+               }
             }
          }
       }

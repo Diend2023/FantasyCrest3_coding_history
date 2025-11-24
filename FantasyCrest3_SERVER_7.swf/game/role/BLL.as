@@ -315,7 +315,7 @@ package game.role
                      effectP.y = role.y;
                      effectP.posx = role.x;
                      effectP.posy = role.y;
-                     // effectW.removeFromParent();
+                     effectW.removeFromParent();
                   }
                }
             }
