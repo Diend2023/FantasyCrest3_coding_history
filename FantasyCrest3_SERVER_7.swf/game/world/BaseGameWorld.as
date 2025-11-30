@@ -36,6 +36,8 @@ package game.world
    import zygame.ui.Fade;
    import zygame.utils.GIFUtils;
    import zygame.utils.RTools;
+   import zygame.core.CoreStarup; //
+   import starling.utils.AssetManager; //
    
    public class BaseGameWorld extends World
    {
@@ -314,16 +316,23 @@ package game.world
          mathCenterPos();
          founcDisplay = _centerSprite;
          moveMap(1);
-         var _2pSound:Sound = DataCore.getSound(_2p.targetName); // 尝试播放角色bgm，从2p开始，1p覆盖2p
-         var _1pSound:Sound = DataCore.getSound(_1p.targetName); //
-         if(_2pSound) //
-         { //
-            GameCore.soundCore.playBGSound(_2p.targetName); //
-         } //
-         if(_1pSound) //
-         { //
-            GameCore.soundCore.playBGSound(_1p.targetName); //
-         } //
+         DataCore.assetsMap.assets.enqueue("bgm/role/" + _2p.targetName + ".mp3"); //
+         DataCore.assetsMap.assets.enqueue("bgm/role/" + _1p.targetName + ".mp3"); //
+         DataCore.assetsMap.assets.loadQueue(function(ratio:Number):void { //
+            if (ratio != 1) return; //
+            var _2pSound:Sound = DataCore.getSound(_2p.targetName); // 尝试播放角色bgm，从2p开始，1p覆盖2p
+            var _1pSound:Sound = DataCore.getSound(_1p.targetName); //
+            if(_2pSound) //
+            { //
+               trace("playBGM：",_2p.targetName); //
+               GameCore.soundCore.playBGSound(_2p.targetName); //
+            } //
+            if(_1pSound) //
+            { //
+               trace("playBGM：",_1p.targetName); //
+               GameCore.soundCore.playBGSound(_1p.targetName); //
+            } //
+         });
       }
       
       override public function set role(r:BaseRole) : void
