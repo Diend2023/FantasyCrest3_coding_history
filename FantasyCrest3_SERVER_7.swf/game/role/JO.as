@@ -10,6 +10,7 @@ package game.role
    import zygame.data.RoleAttributeData;
    import zygame.display.World;
    import zygame.display.EffectDisplay;
+   import starling.core.Starling;
    
    public class JO extends GameRole
    {
@@ -20,11 +21,15 @@ package game.role
 
       private var _backgroundFilter:ColorMatrixFilter;  // 用于背景
 
-      var baseBgVolume:Number = GameCore.soundCore.bgvolume;
+      var baseBgVolume:Number = 0.4;
       
       public function JO(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
       {
          super(roleTarget,xz,yz,pworld,fps,pscale,troop,roleAttr);
+         startTheWorldVisualEffect();
+         stopTheWorldVisualEffect();
+         GameCore.soundCore.bgvolume = this.baseBgVolume;
+
       }
 
 	   override public function onFrame():void
@@ -34,10 +39,14 @@ package game.role
          {
             if (this.currentFrame == 16)
             {
-               this.theWorldTimer = 300; // 5秒钟
+               this.theWorldTimer = 345; // 5秒钟
                GameCore.soundCore.bgvolume = 0.0;
                GameCore.soundCore.playEffect("ctl39");
                startTheWorldVisualEffect();
+               Starling.juggler.delayCall(function():void
+               {
+                  GameCore.soundCore.bgvolume = baseBgVolume;
+               },5);
             }
          }
          // 时停被动计时
@@ -89,7 +98,11 @@ package game.role
          for(var j = 0; j < num; j++)
          {
             effect = this.world.map.roleLayer.getChildAt(j) as EffectDisplay;
-            if (effect != null && !effect.objectData.unhit)
+            if(effect == null || (effect.role == this as BaseRole && effect.objectData.unhit == true))
+            {
+               continue;
+            }
+            else
             {
                effect.cardFrame = cardFrame;
             }
@@ -99,6 +112,10 @@ package game.role
 
       private function startTheWorldVisualEffect():void
       {
+         if(this.world.targetName != "map1")
+         {
+            return;
+         }
          // 1. 创建独立的滤镜实例
          _worldFilter = new ColorMatrixFilter();
          _backgroundFilter = new ColorMatrixFilter();
@@ -170,6 +187,10 @@ package game.role
       // 结束时停视觉效果
       private function stopTheWorldVisualEffect():void
       {
+         if(this.world.targetName != "map1")
+         {
+            return;
+         }
          // 1. 移除地图地面层的滤镜
          if (this.world.map && this.world.map.numChildren > 0)
          {
