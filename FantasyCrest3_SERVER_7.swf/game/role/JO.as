@@ -33,13 +33,6 @@ package game.role
          startTheWorldVisualEffect();
          stopTheWorldVisualEffect();
          GameCore.soundCore.bgvolume = this.baseBgVolume;
-         Starling.juggler.delayCall(function():void
-         {
-            if(attribute.hp > 0 && attribute.hp < 50)
-            {
-               hasPassive = true;
-            }
-         },1);
       }
 
 	   override public function onFrame():void
@@ -107,6 +100,19 @@ package game.role
          {
             this.passiveTheWorld(beData.role);
          }
+      }
+
+      override public function copyData() : Object
+      {
+         var ob:Object = super.copyData();
+         ob.hasPassive = this.hasPassive;
+         return ob;
+      }
+      
+      override public function setData(value:Object) : void
+      {
+         super.setData(value);
+         this.hasPassive = value.hasPassive;
       }
 
       public function theWorld():void
