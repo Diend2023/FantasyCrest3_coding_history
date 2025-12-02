@@ -21,7 +21,11 @@ package game.role
 
       private var _backgroundFilter:ColorMatrixFilter;  // 用于背景
 
-      var baseBgVolume:Number = 0.4;
+      private var baseBgVolume:Number = 0.4;
+
+      public var hasPassive:Boolean = false;
+      
+      public var passiveWillDie:Boolean = false;
       
       public function JO(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
       {
@@ -29,7 +33,13 @@ package game.role
          startTheWorldVisualEffect();
          stopTheWorldVisualEffect();
          GameCore.soundCore.bgvolume = this.baseBgVolume;
-
+         Starling.juggler.delayCall(function():void
+         {
+            if(attribute.hp > 0 && attribute.hp < 50)
+            {
+               hasPassive = true;
+            }
+         },1);
       }
 
 	   override public function onFrame():void
@@ -39,14 +49,7 @@ package game.role
          {
             if (this.currentFrame == 16)
             {
-               this.theWorldTimer = 345; // 5秒钟
-               GameCore.soundCore.bgvolume = 0.0;
-               GameCore.soundCore.playEffect("ctl39");
-               startTheWorldVisualEffect();
-               Starling.juggler.delayCall(function():void
-               {
-                  GameCore.soundCore.bgvolume = baseBgVolume;
-               },5);
+               this.theWorld();
             }
          }
          // 时停被动计时
@@ -58,6 +61,14 @@ package game.role
 
             if(this.theWorldTimer == 45)
             {
+               if(this.passiveWillDie)
+               {
+                  this.attribute.hp = 0;
+                  this.theWorldTimer = 0;
+                  GameCore.soundCore.bgvolume = this.baseBgVolume;
+                  stopTheWorldVisualEffect();
+                  return;
+               }
                this.playSkill("时间开始流动");
             }
 
@@ -72,7 +83,57 @@ package game.role
 
       override public function onHitEnemy(beData:BeHitData, enemy:BaseRole) : void
       {
+         if(beData.armorScale == 0)
+         {
+            beData.armorScale = 1;
+         }
+         if(this.attribute.hp > 0 && this.attribute.hp < 50 && (this.actionName == "欧拉？" || this.actionName == "隔空杀妈"))
+         {
+            beData.armorScale = 1.7; // 增加70%伤害
+         }
          super.onHitEnemy(beData,enemy);
+      }
+
+      override public function onBeHit(beData:BeHitData) : void
+      {
+         super.onBeHit(beData);
+         if(this.attribute.hp <= 0 && !this.hasPassive && this.currentMp.value >= 5 && this.theWorldTimer <= 0)
+         {
+            this.attribute.hp = 1; // 保持1点生命值
+            this.passiveTheWorld(beData.role);
+            this.passiveWillDie = true;
+         }
+         if(this.attribute.hp > 0 && this.attribute.hp < 50 && !this.hasPassive && this.currentMp.value >= 5 && this.theWorldTimer <= 0)
+         {
+            this.passiveTheWorld(beData.role);
+         }
+      }
+
+      public function theWorld():void
+      {
+         this.theWorldTimer = 345; // 5秒钟
+         GameCore.soundCore.bgvolume = 0.0;
+         GameCore.soundCore.playEffect("ctl39");
+         startTheWorldVisualEffect();
+         Starling.juggler.delayCall(function():void
+         {
+            GameCore.soundCore.bgvolume = baseBgVolume;
+         },5);
+      }
+
+      public function passiveTheWorld(enemy:BaseRole):void
+      {
+         GameCore.soundCore.playEffect("ctl29");
+         this.hasPassive = true;
+         this.theWorld();
+         this.currentMp.value -= 5;
+         this.posx = enemy.x - 150 * enemy.scaleX;
+         this.posy = enemy.y;
+         this.scaleX = enemy.scaleX > 0 ? 1 : -1;
+         this.golden = 60;
+         this.cardFrame = 0;
+         this.clearDebuffMove();
+         this.actionName = "降落";
       }
 
       // 时停所有角色除了自己
@@ -110,7 +171,7 @@ package game.role
       }
 
 
-      private function startTheWorldVisualEffect():void
+      public function startTheWorldVisualEffect():void
       {
          if(this.world.targetName != "map1")
          {
@@ -185,7 +246,7 @@ package game.role
       }
 
       // 结束时停视觉效果
-      private function stopTheWorldVisualEffect():void
+      public function stopTheWorldVisualEffect():void
       {
          if(this.world.targetName != "map1")
          {
