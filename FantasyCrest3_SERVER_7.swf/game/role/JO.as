@@ -42,7 +42,7 @@ package game.role
          {
             if (this.currentFrame == 16)
             {
-               this.theWorld();
+               theWorld();
             }
          }
          // 时停被动计时
@@ -93,12 +93,12 @@ package game.role
          if(this.attribute.hp <= 0 && !this.hasPassive && this.currentMp.value >= 5 && this.theWorldTimer <= 0)
          {
             this.attribute.hp = 1; // 保持1点生命值
-            this.passiveTheWorld(beData.role);
+            passiveTheWorld(beData.role);
             this.passiveWillDie = true;
          }
          if(this.attribute.hp > 0 && this.attribute.hp < 50 && !this.hasPassive && this.currentMp.value >= 5 && this.theWorldTimer <= 0)
          {
-            this.passiveTheWorld(beData.role);
+            passiveTheWorld(beData.role);
          }
       }
 
@@ -131,7 +131,7 @@ package game.role
       {
          GameCore.soundCore.playEffect("ctl29");
          this.hasPassive = true;
-         this.theWorld();
+         theWorld();
          this.currentMp.value -= 5;
          this.posx = enemy.x - 150 * enemy.scaleX;
          this.posy = enemy.y;
