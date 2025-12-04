@@ -64,7 +64,8 @@ package game.view
          {
             p2pshow = true;
          }
-         _2p = new HPMP(p2pshow);
+         // _2p = new HPMP(p2pshow);
+         _2p = new HPMP(true); // 添加CD条
          _1p.x = 10;
          _1p.y = 10;
          _2p.x = stage.stageWidth - 10;

@@ -28,19 +28,37 @@ package game.role
          if(inFrame("杜门！爆发连段！",51))
          {
             enemy.hurtNumber(beHurtNum,null,new Point(beData.role.x,beData.role.y));
-            this.beHurtNum = 0;
-            this.listData.getItemAt(0).msg = this.beHurtNum;
-            this.listData.updateItemAt(0);
+            beHurtNum = 0;
+            listData.getItemAt(0).msg = beHurtNum;
+            listData.updateItemAt(0);
          }
       }
       
       override public function hurtNumber(beHurt:int, beData:BeHitData, pos:Point) : void
       {
-         this.beHurtNum += beHurt * 0.25;
-         this.listData.getItemAt(0).msg = this.beHurtNum;
-         this.listData.updateItemAt(0);
+         beHurtNum += beHurt * 0.25;
+         listData.getItemAt(0).msg = beHurtNum;
+         listData.updateItemAt(0);
          super.hurtNumber(beHurt,beData,pos);
       }
+
+      override public function copyData() : Object
+      {
+         var ob:Object = super.copyData();
+         // 复制被动数据继承至下一局
+         ob.beHurtNum = beHurtNum;
+         return ob;
+      }
+      
+      override public function setData(value:Object) : void
+      {
+         super.setData(value);
+         // 读取继承的被动数据
+         beHurtNum = value.beHurtNum;
+         listData.getItemAt(0).msg = beHurtNum;
+         listData.updateItemAt(0);
+      }
+
    }
 }
 

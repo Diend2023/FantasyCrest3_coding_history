@@ -1,6 +1,7 @@
 // 添加布罗利(纹4)
 package game.role
 {
+   import game.buff.AttributeChangeBuff;
    import zygame.data.RoleAttributeData;
    import zygame.display.World;
    import zygame.display.EffectDisplay;
@@ -13,28 +14,20 @@ package game.role
    
    public class BLL extends GameRole
    {
-      private var flag:int;
-      private var time:int;
-      private var baseAtk:int;
-      private var timeAddAtk:int;
-      private var baseMAtk:int;
-      private var timeAddMAtk:int;
-      private var baseDef:int;
-      private var timeAddDef:int;
-      private var baseMDef:int;
-      private var timeAddMDef:int;
-      private var hitEnemyNumAddAtk:int;
-      private var hitEnemyNumAddMAtk:int;
-      private var beHitAddDef:int;
-      private var beHitAddMDef:int;
-      private var beHitNum:int;
-      private var hitEnemyNum:int;
-
+      private var _timeBuff:AttributeChangeBuff;
+      private var _hitBuff:AttributeChangeBuff;
+      private var _timecount:int = 0;
+      private var _beHitNum:int = 0;
+      private var _hitNum:int = 0;
       private var groundY:int;
 
       public function BLL(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
       {
          super(roleTarget,xz,yz,pworld,fps,pscale,troop,roleAttr);
+         _timeBuff = new AttributeChangeBuff("BLL_timeBuff",this,-1,new RoleAttributeData());
+         this.addBuff(_timeBuff);
+         _hitBuff = new AttributeChangeBuff("BLL_hitBuff",this,-1,new RoleAttributeData());
+         this.addBuff(_hitBuff);
          this.listData = new ListCollection([{
             "icon":"liliang.png",
             "msg":0
@@ -48,50 +41,28 @@ package game.role
       override public function onInit() : void
       {
          super.onInit();
-         baseAtk = this.attribute.power;
-         baseMAtk = this.attribute.magic;
-         baseDef = this.attribute.armorDefense;
-         baseMDef = this.attribute.magicDefense;
-         timeAddAtk = 0;
-         timeAddMAtk = 0;
-         timeAddDef = 0;
-         timeAddMDef = 0;
-         hitEnemyNumAddAtk = 0;
-         hitEnemyNumAddMAtk = 0;
-         beHitAddDef = 0;
-         beHitAddMDef = 0;
-         beHitNum = 0;
-         hitEnemyNum = 0;
+      }
+
+      override public function onSUpdate() : void
+      {
+         super.onSUpdate();
+         // 被动代码随时间加伤和防御代码实现
+         _timeBuff.changeData.power = int(_timecount * 0.00232);
+         _timeBuff.changeData.magic = int(_timecount * 0.00286);
+         _timeBuff.changeData.armorDefense = int(_timecount * 0.00002);
+         _timeBuff.changeData.magicDefense = int(_timecount * 0.00002);
+         listData.getItemAt(0).msg = this.attribute.power;
+         listData.updateItemAt(0);
+         listData.getItemAt(1).msg = this.attribute.magic;
+         listData.updateItemAt(1);
       }
 
 	   override public function onFrame():void
       {
          super.onFrame();
-         var addAtk:int = 0;
-         var addMAtk:int = 0;
-         var addDef:int = 0;
-         var addMDef:int = 0;
-         // 被动代码随时间加伤和防御代码实现
-         var count:int = (world as BaseGameWorld).frameCount;
+         _timecount++;
          var isHand:Boolean = false;
          var role:BaseRole = null;
-			timeAddAtk = int(count * 0.00232 + baseAtk);
-			timeAddMAtk = int(count * 0.00286 + baseMAtk);
-			timeAddDef = int(count * 0.00002 + baseDef);
-			timeAddMDef = int(count * 0.00002 + baseMDef);
-         addAtk = timeAddAtk + hitEnemyNumAddAtk;
-         addMAtk = timeAddMAtk + hitEnemyNumAddMAtk;
-         addDef = timeAddDef + beHitAddDef;
-         addMDef = timeAddMDef + beHitAddMDef;
-         this.attribute.power = addAtk;
-         this.attribute.magic = addMAtk;
-         this.attribute.armorDefense = addDef;
-         this.attribute.magicDefense = addMDef;
-         this.listData.getItemAt(0).msg = this.attribute.power;
-         this.listData.updateItemAt(0);
-         this.listData.getItemAt(1).msg = this.attribute.magic;
-         this.listData.updateItemAt(1);
-
          // 普通攻击后续
          if (actionName == "普通攻击" && frameAt(8,14))
          {
@@ -436,8 +407,12 @@ package game.role
       {
          var isHand:Boolean = false;
          // 被动当攻击敌人1hit后增加攻击代码实现
-         hitEnemyNumAddAtk = int(++hitEnemyNum * 0.464);
-         hitEnemyNumAddMAtk = int(++hitEnemyNum * 0.572);
+         _hitBuff.changeData.power = int(++_hitNum * 0.464);
+         _hitBuff.changeData.magic = int(++_hitNum * 0.572);
+         listData.getItemAt(0).msg = this.attribute.power;
+         listData.updateItemAt(0);
+         listData.getItemAt(1).msg = this.attribute.magic;
+         listData.updateItemAt(1);
          super.onHitEnemy(beData,enemy);
 
          // SU巨爪击破防和跳转后续和调整敌方位置实现
@@ -474,9 +449,44 @@ package game.role
       override public function onBeHit(beData:BeHitData) : void
       {
          // 被动当收到一hit攻击后增加防御代码实现
-         beHitAddDef = int(++beHitNum * 0.05);
-         beHitAddMDef = int(++beHitNum * 0.05);
+         _hitBuff.changeData.armorDefense = int(++_beHitNum * 0.05);
+         _hitBuff.changeData.magicDefense = int(++_beHitNum * 0.05);
+         listData.getItemAt(0).msg = this.attribute.power;
+         listData.updateItemAt(0);
+         listData.getItemAt(1).msg = this.attribute.magic;
+         listData.updateItemAt(1);
          super.onBeHit(beData);
+      }
+
+      override public function copyData() : Object
+      {
+         var ob:Object = super.copyData();
+         // 复制被击和命中次数继承至下一局
+         ob._timecount = this._timecount;
+         ob._beHitNum = this._beHitNum;
+         ob._hitNum = this._hitNum;
+         return ob;
+      }
+      
+      override public function setData(value:Object) : void
+      {
+         super.setData(value);
+         // 读取继承的被击和命中次数
+         _timecount = value._timecount;
+         _beHitNum = value._beHitNum;
+         _hitNum = value._hitNum;
+         _timeBuff.changeData.power = int(_timecount * 0.00232);
+         _timeBuff.changeData.magic = int(_timecount * 0.00286);
+         _timeBuff.changeData.armorDefense = int(_timecount * 0.00002);
+         _timeBuff.changeData.magicDefense = int(_timecount * 0.00002);
+         _hitBuff.changeData.power = int(_hitNum * 0.464);
+         _hitBuff.changeData.magic = int(_hitNum * 0.572);
+         _hitBuff.changeData.armorDefense = int(_beHitNum * 0.05);
+         _hitBuff.changeData.magicDefense = int(_beHitNum * 0.05);
+         listData.getItemAt(0).msg = this.attribute.power;
+         listData.updateItemAt(0);
+         listData.getItemAt(1).msg = this.attribute.magic;
+         listData.updateItemAt(1);
       }
 
       public function hand(topRange:int = 200, bottomRange:int = 200, backRange:int = 100, frontRange:int = 200,  toX:int = 0, toY:int = 0):Boolean
