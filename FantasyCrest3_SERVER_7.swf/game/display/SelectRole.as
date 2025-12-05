@@ -24,6 +24,8 @@ package game.display
    import zygame.utils.MemoryUtils;
    import feathers.controls.ScrollText; // 使用feathers的ScrollText
    import flash.text.TextFormat; // feathers的ScrollText使用的是flash的TextFormat
+   import game.view.GameHeroView; //
+   import game.view.GameShopView; //
 
    public class SelectRole extends KeyDisplayObject
    {
@@ -146,17 +148,20 @@ package game.display
          _list.selectedIndex = 0;
          _list.touchable = true;
          _list.addEventListener("change",onListChange);
-         _list.addEventListener("triggered", function(e:Event) // 适配点击锁定角色
+         if(!(this.parent is GameHeroView || this.parent is GameShopView)) // 如果是在英雄界面或商店界面打开的选人，则不适配点击锁定角色
          { //
-            var index:int = _list.selectedIndex; //
-            callLate(function():void //
+            _list.addEventListener("triggered", function(e:Event) // 适配点击锁定角色
             { //
-               if(_list.selectedIndex == index) //
+               var index:int = _list.selectedIndex; //
+               callLate(function():void //
                { //
-                  onDown(74); //
-               } //
+                  if(_list.selectedIndex == index) //
+                  { //
+                     onDown(74); //
+                  } //
+               }); //
             }); //
-         }); //
+         } //
          _attribute = new AttributeView();
          this.addChild(_attribute);
          _attribute.x = abg.x;
