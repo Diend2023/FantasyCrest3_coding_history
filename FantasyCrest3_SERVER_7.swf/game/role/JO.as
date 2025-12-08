@@ -10,7 +10,6 @@ package game.role
    import zygame.data.RoleAttributeData;
    import zygame.display.World;
    import zygame.display.EffectDisplay;
-   import starling.core.Starling;
    
    public class JO extends GameRole
    {
