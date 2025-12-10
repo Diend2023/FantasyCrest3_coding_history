@@ -19,7 +19,7 @@ package game.role
       private var _timecount:int = 0;
       private var _beHitNum:int = 0;
       private var _hitNum:int = 0;
-      private var groundY:int;
+      private var _groundY:int;
 
       public function BLL(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
       {
@@ -294,7 +294,7 @@ package game.role
 
          if(actionName == "待机")
          {
-            groundY = this.y - 70;
+            _groundY = this.y - 70;
          }
 
          // KO巨量流星时停和cg实现
@@ -360,7 +360,7 @@ package game.role
                }
             }
 
-            if(effectBLL22.y >= groundY)
+            if(effectBLL22.y >= _groundY)
             {
                effectBLL22.removeFromParent();
 

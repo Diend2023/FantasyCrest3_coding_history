@@ -81,7 +81,7 @@ package game.role
          }
          if(this.attribute.hp > 0 && this.attribute.hp < 50 && (this.actionName == "欧拉？" || this.actionName == "隔空杀妈"))
          {
-            beData.armorScale = 1.7; // 增加70%伤害
+            beData.armorScale += 0.7; // 增加70%伤害
          }
          super.onHitEnemy(beData,enemy);
       }
