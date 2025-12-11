@@ -8,6 +8,7 @@ package game.role
    import zygame.data.BeHitData;
    import zygame.data.RoleAttributeData;
    import zygame.display.World;
+   import zygame.display.EffectDisplay;
    
    public class ZhaoMei extends GameRole
    {
@@ -50,13 +51,19 @@ package game.role
 
       override public function onHitEnemy(beData:BeHitData, enemy:BaseRole) : void
       {
-         if(this.inFrame("神帰来・大蛇斩头烈封饿",48))
+         if(this.actionName == "神帰来・大蛇斩头烈封饿" && beData.getHurt(enemy.attribute) > 1000)
          {
-            if(beData.armorScale == 0)
+            var effectBOOM11:EffectDisplay = this.world.getEffectFormName("BOOM11",this);
+            if(effectBOOM11 && effectBOOM11.currentFrame == 0)
             {
-               beData.armorScale = 1;
+               if(beData.armorScale == 0)
+               {
+                  beData.armorScale = 1;
+               }
+               beData.armorScale *= 1 + _OUsePoint * 0.05;
+               beData.armorScale -= 20;
+               _OUsePoint = 0;
             }
-            beData.armorScale += _OUsePoint * 0.05;
          }
          super.onHitEnemy(beData,enemy);
          if(_skillCanCountObj[this.actionName])
