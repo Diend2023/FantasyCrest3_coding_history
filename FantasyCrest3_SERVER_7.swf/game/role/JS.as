@@ -12,11 +12,11 @@ package game.role
    public class JS extends GameRole
    {
 
-      private var _effectSuChuanTimer:int = 0;
+      private var _effectSuChuanTimer:int = 0; // SP紧锁之壁计时器
 
       private var _bdNumber:int = 0; // 被动吸收水晶次数
 
-      private var _bdBuff:AttributeChangeBuff;
+      private var _bdBuff:AttributeChangeBuff; // 被动魔力变化Buff
       
       public function JS(roleTarget:String, xz:int, yz:int, pworld:World, fps:int = 24, pscale:Number = 1, troop:int = -1, roleAttr:RoleAttributeData = null)
       {
@@ -60,7 +60,7 @@ package game.role
             {
                enemy.currentMp.value -= 1;
                _bdNumber += 1;
-               // 每次吸收水晶增加15点魔法
+               // 每次吸收水晶增加15点魔力
                _bdBuff.changeData.magic = 15 * _bdNumber;
                this.listData.getItemAt(0).msg = _bdBuff.changeData.magic;
                this.listData.updateItemAt(0);
@@ -68,6 +68,7 @@ package game.role
          }
          super.onHitEnemy(beData, enemy);
       }
+
       override public function copyData() : Object
       {
          var ob:Object = super.copyData();

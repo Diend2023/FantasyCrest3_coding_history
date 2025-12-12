@@ -163,7 +163,7 @@ package game.role
          (this.world as BaseGameWorld).showSkillPainting(targetName,actionName,troopid);
       }
 
-      // 时停
+      // 时停角色
       public function shitingRole(cardFrame:int, role:BaseRole):void
       {
          for(var i in this.world.getRoleList())
@@ -175,6 +175,7 @@ package game.role
          }
       }
 
+      // 时停特效
       public function shitingEffect(cardFrame:int, role:BaseRole):void
       {
          for(var i in this.world.getRoleList())

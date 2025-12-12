@@ -14,7 +14,7 @@ package game.role
    public class JO extends GameRole
    {
 
-      private var theWorldTimer:int = 0;
+      private var theWorldTimer:int = 0; // 时停计时器
 
       private var _worldFilter:ColorMatrixFilter; // 用于地面层
 
@@ -131,7 +131,8 @@ package game.role
          GameCore.soundCore.playEffect("ctl29");
          this.hasPassive = true;
          theWorld();
-         this.currentMp.value -= 5;
+         this.currentMp.value = 0;
+         this.mpPoint.value = 0;
          this.posx = enemy.x - 150 * enemy.scaleX;
          this.posy = enemy.y;
          this.scaleX = enemy.scaleX > 0 ? 1 : -1;
